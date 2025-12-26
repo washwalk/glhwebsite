@@ -32,77 +32,52 @@ export default async function handler(req, res) {
 
     const gigs = [];
 
-    // Try multiple selectors to find concert data
-    console.log('Searching for concert data...');
+    console.log('Searching for concert data in table format...');
 
-    // First, try the most specific selectors
-    $('ul.tour-dates li, .tour-dates li, .concerts li, .shows li, .gigs li, .event, .show').each((i, el) => {
-      const element = $(el);
-      const text = element.text().trim();
+    // Target the table structure on kuhnfumusic.com/tour-dates
+    $('table tbody tr').each((i, row) => {
+      const tds = $(row).find('td');
 
-      // Extract date - look for month names followed by numbers
-      const dateMatch = text.match(/\b(January|February|March|April|May|June|July|August|September|October|November|December|Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d{1,2}/i);
-      const date = dateMatch ? dateMatch[0] : '';
+      if (tds.length >= 3) {
+        // Extract date from first td
+        const dateLink = $(tds[0]).find('a');
+        const date = dateLink.length > 0 ? dateLink.text().trim() : $(tds[0]).text().trim();
 
-      // Extract venue and city from text
-      let venue = '';
-      let city = '';
+        // Extract city from second td
+        const cityLink = $(tds[1]).find('a');
+        const cityText = cityLink.length > 0 ? cityLink.text().trim() : $(tds[1]).text().trim();
 
-      // Try to find venue and city patterns
-      const venueMatch = text.match(/at\s+([^,\n]+)/i) || text.match(/@\s*([^,\n]+)/i);
-      if (venueMatch) {
-        venue = venueMatch[1].trim();
-      }
+        // Extract venue from third td
+        const venueLink = $(tds[2]).find('a');
+        const venue = venueLink.length > 0 ? venueLink.text().trim() : $(tds[2]).text().trim();
 
-      const cityMatch = text.match(/,\s*([A-Z][a-zA-Z\s]+,\s*[A-Z]{2,})/) || text.match(/([A-Z][a-zA-Z\s]+,\s*[A-Z]{2,})/);
-      if (cityMatch) {
-        city = cityMatch[1].trim();
-      }
-
-      // If no specific venue found, try to extract from remaining text
-      if (!venue && date) {
-        const afterDate = text.split(date)[1] || '';
-        const venueFromText = afterDate.split(',')[0]?.trim();
-        if (venueFromText) {
-          venue = venueFromText;
-        }
-      }
-
-      const link = element.find('a').attr('href') ||
-                   element.closest('a').attr('href') ||
-                   element.attr('href') ||
-                   '';
-
-      // Only add if we found some useful information
-      if (date || venue || city) {
-        gigs.push({
-          date: date || 'Date TBA',
-          venue: venue || 'Venue TBA',
-          city: city || '',
-          link: link ? (link.startsWith('http') ? link : `https://kuhnfumusic.com${link}`) : '',
-          source: 'scraped'
+        // Get link from any of the anchor tags
+        let link = '';
+        $(tds).find('a').each((j, anchor) => {
+          const href = $(anchor).attr('href');
+          if (href && href.includes('http') && !link) {
+            link = href;
+          }
         });
-        console.log('Found concert:', { date, venue, city, link });
+
+        // Clean up the data
+        const cleanDate = date.replace(/\s+/g, ' ').trim();
+        const cleanVenue = venue.replace(/\s+/g, ' ').trim();
+        const cleanCity = cityText.replace(/\s+/g, ' ').trim();
+
+        // Only add if we have meaningful data
+        if (cleanDate && (cleanVenue || cleanCity)) {
+          gigs.push({
+            date: cleanDate,
+            venue: cleanVenue || 'Venue TBA',
+            city: cleanCity || '',
+            link: link || '',
+            source: 'scraped'
+          });
+          console.log('Found concert:', { date: cleanDate, venue: cleanVenue, city: cleanCity, link });
+        }
       }
     });
-
-    // If still no gigs found, try a more aggressive approach
-    if (gigs.length === 0) {
-      console.log('No concerts found with specific selectors, trying broader search...');
-
-      $('*').each((i, el) => {
-        const text = $(el).text().trim();
-        if (text.length > 10 && text.length < 200) { // Reasonable text length
-          // Look for date patterns
-          const hasDate = /\b(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*\s+\d{1,2}/i.test(text);
-          const hasConcertTerms = /\b(concert|show|tour|gig|performance|live)\b/i.test(text);
-
-          if (hasDate || hasConcertTerms) {
-            console.log('Potential concert text found:', text);
-          }
-        }
-      });
-    }
 
     console.log(`Found ${gigs.length} concerts total`);
 

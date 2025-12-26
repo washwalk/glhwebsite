@@ -1,0 +1,6 @@
+# Manual Concerts
+# Format: Date|Venue|City|Link
+# Example: 15.12.2024|Blue Note|New York, NY|https://example.com
+
+# Add your manual concerts here
+# 15.12.2024|Blue Note|New York, NY|https://example.com

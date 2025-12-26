@@ -64,20 +64,27 @@ george-hadow-concerts/
 └── README.md            # This file
 ```
 
-## Manual Concert Management (Admin Only)
+## Manual Concert Management
 
-**Admin Access Required**: Only administrators can add, edit, or delete manual concerts.
+Manual concerts are managed via a text file in the repository. This approach is simpler and more maintainable than user interface forms.
 
-### Admin Login
-- Click "Admin Login" button in the top-right
-- Enter the admin password (contact George for access)
-- Once logged in, you'll see "✓ Admin Mode" indicator
+### Managing Manual Concerts
 
-### Manual Concert Features
-- **Add Concerts**: Click "Add Concert Manually" to open the form
-- **Edit Concerts**: Click the "Edit" button on manually added concerts
-- **Delete Concerts**: Click the "Delete" button to remove concerts
-- **Data Storage**: Manual concerts are stored locally in your browser's localStorage
+1. **Edit the `concerts.txt` file** in the repository root
+2. **Format**: `Date|Venue|City|Link` (one concert per line)
+3. **Example**:
+   ```
+   15.12.2024|Blue Note|New York, NY|https://example.com
+   20.12.2024|Jazz Cafe|London, UK|https://jazzcafe.com
+   ```
+
+### File Format Details
+
+- **Date**: Any text format (DD.MM.YYYY, "December 15", etc.)
+- **Venue**: Name of the venue
+- **City**: City and optional state/country
+- **Link**: Optional ticket purchase URL
+- **Comments**: Lines starting with `#` are ignored
 
 Manual concerts are visually distinguished with a green "MANUAL" badge and yellow background.
 
@@ -129,16 +136,11 @@ This application is configured for deployment on Vercel with automatic deploymen
 2. Vercel will automatically detect Next.js and configure deployment
 3. The app will be available at your Vercel domain
 
-## Environment Variables
+## Manual Concert File
 
-Create a `.env.local` file in the project root:
+The `concerts.txt` file contains manually added concerts that complement the automatically scraped data. This file is loaded at runtime and concerts are merged with the scraped data.
 
-```env
-# Admin authentication password
-NEXT_PUBLIC_ADMIN_PASSWORD=your_secure_password_here
-```
-
-The scraper makes direct requests to the public website and doesn't require additional environment variables.
+No environment variables are required - the scraper makes direct requests to the public website.
 
 ## Contributing
 
