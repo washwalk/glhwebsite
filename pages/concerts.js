@@ -58,22 +58,7 @@ export default function Concerts() {
         maxWidth: '1000px',
         margin: '0 auto'
       }}>
-      <h1 style={{
-        color: '#000000',
-        marginBottom: '1rem',
-        fontSize: '1.5rem'
-      }}>George Hadow</h1>
-      <p style={{
-        color: '#666666',
-        marginBottom: '2rem',
-        fontSize: '0.9rem',
-        maxWidth: '600px',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        lineHeight: '1.6'
-      }}>
-        English drummer from South-West Devon, now a prominent figure in Amsterdam&apos;s avant-garde scene since 2012.
-      </p>
+
       <h2 style={{
         color: '#000000',
         marginBottom: '2rem',
