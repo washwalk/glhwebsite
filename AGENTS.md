@@ -31,6 +31,16 @@ npm run lint:fix     # Auto-fix ESLint issues
 # npm run test:watch # Run tests in watch mode
 ```
 
+## Manual Concert Management
+
+The application includes functionality for manually adding, editing, and deleting concerts:
+
+- **State Management**: Manual concerts stored in localStorage
+- **UI Components**: ConcertForm component for adding/editing
+- **Data Flow**: Manual concerts combined with scraped data and sorted by date
+- **Visual Indicators**: Manual concerts shown with green "MANUAL" badges
+- **CRUD Operations**: Full create, read, update, delete functionality
+
 ## Code Style Guidelines
 
 ### File Structure & Naming
