@@ -76,7 +76,7 @@ export default function Home() {
 
       <div style={{ marginBottom: '2rem' }}>
         <p style={{ fontSize: '0.9em', color: '#666', marginBottom: '1rem' }}>
-          <strong>Note:</strong> Manual concerts are managed via the <code>concerts.txt</code> file in the repository.
+          <strong>Note:</strong> Manual concerts are managed via the <code>public/concerts.txt</code> file in the repository.
           Edit this file to add or modify concerts manually.
         </p>
       </div>
@@ -139,7 +139,7 @@ export default function Home() {
 
       <footer style={{ marginTop: '3rem', textAlign: 'center', color: '#666', fontSize: '0.9em' }}>
         <p>Data sourced from <a href="https://kuhnfumusic.com/tour-dates" target="_blank" rel="noopener noreferrer">kuhnfumusic.com/tour-dates</a></p>
-        <p>Manual concerts are managed via the <code>concerts.txt</code> file in the repository</p>
+        <p>Manual concerts are managed via the <code>public/concerts.txt</code> file in the repository</p>
       </footer>
     </div>
   );

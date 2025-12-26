@@ -70,7 +70,7 @@ Manual concerts are managed via a text file in the repository. This approach is 
 
 ### Managing Manual Concerts
 
-1. **Edit the `concerts.txt` file** in the repository root
+1. **Edit the `public/concerts.txt` file** in the repository
 2. **Format**: `Date|Venue|City|Link` (one concert per line)
 3. **Example**:
    ```
@@ -85,6 +85,10 @@ Manual concerts are managed via a text file in the repository. This approach is 
 - **City**: City and optional state/country
 - **Link**: Optional ticket purchase URL
 - **Comments**: Lines starting with `#` are ignored
+
+### File Location
+
+The `concerts.txt` file must be placed in the `public/` directory to be accessible by the application.
 
 Manual concerts are visually distinguished with a green "MANUAL" badge and yellow background.
 
