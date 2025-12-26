@@ -28,18 +28,24 @@ export default async function handler(req, res) {
   }
 
   try {
-    console.log('Fetching concert data from kuhnfumusic.com/tour-dates');
+    console.log('Attempting to fetch concert data with enhanced headers...');
 
     const { data } = await axios.get('https://kuhnfumusic.com/tour-dates', {
       headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-        'Accept-Language': 'en-US,en;q=0.5',
-        'Accept-Encoding': 'gzip, deflate',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+        'Accept-Language': 'en-US,en;q=0.9',
+        'Accept-Encoding': 'gzip, deflate, br',
+        'DNT': '1',
         'Connection': 'keep-alive',
-        'Upgrade-Insecure-Requests': '1'
+        'Upgrade-Insecure-Requests': '1',
+        'Sec-Fetch-Dest': 'document',
+        'Sec-Fetch-Mode': 'navigate',
+        'Sec-Fetch-Site': 'none',
+        'Cache-Control': 'max-age=0'
       },
-      timeout: 15000 // 15 second timeout
+      timeout: 20000, // 20 second timeout
+      maxRedirects: 5
     });
 
     console.log('Successfully fetched HTML, length:', data.length);
@@ -152,28 +158,62 @@ export default async function handler(req, res) {
 
     console.log(`Total concerts found: ${gigs.length}`);
 
-    // If we still have no gigs, return a fallback message
-    if (gigs.length === 0) {
-      console.log('No concerts found, returning fallback data');
-      return res.status(200).json([{
-        date: 'Check back soon',
-        venue: 'Tour dates coming soon',
-        city: 'Stay tuned',
-        link: '',
-        source: 'fallback'
-      }]);
+    // If scraping worked, return the data
+    if (gigs.length > 0) {
+      return res.status(200).json(gigs);
     }
 
-    res.status(200).json(gigs);
+    // Fallback: Try to load from a manually maintained JSON file
+    console.log('No concerts found from scraping, trying manual JSON fallback...');
+    try {
+      const manualResponse = await axios.get('https://raw.githubusercontent.com/washwalk/glhwebsite/main/public/concerts-manual.json', {
+        timeout: 5000
+      });
+
+      if (manualResponse.data && Array.isArray(manualResponse.data)) {
+        console.log('Loaded manual concert data:', manualResponse.data.length, 'concerts');
+        return res.status(200).json(manualResponse.data.map(concert => ({
+          ...concert,
+          source: 'manual-json'
+        })));
+      }
+    } catch (manualError) {
+      console.log('Manual JSON fallback also failed:', manualError.message);
+    }
+
+    // Final fallback: Return helpful message
+    res.status(200).json([{
+      date: 'Data temporarily unavailable',
+      venue: 'Please check back later or contact for updates',
+      city: 'Manual updates in progress',
+      link: '',
+      source: 'fallback'
+    }]);
   } catch (error) {
     console.error('Failed to fetch concerts:', error.message);
     console.error('Error details:', error.response?.status, error.response?.statusText);
 
-    // Return fallback data instead of error
+    // Try manual JSON as final attempt
+    try {
+      const manualResponse = await axios.get('https://raw.githubusercontent.com/washwalk/glhwebsite/main/public/concerts-manual.json', {
+        timeout: 3000
+      });
+
+      if (manualResponse.data && Array.isArray(manualResponse.data)) {
+        console.log('Loaded manual JSON after error:', manualResponse.data.length, 'concerts');
+        return res.status(200).json(manualResponse.data.map(concert => ({
+          ...concert,
+          source: 'manual-json-fallback'
+        })));
+      }
+    } catch (finalError) {
+      console.log('All methods failed');
+    }
+
     res.status(200).json([{
-      date: 'Unable to load concerts',
-      venue: 'Please check back later',
-      city: 'Service temporarily unavailable',
+      date: 'Service temporarily unavailable',
+      venue: 'Unable to load concert data',
+      city: 'Please try again later',
       link: '',
       source: 'error'
     }]);

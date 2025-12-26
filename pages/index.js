@@ -3,9 +3,9 @@ import axios from 'axios';
 
 export default function Home() {
   const [gigs, setGigs] = useState([]);
-  const [manualGigs, setManualGigs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [dataSource, setDataSource] = useState('unknown');
 
   // TEMPORARILY DISABLED: Load manual gigs from concerts.txt file
   // useEffect(() => {
@@ -47,9 +47,22 @@ export default function Home() {
         setLoading(true);
         const { data } = await axios.get('/api/gigs');
         setGigs(data);
+
+        // Determine data source from the response
+        if (data.length > 0) {
+          const sources = data.map(gig => gig.source);
+          if (sources.includes('scraped')) {
+            setDataSource('live-scraping');
+          } else if (sources.includes('manual-json')) {
+            setDataSource('manual-json');
+          } else {
+            setDataSource('fallback');
+          }
+        }
       } catch (err) {
         console.error('Failed to fetch gigs:', err);
         setError('Failed to load concert data');
+        setDataSource('error');
       } finally {
         setLoading(false);
       }
@@ -57,11 +70,15 @@ export default function Home() {
     fetchGigs();
   }, []);
 
-  // Combine and sort all gigs by date
-  const allGigs = [...gigs, ...manualGigs].sort((a, b) => {
-    if (!a.date || !b.date) return 0;
-    return new Date(a.date) - new Date(b.date);
-  });
+  const getDataSourceMessage = () => {
+    switch (dataSource) {
+      case 'live-scraping': return '✅ Live data from kuhnfumusic.com';
+      case 'manual-json': return '📄 Data from manual JSON file';
+      case 'fallback': return '⚠️ Fallback data displayed';
+      case 'error': return '❌ Unable to load data';
+      default: return '⏳ Loading data...';
+    }
+  };
 
   const handleEditGig = (index) => {
     setEditingGig(index);
@@ -76,8 +93,13 @@ export default function Home() {
 
       <div style={{ marginBottom: '2rem' }}>
         <p style={{ fontSize: '0.9em', color: '#666', marginBottom: '1rem' }}>
-          <strong>Testing Mode:</strong> Manual concerts are temporarily disabled to test scraping functionality.
+          <strong>Data Source:</strong> {getDataSourceMessage()}
         </p>
+        {dataSource === 'manual-json' && (
+          <p style={{ fontSize: '0.8em', color: '#888' }}>
+            To update concert data, edit <code>public/concerts-manual.json</code> in the repository.
+          </p>
+        )}
       </div>
 
 
@@ -120,7 +142,7 @@ export default function Home() {
 
       <footer style={{ marginTop: '3rem', textAlign: 'center', color: '#666', fontSize: '0.9em' }}>
         <p>Data sourced from <a href="https://kuhnfumusic.com/tour-dates" target="_blank" rel="noopener noreferrer">kuhnfumusic.com/tour-dates</a></p>
-        <p><strong>Testing Mode:</strong> Only showing scraped concerts</p>
+        <p>Fallback data available in <code>public/concerts-manual.json</code></p>
       </footer>
     </div>
   );
