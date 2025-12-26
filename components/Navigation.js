@@ -3,8 +3,8 @@ import Link from 'next/link';
 export default function Navigation() {
   return (
     <nav style={{
-      backgroundColor: '#1e1e1e',
-      padding: '1rem',
+      backgroundColor: '#000000',
+      padding: '0.75rem',
       borderBottom: '1px solid #333',
       position: 'sticky',
       top: 0,
@@ -15,66 +15,60 @@ export default function Navigation() {
         margin: '0 auto',
         display: 'flex',
         justifyContent: 'center',
-        gap: '2rem'
+        gap: '1.5rem'
       }}>
         <Link href="/" style={{
-          color: '#00d4ff',
+          color: '#ffffff',
           textDecoration: 'none',
-          fontSize: '1.1rem',
-          fontWeight: 'bold',
-          padding: '0.5rem 1rem',
-          borderRadius: '6px',
+          fontSize: '1rem',
+          padding: '0.25rem 0.75rem',
           transition: 'all 0.2s ease'
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.backgroundColor = '#00d4ff';
-          e.currentTarget.style.color = '#121212';
+          e.currentTarget.style.backgroundColor = '#ffffff';
+          e.currentTarget.style.color = '#000000';
         }}
         onMouseLeave={(e) => {
           e.currentTarget.style.backgroundColor = 'transparent';
-          e.currentTarget.style.color = '#00d4ff';
+          e.currentTarget.style.color = '#ffffff';
         }}
         >
           Home
         </Link>
 
         <Link href="/concerts" style={{
-          color: '#ff6b35',
+          color: '#ffffff',
           textDecoration: 'none',
-          fontSize: '1.1rem',
-          fontWeight: 'bold',
-          padding: '0.5rem 1rem',
-          borderRadius: '6px',
+          fontSize: '1rem',
+          padding: '0.25rem 0.75rem',
           transition: 'all 0.2s ease'
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.backgroundColor = '#ff6b35';
-          e.currentTarget.style.color = '#ffffff';
+          e.currentTarget.style.backgroundColor = '#ffffff';
+          e.currentTarget.style.color = '#000000';
         }}
         onMouseLeave={(e) => {
           e.currentTarget.style.backgroundColor = 'transparent';
-          e.currentTarget.style.color = '#ff6b35';
+          e.currentTarget.style.color = '#ffffff';
         }}
         >
           Concerts
         </Link>
 
         <Link href="/about" style={{
-          color: '#4caf50',
+          color: '#ffffff',
           textDecoration: 'none',
-          fontSize: '1.1rem',
-          fontWeight: 'bold',
-          padding: '0.5rem 1rem',
-          borderRadius: '6px',
+          fontSize: '1rem',
+          padding: '0.25rem 0.75rem',
           transition: 'all 0.2s ease'
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.backgroundColor = '#4caf50';
-          e.currentTarget.style.color = '#ffffff';
+          e.currentTarget.style.backgroundColor = '#ffffff';
+          e.currentTarget.style.color = '#000000';
         }}
         onMouseLeave={(e) => {
           e.currentTarget.style.backgroundColor = 'transparent';
-          e.currentTarget.style.color = '#4caf50';
+          e.currentTarget.style.color = '#ffffff';
         }}
         >
           About

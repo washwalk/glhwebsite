@@ -1,7 +1,7 @@
 html, body {
   margin: 0;
   padding: 0;
-  background-color: #121212 !important;
+  background-color: #000000 !important;
   color: #ffffff;
   font-family: sans-serif;
 }
@@ -12,26 +12,26 @@ html, body {
 
 body {
   min-height: 100vh;
-  background-color: #121212 !important;
+  background-color: #000000 !important;
 }
 
 /* Ensure no white borders or backgrounds */
 # __next {
-  background-color: #121212 !important;
+  background-color: #000000 !important;
 }
 
 html {
-  background-color: #121212 !important;
+  background-color: #000000 !important;
 }
 
-/* Link styles for dark theme */
+/* Link styles */
 a {
-  color: #00d4ff;
+  color: #ffffff;
   text-decoration: none;
 }
 
 a:hover {
-  color: #0099cc;
+  color: #cccccc;
 }
 
 /* Navigation styles */

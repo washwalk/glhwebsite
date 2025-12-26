@@ -17,24 +17,19 @@ export default function About() {
       }}>
         <h1 style={{
           color: '#ffffff',
-          marginBottom: '2rem',
-          textShadow: '0 0 10px rgba(255,255,255,0.3)',
-          fontSize: '2.5rem'
+          marginBottom: '1.5rem',
+          fontSize: '1.5rem'
         }}>About George Hadow</h1>
 
          <div style={{
-           backgroundColor: '#1e1e1e',
-           padding: '2rem',
-           borderRadius: '12px',
-           border: '1px solid #333',
            marginBottom: '2rem'
          }}>
-           <h2 style={{ color: '#00d4ff', marginTop: 0 }}>Biography</h2>
-           <p style={{ color: '#cccccc', lineHeight: '1.6', fontSize: '1.1rem' }}>
+           <h2 style={{ color: '#ffffff', marginTop: 0, marginBottom: '1rem', fontSize: '1.1rem' }}>Biography</h2>
+           <p style={{ color: '#cccccc', lineHeight: '1.6', fontSize: '0.95rem' }}>
              George Hadow represents the newest wave of improvisers to hit the Dutch scene. Like many of the active newcomers, George is an expat, hailing from Devon in the UK. George first came to the Netherlands in 2011 to take part in the Dutch Impro Academy, where he studied with Han Bennink and Michael Moore, among others. He has quickly developed into a mature musician, playing with acute sensitivity as well as unbridled power.
            </p>
 
-           <p style={{ color: '#cccccc', lineHeight: '1.6', fontSize: '1.1rem' }}>
+           <p style={{ color: '#cccccc', lineHeight: '1.6', fontSize: '0.95rem' }}>
              Based in Amsterdam since June 2012, George has established himself as a prominent figure in the European avant-garde and improvisational music scene. His innovative approach to rhythm and percussion has led to collaborations across diverse musical projects.
            </p>
          </div>
@@ -46,7 +41,7 @@ export default function About() {
            border: '1px solid #333',
            marginBottom: '2rem'
          }}>
-           <h2 style={{ color: '#00d4ff', marginTop: 0 }}>Regular Groups & Ensembles</h2>
+           <h2 style={{ color: '#ffffff', marginTop: 0, marginBottom: '1rem', fontSize: '1.1rem' }}>Regular Groups & Ensembles</h2>
            <ul style={{ color: '#cccccc', lineHeight: '1.8', fontSize: '1rem', paddingLeft: '1.5rem' }}>
              <li>Blue Lines Trio</li>
              <li>Mulligan – Baker Project</li>
@@ -71,7 +66,7 @@ export default function About() {
            border: '1px solid #333',
            marginBottom: '2rem'
          }}>
-           <h2 style={{ color: '#00d4ff', marginTop: 0 }}>Collaborations</h2>
+           <h2 style={{ color: '#ffffff', marginTop: 0, marginBottom: '1rem', fontSize: '1.1rem' }}>Collaborations</h2>
            <p style={{ color: '#cccccc', lineHeight: '1.6', fontSize: '1rem', marginBottom: '1rem' }}>
              George has collaborated with a wide array of artists including:
            </p>
@@ -87,7 +82,7 @@ export default function About() {
            borderRadius: '12px',
            border: '1px solid #333'
          }}>
-           <h2 style={{ color: '#00d4ff', marginTop: 0 }}>Selected Discography</h2>
+           <h2 style={{ color: '#ffffff', marginTop: 0, marginBottom: '1rem', fontSize: '1.1rem' }}>Selected Discography</h2>
            <p style={{ color: '#cccccc', lineHeight: '1.6', fontSize: '1rem', marginBottom: '1rem' }}>
               George&apos;s work spans from 2014 to 2022 with releases on Creative Sources, Raw Tonk, and TRPTK labels:
            </p>
