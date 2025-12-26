@@ -19,7 +19,7 @@ export default function About() {
           color: '#ffffff',
           marginBottom: '1.5rem',
           fontSize: '1.5rem'
-        }}>About George Hadow</h1>
+        }}>About</h1>
 
          <div style={{
            marginBottom: '2rem'
@@ -97,14 +97,7 @@ export default function About() {
            </ul>
          </div>
 
-        <footer style={{
-          marginTop: '4rem',
-          textAlign: 'center',
-          color: '#888',
-          fontSize: '0.9em'
-        }}>
-          <p>🎸 George Hadow - Amsterdam-based drummer and avant-garde artist 🎸</p>
-        </footer>
+
       </div>
     </div>
   );
