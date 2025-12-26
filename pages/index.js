@@ -1,4 +1,4 @@
-import Link from 'next/link';
+
 import Navigation from '../components/Navigation';
 
 export default function Home() {
@@ -36,65 +36,7 @@ export default function Home() {
           English drummer from South-West Devon, now a prominent figure in Amsterdam&apos;s avant-garde scene since 2012.
         </p>
 
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '1rem',
-          alignItems: 'center',
-          marginBottom: '4rem'
-        }}>
-          <Link href="/concerts" style={{
-            display: 'inline-block',
-            backgroundColor: '#00d4ff',
-            color: '#121212',
-            padding: '1rem 2rem',
-            borderRadius: '8px',
-            textDecoration: 'none',
-            fontSize: '1.2rem',
-            fontWeight: 'bold',
-            transition: 'all 0.2s ease',
-            border: '2px solid transparent'
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = '#0099cc';
-            e.currentTarget.style.borderColor = '#ffffff';
-            e.currentTarget.style.transform = 'scale(1.05)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = '#00d4ff';
-            e.currentTarget.style.borderColor = 'transparent';
-            e.currentTarget.style.transform = 'scale(1)';
-          }}
-          >
-            🎵 View Concerts
-          </Link>
 
-          <Link href="/about" style={{
-            display: 'inline-block',
-            backgroundColor: '#ff6b35',
-            color: '#ffffff',
-            padding: '1rem 2rem',
-            borderRadius: '8px',
-            textDecoration: 'none',
-            fontSize: '1.2rem',
-            fontWeight: 'bold',
-            transition: 'all 0.2s ease',
-            border: '2px solid transparent'
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = '#e55a2b';
-            e.currentTarget.style.borderColor = '#ffffff';
-            e.currentTarget.style.transform = 'scale(1.05)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = '#ff6b35';
-            e.currentTarget.style.borderColor = 'transparent';
-            e.currentTarget.style.transform = 'scale(1)';
-          }}
-          >
-            👤 About George
-          </Link>
-        </div>
 
         <div style={{
           backgroundColor: '#1e1e1e',
