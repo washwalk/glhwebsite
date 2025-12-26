@@ -23,14 +23,40 @@ export default async function handler(req, res) {
         },
         timeout: 15000
       });
-      console.log('HTML fetched, length:', data.length);
+
+      const $ = cheerio.load(data);
+
+      // Extract table information
+      const tables = $('table');
+      const tableData = tables.map((i, table) => {
+        const rows = $(table).find('tr');
+        return {
+          tableIndex: i,
+          rowCount: rows.length,
+          rows: rows.map((j, row) => {
+            const cells = $(row).find('td');
+            return {
+              rowIndex: j,
+              cellCount: cells.length,
+              cells: cells.map((k, cell) => ({
+                cellIndex: k,
+                text: $(cell).text().trim(),
+                hasLink: $(cell).find('a').length > 0,
+                link: $(cell).find('a').attr('href') || null
+              })).get()
+            };
+          }).get()
+        };
+      }).get();
+
       return res.status(200).json({
         success: true,
         htmlLength: data.length,
-        htmlPreview: data.substring(0, 1000),
-        title: data.includes('<title>') ? data.split('<title>')[1].split('</title>')[0] : 'No title found',
-        hasTable: data.includes('<table'),
-        hasTourDates: data.includes('Tour Dates')
+        title: $('title').text().trim(),
+        hasContentTable: $('.content-table').length > 0,
+        tableCount: tables.length,
+        tableData: tableData,
+        rawTableHTML: $('.content-table table').html()?.substring(0, 2000) || 'No table HTML found'
       });
     } catch (error) {
       console.log('Debug HTML fetch failed:', error.message);
@@ -117,31 +143,89 @@ export default async function handler(req, res) {
 
     console.log('Searching for concert data...');
 
-    // Direct approach: find all table rows with concert data
-    // Based on the HTML structure provided, each concert is in a <tr> with 3 <td> elements
-    $('tr').each((i, row) => {
-      const cells = $(row).find('td');
+    // More detailed debugging
+    console.log('Total tables found:', $('table').length);
+    console.log('Total rows found:', $('tr').length);
+    console.log('Rows with 3+ cells:', $('tr').filter((i, row) => $(row).find('td').length >= 3).length);
 
-      // Each concert row has exactly 3 cells: date, city, venue
-      if (cells.length === 3) {
-        const dateText = $(cells[0]).text().trim();
-        const cityText = $(cells[1]).text().trim();
-        const venueText = $(cells[2]).text().trim();
+    // Look specifically for the content-table structure
+    const contentTable = $('.content-table table');
+    console.log('Content table found:', contentTable.length > 0);
 
-        // Find any link in this row (all cells may have the same link)
-        const link = $(row).find('a').first().attr('href') || '';
+    if (contentTable.length > 0) {
+      console.log('Processing content table...');
+      contentTable.find('tr').each((rowIndex, row) => {
+        const cells = $(row).find('td');
+        console.log(`Content table row ${rowIndex}: ${cells.length} cells`);
 
-        console.log(`Found potential concert: "${dateText}" - "${venueText}" in "${cityText}"`);
+        if (cells.length >= 3) {
+          const dateText = $(cells[0]).text().trim();
+          const cityText = $(cells[1]).text().trim();
+          const venueText = $(cells[2]).text().trim();
 
-        // Validate: date should be in DD.MM.YYYY format
-        if (dateText && /^\d{2}\.\d{2}\.\d{4}$/.test(dateText) && venueText) {
-          gigs.push({
+          // Get link from the date cell (which should have the primary link)
+          const dateLink = $(cells[0]).find('a').attr('href') || '';
+
+          console.log(`Row ${rowIndex} data:`, {
             date: dateText,
-            venue: venueText,
             city: cityText,
-            link: link.startsWith('http') ? link : (link ? `https://kuhnfumusic.com${link}` : ''),
-            source: 'scraped'
+            venue: venueText,
+            link: dateLink
           });
+
+          // More flexible date validation
+          const dateRegex = /^\d{1,2}\.\d{1,2}\.\d{4}$/;
+          if (dateText && dateRegex.test(dateText) && venueText && cityText) {
+            gigs.push({
+              date: dateText,
+              venue: venueText,
+              city: cityText,
+              link: dateLink.startsWith('http') ? dateLink : (dateLink ? `https://kuhnfumusic.com${dateLink}` : ''),
+              source: 'scraped'
+            });
+            console.log('✅ Added concert from content table:', { date: dateText, venue: venueText, city: cityText });
+          } else {
+            console.log('❌ Skipped - validation failed:', {
+              hasDate: !!dateText,
+              dateValid: dateRegex.test(dateText),
+              hasVenue: !!venueText,
+              hasCity: !!cityText
+            });
+          }
+        }
+      });
+    }
+
+    // Also try the general table approach as fallback
+    if (gigs.length === 0) {
+      console.log('No concerts from content table, trying general table search...');
+      $('table').each((tableIndex, table) => {
+        $(table).find('tr').each((rowIndex, row) => {
+          const cells = $(row).find('td');
+          if (cells.length === 3) {
+            const dateText = $(cells[0]).text().trim();
+            const cityText = $(cells[1]).text().trim();
+            const venueText = $(cells[2]).text().trim();
+            const link = $(cells[0]).find('a').attr('href') || '';
+
+            const dateRegex = /^\d{1,2}\.\d{1,2}\.\d{4}$/;
+            if (dateText && dateRegex.test(dateText) && venueText && cityText) {
+              gigs.push({
+                date: dateText,
+                venue: venueText,
+                city: cityText,
+                link: link.startsWith('http') ? link : (link ? `https://kuhnfumusic.com${link}` : ''),
+                source: 'scraped-fallback'
+              });
+              console.log('✅ Added concert from fallback table:', { date: dateText, venue: venueText, city: cityText });
+            }
+          }
+        });
+      });
+    }
+
+    // Debug: show what we found
+    console.log(`Final result: ${gigs.length} concerts found`);
           console.log('✅ Added concert:', { date: dateText, venue: venueText, city: cityText });
         }
       }
