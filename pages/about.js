@@ -1,6 +1,4 @@
 import Navigation from '../components/Navigation';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
 
 export default function About() {
   return (
@@ -24,55 +22,85 @@ export default function About() {
           fontSize: '2.5rem'
         }}>About George Hadow</h1>
 
-        <div style={{
-          backgroundColor: '#1e1e1e',
-          padding: '2rem',
-          borderRadius: '12px',
-          border: '1px solid #333',
-          marginBottom: '2rem'
-        }}>
-          <h2 style={{ color: '#00d4ff', marginTop: 0 }}>Biography</h2>
-          <p style={{ color: '#cccccc', lineHeight: '1.6', fontSize: '1.1rem' }}>
-            George Hadow is an English drummer originally from South-West Devon, England.
-            He relocated to Amsterdam in 2012 after attending the Dutch Impro Academy the year prior,
-            where he is now a prominent figure in the avant-garde scene.
-          </p>
+         <div style={{
+           backgroundColor: '#1e1e1e',
+           padding: '2rem',
+           borderRadius: '12px',
+           border: '1px solid #333',
+           marginBottom: '2rem'
+         }}>
+           <h2 style={{ color: '#00d4ff', marginTop: 0 }}>Biography</h2>
+           <p style={{ color: '#cccccc', lineHeight: '1.6', fontSize: '1.1rem' }}>
+             George Hadow represents the newest wave of improvisers to hit the Dutch scene. Like many of the active newcomers, George is an expat, hailing from Devon in the UK. George first came to the Netherlands in 2011 to take part in the Dutch Impro Academy, where he studied with Han Bennink and Michael Moore, among others. He has quickly developed into a mature musician, playing with acute sensitivity as well as unbridled power.
+           </p>
 
-          <p style={{ color: '#cccccc', lineHeight: '1.6', fontSize: '1.1rem' }}>
-            Known for his innovative approach to rhythm and percussion, George has collaborated
-            with numerous artists in the European jazz and improvisational music community.
-            His work spans from traditional jazz ensembles to cutting-edge experimental projects.
-          </p>
-        </div>
+           <p style={{ color: '#cccccc', lineHeight: '1.6', fontSize: '1.1rem' }}>
+             Based in Amsterdam since June 2012, George has established himself as a prominent figure in the European avant-garde and improvisational music scene. His innovative approach to rhythm and percussion has led to collaborations across diverse musical projects.
+           </p>
+         </div>
 
-        <div style={{
-          backgroundColor: '#1e1e1e',
-          padding: '2rem',
-          borderRadius: '12px',
-          border: '1px solid #333',
-          marginBottom: '2rem'
-        }}>
-          <h2 style={{ color: '#00d4ff', marginTop: 0 }}>Musical Style</h2>
-          <p style={{ color: '#cccccc', lineHeight: '1.6', fontSize: '1.1rem' }}>
-            George's drumming combines technical precision with creative improvisation.
-            He draws inspiration from both traditional jazz rhythms and contemporary experimental techniques,
-            creating a unique sound that bridges classical training with modern innovation.
-          </p>
-        </div>
+         <div style={{
+           backgroundColor: '#1e1e1e',
+           padding: '2rem',
+           borderRadius: '12px',
+           border: '1px solid #333',
+           marginBottom: '2rem'
+         }}>
+           <h2 style={{ color: '#00d4ff', marginTop: 0 }}>Regular Groups & Ensembles</h2>
+           <ul style={{ color: '#cccccc', lineHeight: '1.8', fontSize: '1rem', paddingLeft: '1.5rem' }}>
+             <li>Blue Lines Trio</li>
+             <li>Mulligan – Baker Project</li>
+             <li>Terrie Ex/Raoul van der Weide/George Hadow</li>
+             <li>Aya ba yaya</li>
+             <li>Almeida/Dikeman/Hadow</li>
+             <li>Molino</li>
+             <li>Galm Quartet</li>
+             <li>Blue Lines Sextet</li>
+             <li>Kuhn Fu</li>
+             <li>The Bertch Quartet</li>
+             <li>Mixing Memory And Desire</li>
+             <li>Xavier Pamplona Septet</li>
+             <li>Zwerv</li>
+           </ul>
+         </div>
 
-        <div style={{
-          backgroundColor: '#1e1e1e',
-          padding: '2rem',
-          borderRadius: '12px',
-          border: '1px solid #333'
-        }}>
-          <h2 style={{ color: '#00d4ff', marginTop: 0 }}>Collaborations</h2>
-          <p style={{ color: '#cccccc', lineHeight: '1.6', fontSize: '1.1rem' }}>
-            George has performed with various ensembles and artists across Europe,
-            contributing his distinctive rhythmic approach to diverse musical projects.
-            His work continues to push the boundaries of contemporary percussion.
-          </p>
-        </div>
+         <div style={{
+           backgroundColor: '#1e1e1e',
+           padding: '2rem',
+           borderRadius: '12px',
+           border: '1px solid #333',
+           marginBottom: '2rem'
+         }}>
+           <h2 style={{ color: '#00d4ff', marginTop: 0 }}>Collaborations</h2>
+           <p style={{ color: '#cccccc', lineHeight: '1.6', fontSize: '1rem', marginBottom: '1rem' }}>
+             George has collaborated with a wide array of artists including:
+           </p>
+           <div style={{ color: '#cccccc', fontSize: '0.95rem', lineHeight: '1.6' }}>
+             <strong>Notable Collaborators:</strong> Andy Moor, Roy Paci, Anne-James Chaton, Joe Williamson, The Ex, Cactus Truck<br/>
+             <strong>Additional Artists:</strong> Jasper Stadhouders, Onno Govaert, Wilbert de Joode, Felicity Provan, Wolter Wierbos, Eric Boeren, Michael Moore, Joost Buis, Renato Ferreira, Terrie Ex, Christian Ferlaino, Raoul van der Weide, Michel Scheen, Leo Svirsky, Dianne Verdonk, Frank van Bommel, Michael Foster, Leila Bordreuil, Yedo Gibson, Mikael Szafirowski, Nora Mulder, Laurens van de Wee, Andreas Fulgosi, DJ Sniff, Bart van de Putten, Alex Hood, Stephen Simpson, Jamie Benzies
+           </div>
+         </div>
+
+         <div style={{
+           backgroundColor: '#1e1e1e',
+           padding: '2rem',
+           borderRadius: '12px',
+           border: '1px solid #333'
+         }}>
+           <h2 style={{ color: '#00d4ff', marginTop: 0 }}>Selected Discography</h2>
+           <p style={{ color: '#cccccc', lineHeight: '1.6', fontSize: '1rem', marginBottom: '1rem' }}>
+              George&apos;s work spans from 2014 to 2022 with releases on Creative Sources, Raw Tonk, and TRPTK labels:
+           </p>
+           <ul style={{ color: '#cccccc', lineHeight: '1.8', fontSize: '0.95rem', paddingLeft: '1.5rem' }}>
+             <li><em>O Monstro</em> (with Gonçalo Almeida, John Dikeman) - 2014</li>
+             <li><em>Live</em> (with Zwerv) - 2017</li>
+             <li><em>Outermission</em> (with Dirk Serries) - 2017</li>
+             <li><em>Music From Any Moment</em> (with Zwerv) - 2018</li>
+             <li><em>Ideal Principle</em> (with John Dikeman, Dirk Serries, Martina Verhoeven, Luis Vicente) - 2018</li>
+             <li><em>Chapel</em> (with Dirk Serries) - 2021</li>
+             <li><em>Kurkuma</em> (with Irene Sorozábal, Kirsi-Marja Harju, Adrián Moncada, Pedro Ivo Ferreira) - 2022</li>
+           </ul>
+         </div>
 
         <footer style={{
           marginTop: '4rem',

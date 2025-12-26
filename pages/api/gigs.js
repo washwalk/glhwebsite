@@ -1,5 +1,5 @@
 import axios from 'axios';
-const cheerio = require('cheerio');
+import cheerio from 'cheerio';
 
 export default async function handler(req, res) {
   // Set CORS headers
@@ -148,42 +148,54 @@ export default async function handler(req, res) {
     console.log('Total rows found:', $('tr').length);
     console.log('Rows with 3+ cells:', $('tr').filter((i, row) => $(row).find('td').length >= 3).length);
 
-    // Look specifically for the content-table structure
-    const contentTable = $('.content-table table');
-    console.log('Content table found:', contentTable.length > 0);
+    // Try multiple table selectors to find concert data
+    let concertTable = null;
 
-    if (contentTable.length > 0) {
-      console.log('Processing content table...');
-      contentTable.find('tr').each((rowIndex, row) => {
+    // First try the content-table class
+    if ($('.content-table table').length > 0) {
+      concertTable = $('.content-table table');
+      console.log('Found concerts in .content-table');
+    }
+    // Try any table in the main content area
+    else if ($('table').length > 0) {
+      concertTable = $('table').first();
+      console.log('Found concerts in first table');
+    }
+
+    if (concertTable) {
+      console.log('Processing concert table...');
+      concertTable.find('tr').each((rowIndex, row) => {
         const cells = $(row).find('td');
-        console.log(`Content table row ${rowIndex}: ${cells.length} cells`);
+        console.log(`Table row ${rowIndex}: ${cells.length} cells`);
 
         if (cells.length >= 3) {
           const dateText = $(cells[0]).text().trim();
           const cityText = $(cells[1]).text().trim();
           const venueText = $(cells[2]).text().trim();
 
-          // Get link from the date cell (which should have the primary link)
-          const dateLink = $(cells[0]).find('a').attr('href') || '';
+          // Get link from any cell that has a link
+          const link = $(cells[0]).find('a').attr('href') ||
+                      $(cells[1]).find('a').attr('href') ||
+                      $(cells[2]).find('a').attr('href') || '';
 
           console.log(`Row ${rowIndex} data:`, {
             date: dateText,
             city: cityText,
             venue: venueText,
-            link: dateLink
+            link: link
           });
 
-          // More flexible date validation
+          // More flexible date validation - European format (DD.MM.YYYY)
           const dateRegex = /^\d{1,2}\.\d{1,2}\.\d{4}$/;
           if (dateText && dateRegex.test(dateText) && venueText && cityText) {
             gigs.push({
               date: dateText,
               venue: venueText,
               city: cityText,
-              link: dateLink.startsWith('http') ? dateLink : (dateLink ? `https://kuhnfumusic.com${dateLink}` : ''),
+              link: link.startsWith('http') ? link : (link ? `https://kuhnfumusic.com${link}` : ''),
               source: 'scraped'
             });
-            console.log('✅ Added concert from content table:', { date: dateText, venue: venueText, city: cityText });
+            console.log('✅ Added concert:', { date: dateText, venue: venueText, city: cityText });
           } else {
             console.log('❌ Skipped - validation failed:', {
               hasDate: !!dateText,
@@ -196,17 +208,23 @@ export default async function handler(req, res) {
       });
     }
 
-    // Also try the general table approach as fallback
+    // If no concerts found yet, try all tables with more flexible parsing
     if (gigs.length === 0) {
-      console.log('No concerts from content table, trying general table search...');
+      console.log('No concerts found, trying comprehensive table search...');
       $('table').each((tableIndex, table) => {
+        console.log(`Checking table ${tableIndex}...`);
         $(table).find('tr').each((rowIndex, row) => {
           const cells = $(row).find('td');
-          if (cells.length === 3) {
+          console.log(`Table ${tableIndex}, row ${rowIndex}: ${cells.length} cells`);
+
+          // Look for rows with at least 3 cells
+          if (cells.length >= 3) {
             const dateText = $(cells[0]).text().trim();
             const cityText = $(cells[1]).text().trim();
             const venueText = $(cells[2]).text().trim();
-            const link = $(cells[0]).find('a').attr('href') || '';
+
+            // Get link from any cell
+            const link = $(row).find('a').attr('href') || '';
 
             const dateRegex = /^\d{1,2}\.\d{1,2}\.\d{4}$/;
             if (dateText && dateRegex.test(dateText) && venueText && cityText) {
@@ -215,9 +233,9 @@ export default async function handler(req, res) {
                 venue: venueText,
                 city: cityText,
                 link: link.startsWith('http') ? link : (link ? `https://kuhnfumusic.com${link}` : ''),
-                source: 'scraped-fallback'
+                source: 'scraped-comprehensive'
               });
-              console.log('✅ Added concert from fallback table:', { date: dateText, venue: venueText, city: cityText });
+              console.log('✅ Added concert from comprehensive search:', { date: dateText, venue: venueText, city: cityText });
             }
           }
         });

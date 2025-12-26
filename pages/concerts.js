@@ -73,7 +73,7 @@ export default function Concerts() {
         marginRight: 'auto',
         lineHeight: '1.6'
       }}>
-        English drummer from South-West Devon, now a prominent figure in Amsterdam's avant-garde scene since 2012.
+        English drummer from South-West Devon, now a prominent figure in Amsterdam&apos;s avant-garde scene since 2012.
       </p>
       <h2 style={{
         color: '#00d4ff',
