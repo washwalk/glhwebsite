@@ -22,7 +22,25 @@ export default function Concerts() {
       try {
         setLoading(true);
         const { data } = await axios.get('/api/gigs');
-        setGigs(data);
+
+        // Filter to only show upcoming concerts (today or future)
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); // Reset time to start of day
+
+        const upcomingGigs = data.filter(gig => {
+          try {
+            // Parse European date format (DD.MM.YYYY)
+            const [day, month, year] = gig.date.split('.');
+            const concertDate = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+            return concertDate >= today;
+          } catch (error) {
+            // If date parsing fails, include the concert to be safe
+            console.warn('Failed to parse date:', gig.date, error);
+            return true;
+          }
+        });
+
+        setGigs(upcomingGigs);
 
         // Determine data source from the response
         if (data.length > 0) {
