@@ -4,8 +4,8 @@ import Navigation from '../components/Navigation';
 export default function Home() {
   return (
     <div style={{
-      backgroundColor: '#121212',
-      color: '#ffffff',
+      backgroundColor: '#ffffff',
+      color: '#000000',
       minHeight: '100vh',
       textAlign: 'center'
     }}>
@@ -17,14 +17,14 @@ export default function Home() {
         maxWidth: '1000px',
         margin: '0 auto'
       }}>
-         <h1 style={{
-           color: '#ffffff',
-           marginBottom: '1rem',
-           fontSize: '2rem'
-         }}>George Hadow</h1>
+        <h1 style={{
+          color: '#000000',
+          marginBottom: '1rem',
+          fontSize: '2rem'
+        }}>George Hadow</h1>
 
           <p style={{
-            color: '#cccccc',
+            color: '#666666',
             marginBottom: '0.5rem',
             fontSize: '1.1rem',
             maxWidth: '600px',
@@ -37,7 +37,7 @@ export default function Home() {
           </p>
 
           <p style={{
-            color: '#cccccc',
+            color: '#666666',
             marginBottom: '3rem',
             fontSize: '0.95rem',
             maxWidth: '600px',
@@ -58,22 +58,22 @@ export default function Home() {
            marginLeft: 'auto',
            marginRight: 'auto'
          }}>
-            <p style={{ color: '#cccccc', lineHeight: '1.6', fontSize: '1rem' }}>
+            <p style={{ color: '#666666', lineHeight: '1.6', fontSize: '1rem' }}>
              Explore selected performances, current projects, and upcoming live dates.
             </p>
          </div>
 
-         <footer style={{
-           marginTop: '4rem',
-           textAlign: 'center',
-           color: '#888',
-           fontSize: '0.8em'
-         }}>
-           <p>George Hadow - Amsterdam-based drummer and avant-garde artist</p>
-           <p style={{ marginTop: '0.5rem' }}>
-             Data sourced from <a href="https://kuhnfumusic.com/tour-dates" target="_blank" rel="noopener noreferrer" style={{ color: '#ffffff', textDecoration: 'none' }}>kuhnfumusic.com</a>
-           </p>
-         </footer>
+        <footer style={{
+          marginTop: '4rem',
+          textAlign: 'center',
+          color: '#888',
+          fontSize: '0.8em'
+        }}>
+          <p>George Hadow - Amsterdam-based drummer and avant-garde artist</p>
+          <p style={{ marginTop: '0.5rem' }}>
+            Data sourced from <a href="https://kuhnfumusic.com/tour-dates" target="_blank" rel="noopener noreferrer" style={{ color: '#0066cc', textDecoration: 'none' }}>kuhnfumusic.com</a>
+          </p>
+        </footer>
       </div>
     </div>
   );

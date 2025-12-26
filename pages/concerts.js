@@ -59,12 +59,12 @@ export default function Concerts() {
         margin: '0 auto'
       }}>
       <h1 style={{
-        color: '#ffffff',
+        color: '#000000',
         marginBottom: '1rem',
         fontSize: '1.5rem'
       }}>George Hadow</h1>
       <p style={{
-        color: '#cccccc',
+        color: '#666666',
         marginBottom: '2rem',
         fontSize: '0.9rem',
         maxWidth: '600px',
@@ -75,16 +75,16 @@ export default function Concerts() {
         English drummer from South-West Devon, now a prominent figure in Amsterdam&apos;s avant-garde scene since 2012.
       </p>
       <h2 style={{
-        color: '#00d4ff',
+        color: '#000000',
         marginBottom: '2rem',
-        fontSize: '1.8rem',
+        fontSize: '1.2rem',
         textAlign: 'center'
       }}>Upcoming Concerts</h2>
 
       <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
         <p style={{
           fontSize: '0.8em',
-          color: '#cccccc',
+          color: '#666666',
           marginBottom: '1rem'
         }}>
           Data Source: {getDataSourceMessage()}
@@ -95,7 +95,7 @@ export default function Concerts() {
         <div style={{
           textAlign: 'center',
           padding: '2rem',
-          color: '#ffffff',
+          color: '#666666',
           fontSize: '1rem'
         }}>
           Loading concerts...
@@ -106,8 +106,8 @@ export default function Concerts() {
         <div style={{
           textAlign: 'center',
           padding: '1rem',
-          color: '#ffffff',
-          backgroundColor: '#333333',
+          color: '#000000',
+          backgroundColor: '#f0f0f0',
           borderRadius: '4px'
         }}>
           {error}
@@ -118,7 +118,7 @@ export default function Concerts() {
         <div style={{
           textAlign: 'center',
           padding: '2rem',
-          color: '#cccccc',
+          color: '#666666',
           fontSize: '1rem'
         }}>
           No upcoming concerts found.
@@ -131,17 +131,17 @@ export default function Concerts() {
             <li key={gig.id || idx} style={{
               margin: '0.75rem 0',
               padding: '1rem',
-              border: '1px solid #333',
-              backgroundColor: '#1a1a1a'
+              border: '1px solid #e0e0e0',
+              backgroundColor: '#f9f9f9'
             }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
                   <strong style={{
                     fontSize: '1rem',
-                    color: '#ffffff',
+                    color: '#000000',
                     marginRight: '0.75rem'
                   }}>{gig.date}</strong>
-                  <span style={{ color: '#cccccc', fontSize: '0.9rem' }}>
+                  <span style={{ color: '#666666', fontSize: '0.9rem' }}>
                     {gig.venue}, {gig.city}
                   </span>
                 </div>
@@ -151,19 +151,19 @@ export default function Concerts() {
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{
-                      backgroundColor: '#ffffff',
-                      color: '#000000',
+                      backgroundColor: '#000000',
+                      color: '#ffffff',
                       padding: '0.25rem 0.5rem',
                       borderRadius: '3px',
                       textDecoration: 'none',
                       fontSize: '0.8rem',
-                      border: '1px solid #ffffff'
+                      border: '1px solid #000000'
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = '#cccccc';
+                      e.currentTarget.style.backgroundColor = '#333333';
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = '#ffffff';
+                      e.currentTarget.style.backgroundColor = '#000000';
                     }}
                   >
                     🎫 Tickets
@@ -180,10 +180,10 @@ export default function Concerts() {
           textAlign: 'center',
           color: '#888',
           fontSize: '0.8em',
-          borderTop: '1px solid #333',
+          borderTop: '1px solid #e0e0e0',
           paddingTop: '1rem'
         }}>
-          <p>Data sourced from <a href="https://kuhnfumusic.com/tour-dates" target="_blank" rel="noopener noreferrer" style={{ color: '#ffffff', textDecoration: 'none' }}>kuhnfumusic.com</a></p>
+          <p>Data sourced from <a href="https://kuhnfumusic.com/tour-dates" target="_blank" rel="noopener noreferrer" style={{ color: '#0066cc', textDecoration: 'none' }}>kuhnfumusic.com</a></p>
           <p>George Hadow - Live Music Experience</p>
         </footer>
       </div>
