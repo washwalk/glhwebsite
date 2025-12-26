@@ -1,5 +1,6 @@
 import axios from 'axios';
-import cheerio from 'cheerio';
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const cheerio = require('cheerio');
 
 export default async function handler(req, res) {
   // Set CORS headers
