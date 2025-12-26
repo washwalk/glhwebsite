@@ -39,11 +39,7 @@ export default function Home() {
     loadManualGigs();
   }, []);
 
-  // Save manual gigs to localStorage
-  const saveManualGigs = (newGigs) => {
-    setManualGigs(newGigs);
-    localStorage.setItem('manualGigs', JSON.stringify(newGigs));
-  };
+
 
   useEffect(() => {
     async function fetchGigs() {
@@ -67,22 +63,6 @@ export default function Home() {
     return new Date(a.date) - new Date(b.date);
   });
 
-  const handleAddGig = (gigData) => {
-    if (editingGig !== null) {
-      // Update existing gig
-      const updatedGigs = manualGigs.map((gig, idx) =>
-        idx === editingGig ? { ...gigData, id: Date.now() } : gig
-      );
-      saveManualGigs(updatedGigs);
-      setEditingGig(null);
-    } else {
-      // Add new gig
-      const newGig = { ...gigData, id: Date.now() };
-      saveManualGigs([...manualGigs, newGig]);
-    }
-    setShowAddForm(false);
-  };
-
   const handleEditGig = (index) => {
     setEditingGig(index);
     setShowAddForm(true);
@@ -101,16 +81,7 @@ export default function Home() {
         </p>
       </div>
 
-      {showAddForm && (
-        <ConcertForm
-          onSubmit={handleAddGig}
-          onCancel={() => {
-            setShowAddForm(false);
-            setEditingGig(null);
-          }}
-          initialData={editingGig !== null ? manualGigs[editingGig] : null}
-        />
-      )}
+
 
       {loading && <p>Loading concerts...</p>}
 
