@@ -1,10 +1,10 @@
-# George Shadow Concert Scraper
+# George Hadow Concert Scraper
 
-A Next.js web application that scrapes and displays upcoming concert dates for George Shadow from kuhnfumusic.com.
+A Next.js web application that scrapes and displays upcoming concert dates for George Hadow from kuhnfumusic.com.
 
 ## Features
 
-- 🎵 Real-time concert data scraping from kuhnfumusic.com
+- 🎵 Real-time concert data scraping from kuhnfumusic.com/tour-dates
 - 📱 Responsive design that works on all devices
 - ⚡ Fast Next.js application with server-side rendering
 - 🔄 Automatic data fetching and display

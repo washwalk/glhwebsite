@@ -1,9 +1,9 @@
-# AGENTS.md - George Shadow Concert Scraper
+# AGENTS.md - George Hadow Concert Scraper
 
-This document provides coding guidelines and commands for the George Shadow concert scraping application.
+This document provides coding guidelines and commands for the George Hadow concert scraping application.
 
 ## Project Overview
-This is a Next.js application that scrapes concert dates from kuhnfumusic.com and displays upcoming gigs for George Shadow.
+This is a Next.js application that scrapes concert dates from kuhnfumusic.com/tour-dates and displays upcoming gigs for George Hadow.
 
 ## Build/Lint/Test Commands
 

@@ -13,7 +13,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { data } = await axios.get('https://kuhnfumusic.com/', {
+    const { data } = await axios.get('https://kuhnfumusic.com/tour-dates', {
       headers: {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
       }
@@ -48,7 +48,7 @@ export default async function handler(req, res) {
           date: date || 'Date TBA',
           venue: venue || 'Venue TBA',
           city: city || '',
-          link: link ? (link.startsWith('http') ? link : `https://kuhnfumusic.com${link}`) : ''
+          link: link ? (link.startsWith('http') ? link : `https://kuhnfumusic.com/tour-dates${link}`) : ''
         });
       }
     });

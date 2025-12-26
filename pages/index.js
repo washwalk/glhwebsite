@@ -24,7 +24,7 @@ export default function Home() {
 
   return (
     <div style={{ padding: '2rem', fontFamily: 'sans-serif', maxWidth: '800px', margin: '0 auto' }}>
-      <h1 style={{ color: '#333', marginBottom: '2rem' }}>George Shadow - Upcoming Concerts</h1>
+      <h1 style={{ color: '#333', marginBottom: '2rem' }}>George Hadow - Upcoming Concerts</h1>
 
       {loading && <p>Loading concerts...</p>}
 
@@ -63,7 +63,7 @@ export default function Home() {
       )}
 
       <footer style={{ marginTop: '3rem', textAlign: 'center', color: '#666', fontSize: '0.9em' }}>
-        <p>Data sourced from <a href="https://kuhnfumusic.com/" target="_blank" rel="noopener noreferrer">kuhnfumusic.com</a></p>
+        <p>Data sourced from <a href="https://kuhnfumusic.com/tour-dates" target="_blank" rel="noopener noreferrer">kuhnfumusic.com/tour-dates</a></p>
       </footer>
     </div>
   );

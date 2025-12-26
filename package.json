@@ -1,7 +1,7 @@
 {
-  "name": "george-shadow-concerts",
+  "name": "george-hadow-concerts",
   "version": "1.0.0",
-  "description": "George Shadow concert scraper and display website",
+  "description": "George Hadow concert scraper and display website",
   "main": "pages/index.js",
   "scripts": {
     "dev": "next dev",
@@ -22,7 +22,7 @@
     "eslint-config-next": "^14.0.0"
   },
   "keywords": [
-    "george-shadow",
+    "george-hadow",
     "concerts",
     "music",
     "scraper"
