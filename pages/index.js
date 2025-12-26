@@ -7,37 +7,37 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Load manual gigs from concerts.txt file
-  useEffect(() => {
-    async function loadManualGigs() {
-      try {
-        const response = await fetch('/concerts.txt');
-        if (response.ok) {
-          const text = await response.text();
-          const lines = text.split('\n').filter(line =>
-            line.trim() && !line.trim().startsWith('#')
-          );
+  // TEMPORARILY DISABLED: Load manual gigs from concerts.txt file
+  // useEffect(() => {
+  //   async function loadManualGigs() {
+  //     try {
+  //       const response = await fetch('/concerts.txt');
+  //       if (response.ok) {
+  //         const text = await response.text();
+  //         const lines = text.split('\n').filter(line =>
+  //           line.trim() && !line.trim().startsWith('#')
+  //         );
 
-          const parsedGigs = lines.map(line => {
-            const [date, venue, city, link] = line.split('|').map(s => s.trim());
-            return {
-              date: date || 'Date TBA',
-              venue: venue || 'Venue TBA',
-              city: city || '',
-              link: link || '',
-              source: 'manual'
-            };
-          }).filter(gig => gig.date || gig.venue);
+  //         const parsedGigs = lines.map(line => {
+  //           const [date, venue, city, link] = line.split('|').map(s => s.trim());
+  //           return {
+  //             date: date || 'Date TBA',
+  //             venue: venue || 'Venue TBA',
+  //             city: city || '',
+  //             link: link || '',
+  //             source: 'manual'
+  //           };
+  //         }).filter(gig => gig.date || gig.venue);
 
-          setManualGigs(parsedGigs);
-        }
-      } catch (err) {
-        console.log('No manual concerts file found or error loading it:', err);
-      }
-    }
+  //         setManualGigs(parsedGigs);
+  //       }
+  //     } catch (err) {
+  //       console.log('No manual concerts file found or error loading it:', err);
+  //     }
+  //   }
 
-    loadManualGigs();
-  }, []);
+  //   loadManualGigs();
+  // }, []);
 
 
 
@@ -76,8 +76,7 @@ export default function Home() {
 
       <div style={{ marginBottom: '2rem' }}>
         <p style={{ fontSize: '0.9em', color: '#666', marginBottom: '1rem' }}>
-          <strong>Note:</strong> Manual concerts are managed via the <code>public/concerts.txt</code> file in the repository.
-          Edit this file to add or modify concerts manually.
+          <strong>Testing Mode:</strong> Manual concerts are temporarily disabled to test scraping functionality.
         </p>
       </div>
 
@@ -97,41 +96,23 @@ export default function Home() {
               padding: '1rem',
               border: '1px solid #ddd',
               borderRadius: '8px',
-              backgroundColor: gig.source === 'manual' ? '#fff8e1' : '#f9f9f9',
-              position: 'relative'
+              backgroundColor: '#f9f9f9'
             }}>
-              {gig.source === 'manual' && (
-                <div style={{
-                  position: 'absolute',
-                  top: '0.5rem',
-                  left: '0.5rem',
-                  backgroundColor: '#4caf50',
-                  color: 'white',
-                  padding: '0.2rem 0.5rem',
-                  borderRadius: '3px',
-                  fontSize: '0.7rem',
-                  fontWeight: 'bold'
-                }}>
-                  MANUAL
-                </div>
+              <strong style={{ fontSize: '1.1em' }}>{gig.date}</strong> — {gig.venue}, {gig.city}{' '}
+              {gig.link && (
+                <a
+                  href={gig.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    color: '#0070f3',
+                    textDecoration: 'none',
+                    fontWeight: 'bold'
+                  }}
+                >
+                  Tickets
+                </a>
               )}
-              <div style={{ paddingTop: gig.source === 'manual' ? '2rem' : '0' }}>
-                <strong style={{ fontSize: '1.1em' }}>{gig.date}</strong> — {gig.venue}, {gig.city}{' '}
-                {gig.link && (
-                  <a
-                    href={gig.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      color: '#0070f3',
-                      textDecoration: 'none',
-                      fontWeight: 'bold'
-                    }}
-                  >
-                    Tickets
-                  </a>
-                )}
-              </div>
             </li>
           ))}
         </ul>
@@ -139,7 +120,7 @@ export default function Home() {
 
       <footer style={{ marginTop: '3rem', textAlign: 'center', color: '#666', fontSize: '0.9em' }}>
         <p>Data sourced from <a href="https://kuhnfumusic.com/tour-dates" target="_blank" rel="noopener noreferrer">kuhnfumusic.com/tour-dates</a></p>
-        <p>Manual concerts are managed via the <code>public/concerts.txt</code> file in the repository</p>
+        <p><strong>Testing Mode:</strong> Only showing scraped concerts</p>
       </footer>
     </div>
   );
