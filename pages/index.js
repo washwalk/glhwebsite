@@ -23,17 +23,31 @@ export default function Home() {
            fontSize: '2rem'
          }}>George Hadow</h1>
 
-         <p style={{
-           color: '#cccccc',
-           marginBottom: '3rem',
-           fontSize: '1rem',
-           maxWidth: '600px',
-           marginLeft: 'auto',
-           marginRight: 'auto',
-           lineHeight: '1.6'
-         }}>
-           English drummer from South-West Devon, now a prominent figure in Amsterdam&apos;s avant-garde scene since 2012.
-         </p>
+          <p style={{
+            color: '#cccccc',
+            marginBottom: '0.5rem',
+            fontSize: '1.1rem',
+            maxWidth: '600px',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            lineHeight: '1.4',
+            textAlign: 'center'
+          }}>
+            Amsterdam-based drummer & avant-garde artist
+          </p>
+
+          <p style={{
+            color: '#cccccc',
+            marginBottom: '3rem',
+            fontSize: '0.95rem',
+            maxWidth: '600px',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            lineHeight: '1.6'
+          }}>
+            George Hadow is an English drummer from South-West Devon, active in Amsterdam&apos;s avant-garde music scene since 2012.
+            His work focuses on rhythm, texture, and experimentation across contemporary and improvised music.
+          </p>
 
 
 
@@ -44,10 +58,9 @@ export default function Home() {
            marginLeft: 'auto',
            marginRight: 'auto'
          }}>
-           <p style={{ color: '#cccccc', lineHeight: '1.6', fontSize: '1rem' }}>
-            Explore George Hadow&apos;s musical journey through Amsterdam&apos;s avant-garde scene.
-              Discover upcoming performances and learn about his innovative approach to rhythm and percussion.
-           </p>
+            <p style={{ color: '#cccccc', lineHeight: '1.6', fontSize: '1rem' }}>
+             Explore selected performances, current projects, and upcoming live dates.
+            </p>
          </div>
 
          <footer style={{
