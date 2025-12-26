@@ -46,7 +46,7 @@ export default function Concerts() {
 
   return (
     <div style={{
-      backgroundColor: '#121212',
+      backgroundColor: '#ffffff',
       color: '#ffffff',
       minHeight: '100vh'
     }}>

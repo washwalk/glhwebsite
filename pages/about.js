@@ -3,7 +3,7 @@ import Navigation from '../components/Navigation';
 export default function About() {
   return (
     <div style={{
-      backgroundColor: '#121212',
+      backgroundColor: '#ffffff',
       color: '#ffffff',
       minHeight: '100vh'
     }}>
