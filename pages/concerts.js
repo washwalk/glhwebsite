@@ -6,16 +6,7 @@ export default function Concerts() {
   const [gigs, setGigs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [dataSource, setDataSource] = useState('unknown');
 
-  const getDataSourceMessage = () => {
-    switch (dataSource) {
-      case 'live-scraping': return '🟢 Live data from kuhnfumusic.com';
-      case 'fallback': return '🟡 Service temporarily unavailable';
-      case 'error': return '🔴 Unable to load data';
-      default: return '⏳ Loading data...';
-    }
-  };
 
   useEffect(() => {
     async function fetchGigs() {
@@ -41,20 +32,9 @@ export default function Concerts() {
         });
 
         setGigs(upcomingGigs);
-
-        // Determine data source from the response
-        if (data.length > 0) {
-          const sources = data.map(gig => gig.source);
-          if (sources.includes('scraped') || sources.includes('scraped-fallback')) {
-            setDataSource('live-scraping');
-          } else {
-            setDataSource('fallback');
-          }
-        }
       } catch (err) {
         console.error('Failed to fetch gigs:', err);
         setError('Failed to load concert data');
-        setDataSource('error');
       } finally {
         setLoading(false);
       }
@@ -84,15 +64,7 @@ export default function Concerts() {
         textAlign: 'center'
       }}>Upcoming Concerts</h2>
 
-      <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
-        <p style={{
-          fontSize: '0.8em',
-          color: '#666666',
-          marginBottom: '1rem'
-        }}>
-          Data Source: {getDataSourceMessage()}
-        </p>
-      </div>
+
 
       {loading && (
         <div style={{
