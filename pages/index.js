@@ -110,7 +110,7 @@ export default function Home() {
 
       {!loading && !error && allGigs.length === 0 && <p>No upcoming gigs found.</p>}
 
-      {(!loading || manualGigs.length > 0) && allGigs.length > 0 && (
+      {!loading && allGigs.length > 0 && (
         <ul style={{ listStyle: 'none', padding: 0 }}>
           {allGigs.map((gig, idx) => (
             <li key={gig.id || idx} style={{
