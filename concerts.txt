@@ -2,5 +2,169 @@
 # Format: Date|Venue|City|Link
 # Example: 15.12.2024|Blue Note|New York, NY|https://example.com
 
-# Add your manual concerts here
-# 15.12.2024|Blue Note|New York, NY|https://example.com
+# Upcoming Concerts
+30.01.2026|Rabbit Hole Theater|Essen (GER)|
+31.01.2026|Jazzmission|Schwäbisch Gmünd (GER)|
+03.02.2026|Porgy and Bess|Wien (AT)|
+04.02.2026|Opus Jazz Club|Budapest (HU)|
+06.02.2026|Teatro Miela|Trieste (IT)|
+07.02.2026|Stockwerk|Graz (AT)|
+27.02.2026|Jazz & Kunst im Kalk|Limburg (GER)|
+28.02.2026|Kinett Kusel|Kusel (GER)|
+31.03.2026|Theaterhaus Jazztage|Stuttgart (GER)|
+16.05.2026|TBA|Ulm (GER)|
+22.10.2026|Insel|Wuppertal (GER)|
+23.10.2026|Vakuum|Bad Bevensen (GER)|
+
+# Past Concerts
+12.12.2025|Jazzclub|Rymarov (CZ)|
+11.12.2025|Museum Volyne|Volyne (CZ)|
+10.12.2025|Cafe Tresor|Göppingen (GER)|
+09.12.2025|Die Fabrik|Frankfurt (GER)|
+08.12.2025|C.Keller|Weimar (GER)|
+06.12.2025|Hofbühne im Weidengrund|Lochwitz (GER)|
+05.12.2025|ex-Sultanmarkt|Flensburg (GER)|
+28.10.2025|Capitol|Mannheim (GER)|
+26.10.2025|Jazzfestival|Würzburg (GER)|
+25.10.2025|Tor 9|Bremen (GER)|
+24.10.2025|BLOCK1@Gaswerksiedlung|Berlin (GER)|
+11.10.2025|Soulbuddies|Altdorf b. Nürnberg (GER)|
+10.10.2025|Jazzclub|Nordhausen (GER)|
+06.09.2025|Akut #24 Festival für Jazz|Mainz (GER)|
+29.08.2025|Klever Jazzfreunde am Spiegelzelt|Kleve (GER)|
+09.07.2025|JEFF Festival|Koper (SL)|
+05.07.2025|Jazz an einem Sommerabend Festival|Krefeld (GER)|
+24.05.2025|White Cube|Bergedorf (GER)|
+23.05.2025|Villa Sponte|Bremen (GER)|
+22.05.2025|CVJM|Lübeck (GER)|
+16.05.2025|Bimhuis|Amsterdam (NL)|
+11.05.2025|Last Penny|Ankara (TR)|
+10.05.2025|iZOLE|Eskisehir (TR)|
+09.05.2025|Borusan Muzik Evi|Istanbul (TR)|
+06.04.2025|jazzexzess@ House of Music|Berlin (GER)|
+05.04.2025|Wendlandjazz|Göhrde (GER)|
+04.04.2025|JAZZ im Güterschuppen|Westerstede (GER)|
+03.04.2025|Kunsthaus|Troisdorf (GER)|
+29.03.2025|Zentrale zum Rieblwirt|Landshut (GER)|
+28.03.2025|Kulturquartier Allgäu|Kempten (GER)|
+27.03.2025|Jazzport|Friedrichshafen (GER)|
+25.03.2025|Cankarjev dom|Ljublijana (SL)|
+23.03.2025|Circolo Libero Pensiero|Lecco (IT)|
+22.03.2025|Altes Kino|Landeck (AT)|
+21.03.2025|Jazz im Refektorium|Rottweil (DE)|
+02.11.2024|Jazzclub|Erfurt (GER)|
+01.11.2024|Horns Erben|Leipzig (GER)|
+31.10.2024|Unterfahrt|Munich (GER)|
+30.10.2024|Kulturforum|Villach (AT)|
+29.10.2024|Jazz im Martinschlössl|Vienna (AT)|
+28.10.2024|Mocvara|Zagreb (HR)|
+26.10.2024|Opus Jazzclub|Budapest (HU)|
+25.10.2024|Hogo Fogo Jazz & Art Club|Banská Bystrica (SK)|
+24.10.2024|Galerie Brunnhofer|Linz (AT)|
+23.10.2024|Kohi|Karlsruhe (GER)|
+20.10.2024|Musikbunker|Aachen (GER)|
+18.10.2024|Speicher|Husum (GER)|
+01.09.2024|Cologne Jazzweek (Large Ensemble)|Cologne (GER)|
+31.08.2024|ZOMeRJaZZFIeTSTOUR|Groningen (NL)|
+30.08.2024|ZOMeRJaZZFIeTSTOUR Prolog (Large Ensemble)|Groningen (NL)|
+24.08.2024|Jazz am Kaisersteg (Septet)|Berlin (GER)|
+02.06.2024|Magazin 4|Brussels (BE)|
+01.06.2024|Polychrom Festival|Osnabrück (GER)|
+10.05.2024|Jazz Jantar|Gdansk (PL)|
+23.02.2024|Tonne|Dresden (GER)|
+22.02.2024|Kühlspot|Berlin (GER)|
+21.02.2024|Loch|Wuppertal (GER)|
+20.02.2024|Loft|Köln (GER)|
+18.02.2024|Black Box Cuba|Münster (GER)|
+17.02.2024|Vakuum|Bad Bevensen (GER)|
+16.02.2024|Saxstall|Pohrsdorf (GER)|
+15.02.2024|Weltecho|Chemnitz (GER)|
+28.10.2023|Kulturschranne ( Sextet )|Dachau (GER)|
+27.10.2023|Museum Volyne|Volyne (CZ)|
+26.10.2023|Jazzdock|Prague (CZ)|
+25.10.2023|Jazzclub Hirsch ( Quartet )|Freising (GER)|
+13.08.2023|Ciglana Club|Belgrade (SRB)|
+11.08.2023|Nisville Jazzfestival|Nis (SRB)|
+09.08.2023|Fri-Fru-Fra Koncertni Cikel|Nova Gorica (SL)|
+14.07.2023|Zappanale|Bad Doberan (DE)|
+19.05.2023|Ponava Fest|Brno (CZ)|
+18.05.2023|Diocesan Museum|Székesfehérvár (HU)|
+17.05.2023|Jazzfest Budapest @ Lumen Kávézó|Budapest (HU)|
+22.04.2023|Dexter|Odense (DK)|
+01.04.2023|Jazzclub|Villingen (GER)|
+31.03.2023|Jazz am See|Feldafing (GER)|
+11.02.2023|White Cube|Bergedorf (GER)|
+10.02.2023|CVJM|Lübeck (GER)|
+09.02.2023|Astra Stube|Hamburg (GER)|
+05.02.2023|Bimhuis|Amsterdam (NL)|
+04.02.2023|Jazzclub|Nordhausen (GER)|
+03.02.2023|Horns Erben|Leipzig (GER)|
+02.02.2023|Schlot|Berlin (GER)|
+19.11.2022|Bflat|Berlin (GER)|
+10.11.2022|Divadlo 29|Pardubice (CZ)|
+09.11.2022|Jazzclub|Augsburg (GER)|
+08.11.2022|Limmitationes|Schweinz (AT)|
+05.11.2022|Pancevo Jazz Festival|Pancevo (SRB)|
+04.11.2022|Alarma Punk Jazz|Sofia (BLG)|
+03.11.2022|BAM|Belgrade (SRB)|
+02.11.2022|Studio 6 Radio|Belgrade (GER)|
+01.11.2022|Kulturni Centar Lab|Novi Sad (SRB)|
+30.10.2022|Jazzire|Subotica (SRB)|
+29.10.2022|Petz Pub|Székesfehérvár (HU)|
+28.10.2022|Stockwerk|Graz (AT)|
+27.10.2022|Jazz im Martinschlössl|Vienna (AT)|
+26.10.2022|Altes Kino|Landeck (AT)|
+25.10.2022|Kulturforum|Villach (AT)|
+23.10.2022|Standard|Würzburg (GER)|
+22.10.2022|Jazzclub|Erfurt (GER)|
+21.10.2022|Petersburg Artspace|Berlin (GER)|
+26.08.2022|Visual Sound Outdoor Festival|Dortmund (GER)|
+20.08.2022|Festival am Forsthaus|Buchholz (GER)|
+19.08.2022|TBA|Bonn (GER)|
+20.07.2022|Babel Sound|Balatonboglár (HU)|
+01.07.2022|Eldenaer Jazz Evenings ( Sextet / NDR Broadcast )|Greifswald (GER)|
+09.04.2022|White Cube|Bergedorf (GER)|
+08.04.2022|TOR 9|Bremen (GER)|
+12.03.2022|PlusEtage ( Sextet )|Baarle-Nassau (NL)|
+12.12.2021|B flat ( Trio w. Jungle Debris )|Berlin (GER)|
+15.10.2021|Jazzklub|Altenburg (GER)|
+14.10.2021|Peter und der Jazz|Rostock (GER)|
+13.10.2021|Zentrifuge Studio Recording|Berlin (GER)|
+12.10.2021|Zentrifuge Studio Recording|Berlin (GER)|
+11.10.2021|Jazzdock ( Sextet )|Prague (CZ)|
+09.10.2021|Musikbunker ( Sextet )|Aachen (GER)|
+08.10.2021|Freakshow.Artrock.Festival ( Sextet )|Würzburg (GER)|
+29.08.2021|BUI Picnic Festival #balkonscenes|Utrecht (NL)|
+28.08.2021|Jazz in Crooswijk #bakonscenes|Rotterdam (NL)|
+27.08.2021|Summer Space Festival #balkonscenes|Amsterdam (NL)|
+20.08.2021|Jazzfestival ( Sextet with Tobias Delius & John Dikeman )|Saalfelden (AT)|
+14.08.2021|OZOLand|Hunsel (NL)|
+14.08.2021|Ozoland #Balconscenes|Hunsel (NL)|
+31.07.2021|Varna Jazz Festival|Varna (BUL)|
+14.05.2021|TBA|Dordrecht (NL)|
+13.05.2021|Porgy & Bess|Vienna (AT)|
+12.05.2021|Jazzdock ( CANCELLED )|Prague (CZ)|
+17.04.2021|Kühlspot ( cancelled )|Berlin (GER)|
+16.04.2021|Jazzklub ( cancelled )|Altenburg (GER)|
+14.04.2021|Loft ( cancelled )|Cologne (GER)|
+13.04.2021|Musikbunker ( Sextett )|Aachen (GER)|
+12.04.2021|Jazzklub Krefeld in der Kulturfabrik ( Live Stream )|Krefeld (GER)|
+29.10.2020|U BÍLÝHO ČERNOCHA ( CANCELLED )|ČESKÁ LÍPA (CZ)|
+17.10.2020|JazzBlazzt ( CANCELLED )|Neeritter (NL)|
+22.08.2020|RKZ Garden ( trio )|Groningen (NL)|
+21.08.2020|Lila Eule ( trio )|Bremen (GER)|
+16.08.2020|WhiteCube|Bergedorf (GER)|
+15.08.2020|Wendlandjazz|Gedelitz (GER)|
+07.08.2020|Bayerisches Jazzinstitut Live Stream|Regensburg (GER)|
+05.06.2020|Open Air Schieszhaus ( Trio ) – CANCELLED|Zeulenroda (GER)|
+16.05.2020|Sowieso – CANCELLED|Berlin (GER)|
+15.05.2020|Ponava – CANCELLED|Brno (CZ)|
+14.05.2020|Porgy & Bess – CANCELLED|Vienna (AT)|
+05.05.2020|BEvrijdingsfestival op Fort Lunet I – CANCELLED|Utrecht (NL)|
+09.04.2020|JAZZKLUB KREFELD ( Sextet ) – CANCELLED|Krefeld (GER)|
+03.04.2020|PlayOutFest@Sexyland ( Quintet ) – CANCELLED|Amsterdam (NL)|
+28.03.2020|CLUB Bambule – CANCELLED|Göppingen (GER)|
+27.03.2020|Jazzclub Altenburg – CANCELLED|Altenburg (GER)|
+26.03.2020|U bílýho černocha – CANCELLED|Česká Lípa (CZ)|
+09.02.2020|Cuba|Münster (GER)|
+08.02.2020|Kulturbahnhof|Jena (GER)|
