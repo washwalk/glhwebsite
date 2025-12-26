@@ -80,6 +80,9 @@ export default function Home() {
     }
   };
 
+  // Use gigs directly since manual concerts are handled via API fallback
+  const allGigs = gigs;
+
   const handleEditGig = (index) => {
     setEditingGig(index);
     setShowAddForm(true);
