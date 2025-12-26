@@ -1,0 +1,45 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #121212 !important;
+  color: #ffffff;
+  font-family: sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background-color: #121212 !important;
+}
+
+/* Ensure no white borders or backgrounds */
+# __next {
+  background-color: #121212 !important;
+}
+
+html {
+  background-color: #121212 !important;
+}
+
+/* Link styles for dark theme */
+a {
+  color: #00d4ff;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #0099cc;
+}
+
+/* Navigation styles */
+nav a {
+  transition: all 0.2s ease;
+}
+
+/* Concert card hover effects */
+li {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
