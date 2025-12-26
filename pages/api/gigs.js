@@ -12,18 +12,52 @@ export default async function handler(req, res) {
     return;
   }
 
-  // Debug endpoint - return raw HTML if requested
+  // Debug endpoints
   if (req.query.debug === 'html') {
     try {
+      console.log('Fetching HTML for debugging...');
       const { data } = await axios.get('https://kuhnfumusic.com/tour-dates', {
         headers: {
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
         },
         timeout: 15000
       });
-      return res.status(200).json({ html: data.substring(0, 2000) }); // First 2000 chars
+      console.log('HTML fetched, length:', data.length);
+      return res.status(200).json({
+        success: true,
+        htmlLength: data.length,
+        htmlPreview: data.substring(0, 1000),
+        title: data.includes('<title>') ? data.split('<title>')[1].split('</title>')[0] : 'No title found',
+        hasTable: data.includes('<table'),
+        hasTourDates: data.includes('Tour Dates')
+      });
     } catch (error) {
-      return res.status(500).json({ error: error.message });
+      console.log('Debug HTML fetch failed:', error.message);
+      return res.status(500).json({
+        success: false,
+        error: error.message,
+        status: error.response?.status,
+        statusText: error.response?.statusText
+      });
+    }
+  }
+
+  if (req.query.debug === 'test') {
+    // Simple test to check if we can reach the website at all
+    try {
+      const response = await axios.head('https://kuhnfumusic.com/tour-dates', { timeout: 5000 });
+      return res.status(200).json({
+        reachable: true,
+        status: response.status,
+        headers: response.headers
+      });
+    } catch (error) {
+      return res.status(200).json({
+        reachable: false,
+        error: error.message,
+        status: error.response?.status
+      });
     }
   }
 

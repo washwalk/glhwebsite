@@ -6,6 +6,8 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [dataSource, setDataSource] = useState('unknown');
+  const [showAddForm, setShowAddForm] = useState(false);
+  const [newConcert, setNewConcert] = useState({ date: '', venue: '', city: '', link: '' });
 
   // TEMPORARILY DISABLED: Load manual gigs from concerts.txt file
   // useEffect(() => {
@@ -99,11 +101,29 @@ export default function Home() {
     }}>
       <h1 style={{
         color: '#ffffff',
+        marginBottom: '1rem',
+        textShadow: '0 0 10px rgba(255,255,255,0.3)',
+        fontSize: '2.5rem'
+      }}>George Hadow</h1>
+      <p style={{
+        color: '#cccccc',
         marginBottom: '2rem',
-        textShadow: '0 0 10px rgba(255,255,255,0.3)'
-      }}>George Hadow - Upcoming Concerts</h1>
+        fontSize: '1.1rem',
+        maxWidth: '600px',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        lineHeight: '1.6'
+      }}>
+        English drummer from South-West Devon, now a prominent figure in Amsterdam's avant-garde scene since 2012.
+      </p>
+      <h2 style={{
+        color: '#00d4ff',
+        marginBottom: '2rem',
+        fontSize: '1.8rem',
+        textAlign: 'center'
+      }}>🎵 Upcoming Concerts</h2>
 
-      <div style={{ marginBottom: '2rem' }}>
+      <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
         <p style={{
           fontSize: '0.9em',
           color: '#cccccc',
@@ -112,7 +132,150 @@ export default function Home() {
         }}>
           <strong>Data Source:</strong> {getDataSourceMessage()}
         </p>
+
+        <button
+          onClick={() => setShowAddForm(!showAddForm)}
+          style={{
+            backgroundColor: '#00d4ff',
+            color: '#121212',
+            border: 'none',
+            padding: '0.5rem 1rem',
+            borderRadius: '6px',
+            cursor: 'pointer',
+            fontSize: '0.9rem',
+            fontWeight: 'bold',
+            marginTop: '1rem'
+          }}
+        >
+          {showAddForm ? 'Cancel' : '+ Add Concert Manually'}
+        </button>
       </div>
+
+      {showAddForm && (
+        <div style={{
+          backgroundColor: '#1e1e1e',
+          padding: '2rem',
+          borderRadius: '12px',
+          border: '1px solid #333',
+          marginBottom: '2rem',
+          maxWidth: '500px',
+          marginLeft: 'auto',
+          marginRight: 'auto'
+        }}>
+          <h3 style={{ color: '#00d4ff', marginTop: 0 }}>Add New Concert</h3>
+          <form onSubmit={(e) => {
+            e.preventDefault();
+            // In a real app, this would save to a database
+            // For now, just add to local state
+            const concertWithId = { ...newConcert, id: Date.now(), source: 'manual' };
+            setGigs(prev => [...prev, concertWithId]);
+            setNewConcert({ date: '', venue: '', city: '', link: '' });
+            setShowAddForm(false);
+          }}>
+            <div style={{ marginBottom: '1rem' }}>
+              <input
+                type="date"
+                placeholder="Concert Date"
+                value={newConcert.date}
+                onChange={(e) => setNewConcert({...newConcert, date: e.target.value})}
+                required
+                style={{
+                  width: '100%',
+                  padding: '0.5rem',
+                  backgroundColor: '#2a2a2a',
+                  border: '1px solid #555',
+                  borderRadius: '4px',
+                  color: '#ffffff',
+                  fontSize: '1rem'
+                }}
+              />
+            </div>
+            <div style={{ marginBottom: '1rem' }}>
+              <input
+                type="text"
+                placeholder="Venue Name"
+                value={newConcert.venue}
+                onChange={(e) => setNewConcert({...newConcert, venue: e.target.value})}
+                required
+                style={{
+                  width: '100%',
+                  padding: '0.5rem',
+                  backgroundColor: '#2a2a2a',
+                  border: '1px solid #555',
+                  borderRadius: '4px',
+                  color: '#ffffff',
+                  fontSize: '1rem'
+                }}
+              />
+            </div>
+            <div style={{ marginBottom: '1rem' }}>
+              <input
+                type="text"
+                placeholder="City, Country"
+                value={newConcert.city}
+                onChange={(e) => setNewConcert({...newConcert, city: e.target.value})}
+                required
+                style={{
+                  width: '100%',
+                  padding: '0.5rem',
+                  backgroundColor: '#2a2a2a',
+                  border: '1px solid #555',
+                  borderRadius: '4px',
+                  color: '#ffffff',
+                  fontSize: '1rem'
+                }}
+              />
+            </div>
+            <div style={{ marginBottom: '1rem' }}>
+              <input
+                type="url"
+                placeholder="Ticket Link (optional)"
+                value={newConcert.link}
+                onChange={(e) => setNewConcert({...newConcert, link: e.target.value})}
+                style={{
+                  width: '100%',
+                  padding: '0.5rem',
+                  backgroundColor: '#2a2a2a',
+                  border: '1px solid #555',
+                  borderRadius: '4px',
+                  color: '#ffffff',
+                  fontSize: '1rem'
+                }}
+              />
+            </div>
+            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'flex-end' }}>
+              <button
+                type="button"
+                onClick={() => setShowAddForm(false)}
+                style={{
+                  backgroundColor: '#666',
+                  color: '#ffffff',
+                  border: 'none',
+                  padding: '0.5rem 1rem',
+                  borderRadius: '4px',
+                  cursor: 'pointer'
+                }}
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                style={{
+                  backgroundColor: '#ff6b35',
+                  color: '#ffffff',
+                  border: 'none',
+                  padding: '0.5rem 1rem',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                  fontWeight: 'bold'
+                }}
+              >
+                Add Concert
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
 
 
 
@@ -225,23 +388,13 @@ export default function Home() {
         borderTop: '1px solid #333',
         paddingTop: '2rem'
       }}>
-        <p>
-          Data sourced from{' '}
-          <a
-            href="https://kuhnfumusic.com/tour-dates"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              color: '#00d4ff',
-              textDecoration: 'none',
-              fontWeight: 'bold'
-            }}
-          >
-            kuhnfumusic.com/tour-dates
-          </a>
+        <p>Data sourced from <a href="https://kuhnfumusic.com/tour-dates" target="_blank" rel="noopener noreferrer" style={{ color: '#00d4ff', textDecoration: 'none', fontWeight: 'bold' }}>kuhnfumusic.com/tour-dates</a></p>
+        <p style={{ marginTop: '0.5rem', color: '#666', fontSize: '0.8em' }}>
+          Debug: <a href="/api/gigs?debug=test" style={{ color: '#ff6b35', textDecoration: 'none' }}>Connection Test</a> |
+          <a href="/api/gigs?debug=html" style={{ color: '#ff6b35', textDecoration: 'none', marginLeft: '1rem' }}>HTML Debug</a>
         </p>
-        <p style={{ marginTop: '0.5rem', color: '#666' }}>
-          🎸 George Hadow - Live Music Experience 🎸
+        <p style={{ marginTop: '1rem', color: '#666' }}>
+          🎸 George Hadow - English drummer from Devon, Amsterdam-based avant-garde artist since 2012 🎸
         </p>
       </footer>
     </div>
