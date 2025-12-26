@@ -9,6 +9,10 @@ A Next.js web application that scrapes and displays upcoming concert dates for G
 - ⚡ Fast Next.js application with server-side rendering
 - 🔄 Automatic data fetching and display
 - 🎫 Direct links to ticket purchases
+- ➕ Manual concert addition and management
+- ✏️ Edit and delete manually added concerts
+- 💾 Local storage for manual concerts
+- 📅 Automatic sorting by date
 
 ## Tech Stack
 
@@ -48,9 +52,9 @@ npm run dev
 ## Project Structure
 
 ```
-george-shadow-concerts/
+george-hadow-concerts/
 ├── pages/
-│   ├── index.js          # Home page displaying concerts
+│   ├── index.js          # Home page with concert display and manual management
 │   └── api/
 │       └── gigs.js       # API route for scraping concert data
 ├── public/               # Static assets
@@ -60,11 +64,22 @@ george-shadow-concerts/
 └── README.md            # This file
 ```
 
+## Manual Concert Management
+
+In addition to automatically scraped concerts, you can manually add, edit, and delete concerts:
+
+- **Add Concerts**: Click "Add Concert Manually" to open the form
+- **Edit Concerts**: Click the "Edit" button on manually added concerts
+- **Delete Concerts**: Click the "Delete" button to remove concerts
+- **Data Storage**: Manual concerts are stored locally in your browser's localStorage
+
+Manual concerts are visually distinguished with a green "MANUAL" badge and yellow background.
+
 ## API Endpoints
 
 ### GET /api/gigs
 
-Returns upcoming concert information scraped from kuhnfumusic.com.
+Returns upcoming concert information scraped from kuhnfumusic.com/tour-dates.
 
 **Response Format:**
 ```json
