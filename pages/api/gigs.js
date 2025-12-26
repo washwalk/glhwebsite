@@ -34,9 +34,19 @@ export default async function handler(req, res) {
 
     console.log('Searching for concert data in table format...');
 
+    // Debug: Check what tables exist
+    console.log('Found', $('table').length, 'tables');
+    $('table').each((tableIndex, table) => {
+      console.log(`Table ${tableIndex} has`, $(table).find('tr').length, 'rows');
+    });
+
     // Target the table structure on kuhnfumusic.com/tour-dates
-    $('table tbody tr').each((i, row) => {
+    // Try both with and without tbody
+    const tableRows = $('table tbody tr').length > 0 ? $('table tbody tr') : $('table tr');
+
+    tableRows.each((i, row) => {
       const tds = $(row).find('td');
+      console.log(`Row ${i} has ${tds.length} columns`);
 
       if (tds.length >= 3) {
         // Extract date from first td
@@ -65,6 +75,8 @@ export default async function handler(req, res) {
         const cleanVenue = venue.replace(/\s+/g, ' ').trim();
         const cleanCity = cityText.replace(/\s+/g, ' ').trim();
 
+        console.log(`Processing row ${i}:`, { date: cleanDate, city: cleanCity, venue: cleanVenue, link });
+
         // Only add if we have meaningful data
         if (cleanDate && (cleanVenue || cleanCity)) {
           gigs.push({
@@ -74,12 +86,49 @@ export default async function handler(req, res) {
             link: link || '',
             source: 'scraped'
           });
-          console.log('Found concert:', { date: cleanDate, venue: cleanVenue, city: cleanCity, link });
+          console.log('Added concert:', { date: cleanDate, venue: cleanVenue, city: cleanCity, link });
+        } else {
+          console.log('Skipped row - insufficient data');
         }
+      } else {
+        console.log(`Skipping row ${i} - not enough columns`);
       }
     });
 
+    console.log(`Total concerts found: ${gigs.length}`);
+
     console.log(`Found ${gigs.length} concerts total`);
+
+    // If we still have no gigs, try a more direct approach
+    if (gigs.length === 0) {
+      console.log('No concerts found with table parsing, trying manual extraction...');
+
+      // Look for the content-table div and extract from there
+      $('.content-table table tr').each((i, row) => {
+        const tds = $(row).find('td');
+        console.log(`Manual extraction - Row ${i} has ${tds.length} columns`);
+
+        if (tds.length >= 3) {
+          const date = $(tds[0]).text().trim();
+          const city = $(tds[1]).text().trim();
+          const venue = $(tds[2]).text().trim();
+
+          // Get first link from any td
+          const link = $(row).find('a').first().attr('href') || '';
+
+          if (date && (venue || city)) {
+            gigs.push({
+              date: date,
+              venue: venue || 'Venue TBA',
+              city: city || '',
+              link: link ? (link.startsWith('http') ? link : `https://kuhnfumusic.com${link}`) : '',
+              source: 'manual'
+            });
+            console.log('Manual extraction found:', { date, venue, city, link });
+          }
+        }
+      });
+    }
 
     // If we still have no gigs, return a fallback message
     if (gigs.length === 0) {
