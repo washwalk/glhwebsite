@@ -34,86 +34,76 @@ export default async function handler(req, res) {
 
     console.log('Searching for concert data in table format...');
 
-    // Debug: Check what tables exist
-    console.log('Found', $('table').length, 'tables');
-    $('table').each((tableIndex, table) => {
-      console.log(`Table ${tableIndex} has`, $(table).find('tr').length, 'rows');
-    });
+    // Target the specific content-table from kuhnfumusic.com
+    const contentTable = $('.content-table table');
+    console.log('Found content table:', contentTable.length > 0);
 
-    // Target the table structure on kuhnfumusic.com/tour-dates
-    // Try both with and without tbody
-    const tableRows = $('table tbody tr').length > 0 ? $('table tbody tr') : $('table tr');
+    if (contentTable.length > 0) {
+      // Get all table rows, skipping the first one (header)
+      const tableRows = contentTable.find('tr').slice(1); // Skip header row
+      console.log(`Found ${tableRows.length} concert rows in content table`);
 
-    tableRows.each((i, row) => {
-      const tds = $(row).find('td');
-      console.log(`Row ${i} has ${tds.length} columns`);
-
-      if (tds.length >= 3) {
-        // Extract date from first td
-        const dateLink = $(tds[0]).find('a');
-        const date = dateLink.length > 0 ? dateLink.text().trim() : $(tds[0]).text().trim();
-
-        // Extract city from second td
-        const cityLink = $(tds[1]).find('a');
-        const cityText = cityLink.length > 0 ? cityLink.text().trim() : $(tds[1]).text().trim();
-
-        // Extract venue from third td
-        const venueLink = $(tds[2]).find('a');
-        const venue = venueLink.length > 0 ? venueLink.text().trim() : $(tds[2]).text().trim();
-
-        // Get link from any of the anchor tags
-        let link = '';
-        $(tds).find('a').each((j, anchor) => {
-          const href = $(anchor).attr('href');
-          if (href && href.includes('http') && !link) {
-            link = href;
-          }
-        });
-
-        // Clean up the data
-        const cleanDate = date.replace(/\s+/g, ' ').trim();
-        const cleanVenue = venue.replace(/\s+/g, ' ').trim();
-        const cleanCity = cityText.replace(/\s+/g, ' ').trim();
-
-        console.log(`Processing row ${i}:`, { date: cleanDate, city: cleanCity, venue: cleanVenue, link });
-
-        // Only add if we have meaningful data
-        if (cleanDate && (cleanVenue || cleanCity)) {
-          gigs.push({
-            date: cleanDate,
-            venue: cleanVenue || 'Venue TBA',
-            city: cleanCity || '',
-            link: link || '',
-            source: 'scraped'
-          });
-          console.log('Added concert:', { date: cleanDate, venue: cleanVenue, city: cleanCity, link });
-        } else {
-          console.log('Skipped row - insufficient data');
-        }
-      } else {
-        console.log(`Skipping row ${i} - not enough columns`);
-      }
-    });
-
-    console.log(`Total concerts found: ${gigs.length}`);
-
-    console.log(`Found ${gigs.length} concerts total`);
-
-    // If we still have no gigs, try a more direct approach
-    if (gigs.length === 0) {
-      console.log('No concerts found with table parsing, trying manual extraction...');
-
-      // Look for the content-table div and extract from there
-      $('.content-table table tr').each((i, row) => {
+      tableRows.each((i, row) => {
         const tds = $(row).find('td');
-        console.log(`Manual extraction - Row ${i} has ${tds.length} columns`);
+        console.log(`Row ${i} has ${tds.length} columns`);
 
+        if (tds.length >= 3) {
+          // Extract date from first td
+          const dateText = $(tds[0]).text().trim();
+          const dateLink = $(tds[0]).find('a').attr('href');
+
+          // Extract city from second td
+          const cityText = $(tds[1]).text().trim();
+          const cityLink = $(tds[1]).find('a').attr('href');
+
+          // Extract venue from third td
+          const venueText = $(tds[2]).text().trim();
+          const venueLink = $(tds[2]).find('a').attr('href');
+
+          // Determine the best link (prefer specific venue/city links)
+          let link = '';
+          if (venueLink && venueLink.includes('http')) {
+            link = venueLink;
+          } else if (cityLink && cityLink.includes('http')) {
+            link = cityLink;
+          } else if (dateLink && dateLink.includes('http')) {
+            link = dateLink;
+          }
+
+          // Clean up the data
+          const cleanDate = dateText.replace(/\s+/g, ' ').trim();
+          const cleanVenue = venueText.replace(/\s+/g, ' ').trim();
+          const cleanCity = cityText.replace(/\s+/g, ' ').trim();
+
+          console.log(`Processing row ${i}:`, { date: cleanDate, city: cleanCity, venue: cleanVenue, link });
+
+          // Only add if we have a date and some location info
+          if (cleanDate && (cleanVenue || cleanCity)) {
+            gigs.push({
+              date: cleanDate,
+              venue: cleanVenue || 'Venue TBA',
+              city: cleanCity || '',
+              link: link ? (link.startsWith('http') ? link : `https://kuhnfumusic.com${link}`) : '',
+              source: 'scraped'
+            });
+            console.log('Added concert:', { date: cleanDate, venue: cleanVenue, city: cleanCity, link });
+          } else {
+            console.log('Skipped row - insufficient data');
+          }
+        } else {
+          console.log(`Skipping row ${i} - not enough columns`);
+        }
+      });
+    } else {
+      console.log('No content table found, trying fallback approach...');
+
+      // Fallback: try to find any table
+      $('table').first().find('tr').slice(1).each((i, row) => {
+        const tds = $(row).find('td');
         if (tds.length >= 3) {
           const date = $(tds[0]).text().trim();
           const city = $(tds[1]).text().trim();
           const venue = $(tds[2]).text().trim();
-
-          // Get first link from any td
           const link = $(row).find('a').first().attr('href') || '';
 
           if (date && (venue || city)) {
@@ -122,13 +112,14 @@ export default async function handler(req, res) {
               venue: venue || 'Venue TBA',
               city: city || '',
               link: link ? (link.startsWith('http') ? link : `https://kuhnfumusic.com${link}`) : '',
-              source: 'manual'
+              source: 'scraped'
             });
-            console.log('Manual extraction found:', { date, venue, city, link });
           }
         }
       });
     }
+
+    console.log(`Total concerts found: ${gigs.length}`);
 
     // If we still have no gigs, return a fallback message
     if (gigs.length === 0) {
