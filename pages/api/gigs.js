@@ -81,107 +81,48 @@ export default async function handler(req, res) {
 
     const gigs = [];
 
-    console.log('Searching for concert data in table format...');
+    console.log('Searching for concert data...');
 
-    // First, try the most direct approach - look for any table with concert data
-    const allTables = $('table');
-    console.log('Found', allTables.length, 'tables on the page');
+    // Direct approach: find all table rows with concert data
+    // Based on the HTML structure provided, each concert is in a <tr> with 3 <td> elements
+    $('tr').each((i, row) => {
+      const cells = $(row).find('td');
 
-    allTables.each((tableIndex, table) => {
-      const rows = $(table).find('tr');
-      console.log(`Table ${tableIndex} has ${rows.length} rows`);
+      // Each concert row has exactly 3 cells: date, city, venue
+      if (cells.length === 3) {
+        const dateText = $(cells[0]).text().trim();
+        const cityText = $(cells[1]).text().trim();
+        const venueText = $(cells[2]).text().trim();
 
-      // Process all rows (no header to skip based on HTML structure)
-      rows.each((rowIndex, row) => {
-        const tds = $(row).find('td');
-        console.log(`Table ${tableIndex}, Row ${rowIndex} has ${tds.length} columns`);
+        // Find any link in this row (all cells may have the same link)
+        const link = $(row).find('a').first().attr('href') || '';
 
-        if (tds.length >= 3) {
-          // Extract data from each column
-          const dateText = $(tds[0]).text().trim();
-          const cityText = $(tds[1]).text().trim();
-          const venueText = $(tds[2]).text().trim();
+        console.log(`Found potential concert: "${dateText}" - "${venueText}" in "${cityText}"`);
 
-          // Get link from any of the anchor tags in this row
-          const rowLinks = $(row).find('a[href]');
-          let link = '';
-          if (rowLinks.length > 0) {
-            link = $(rowLinks[0]).attr('href') || '';
-          }
-
-          console.log(`Extracted data:`, { dateText, cityText, venueText, link });
-
-          // Only add if we have meaningful data and it looks like a date
-          if (dateText && (venueText || cityText) && /\d{1,2}\.\d{1,2}\.\d{4}/.test(dateText)) {
-            gigs.push({
-              date: dateText,
-              venue: venueText || 'Venue TBA',
-              city: cityText || '',
-              link: link.startsWith('http') ? link : `https://kuhnfumusic.com${link}`,
-              source: 'scraped'
-            });
-            console.log('Added concert from table parsing:', { date: dateText, venue: venueText, city: cityText, link });
-          } else {
-            console.log('Skipped - invalid data or not a concert row');
-          }
+        // Validate: date should be in DD.MM.YYYY format
+        if (dateText && /^\d{2}\.\d{2}\.\d{4}$/.test(dateText) && venueText) {
+          gigs.push({
+            date: dateText,
+            venue: venueText,
+            city: cityText,
+            link: link.startsWith('http') ? link : (link ? `https://kuhnfumusic.com${link}` : ''),
+            source: 'scraped'
+          });
+          console.log('✅ Added concert:', { date: dateText, venue: venueText, city: cityText });
         }
-      });
+      }
     });
-
-    // If no gigs found, try a different approach - look for structured data
-    if (gigs.length === 0) {
-      console.log('No concerts found in tables, trying alternative parsing...');
-
-      // Look for any elements that might contain concert info
-      $('tr').each((i, row) => {
-        const cells = $(row).find('td');
-        if (cells.length >= 3) {
-          const date = $(cells[0]).text().trim();
-          const city = $(cells[1]).text().trim();
-          const venue = $(cells[2]).text().trim();
-          const link = $(row).find('a').attr('href') || '';
-
-          // Check if this looks like concert data
-          if (date && venue && /\d{2}\.\d{2}\.\d{4}/.test(date)) {
-            gigs.push({
-              date: date,
-              venue: venue,
-              city: city,
-              link: link.startsWith('http') ? link : `https://kuhnfumusic.com${link}`,
-              source: 'scraped'
-            });
-            console.log('Added concert from alternative parsing:', { date, venue, city, link });
-          }
-        }
-      });
-    }
 
     console.log(`Total concerts found: ${gigs.length}`);
 
-    // If scraping worked, return the data
+    // Return the scraped data if found, otherwise show simple message
     if (gigs.length > 0) {
+      console.log(`Successfully scraped ${gigs.length} concerts`);
       return res.status(200).json(gigs);
     }
 
-    // Fallback: Try to load from a manually maintained JSON file
-    console.log('No concerts found from scraping, trying manual JSON fallback...');
-    try {
-      const manualResponse = await axios.get('https://raw.githubusercontent.com/washwalk/glhwebsite/main/public/concerts-manual.json', {
-        timeout: 5000
-      });
-
-      if (manualResponse.data && Array.isArray(manualResponse.data)) {
-        console.log('Loaded manual concert data:', manualResponse.data.length, 'concerts');
-        return res.status(200).json(manualResponse.data.map(concert => ({
-          ...concert,
-          source: 'manual-json'
-        })));
-      }
-    } catch (manualError) {
-      console.log('Manual JSON fallback also failed:', manualError.message);
-    }
-
-    // Final fallback: Return helpful message
+    // No concerts found - return simple message
+    console.log('No concerts found - website may be blocking requests');
     res.status(200).json([{
       date: 'Data temporarily unavailable',
       venue: 'Please check back later or contact for updates',
@@ -193,22 +134,7 @@ export default async function handler(req, res) {
     console.error('Failed to fetch concerts:', error.message);
     console.error('Error details:', error.response?.status, error.response?.statusText);
 
-    // Try manual JSON as final attempt
-    try {
-      const manualResponse = await axios.get('https://raw.githubusercontent.com/washwalk/glhwebsite/main/public/concerts-manual.json', {
-        timeout: 3000
-      });
 
-      if (manualResponse.data && Array.isArray(manualResponse.data)) {
-        console.log('Loaded manual JSON after error:', manualResponse.data.length, 'concerts');
-        return res.status(200).json(manualResponse.data.map(concert => ({
-          ...concert,
-          source: 'manual-json-fallback'
-        })));
-      }
-    } catch (finalError) {
-      console.log('All methods failed');
-    }
 
     res.status(200).json([{
       date: 'Service temporarily unavailable',

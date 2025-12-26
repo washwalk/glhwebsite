@@ -51,10 +51,8 @@ export default function Home() {
         // Determine data source from the response
         if (data.length > 0) {
           const sources = data.map(gig => gig.source);
-          if (sources.includes('scraped')) {
+          if (sources.includes('scraped') || sources.includes('scraped-fallback')) {
             setDataSource('live-scraping');
-          } else if (sources.includes('manual-json')) {
-            setDataSource('manual-json');
           } else {
             setDataSource('fallback');
           }
@@ -98,11 +96,6 @@ export default function Home() {
         <p style={{ fontSize: '0.9em', color: '#666', marginBottom: '1rem' }}>
           <strong>Data Source:</strong> {getDataSourceMessage()}
         </p>
-        {dataSource === 'manual-json' && (
-          <p style={{ fontSize: '0.8em', color: '#888' }}>
-            To update concert data, edit <code>public/concerts-manual.json</code> in the repository.
-          </p>
-        )}
       </div>
 
 
@@ -145,7 +138,6 @@ export default function Home() {
 
       <footer style={{ marginTop: '3rem', textAlign: 'center', color: '#666', fontSize: '0.9em' }}>
         <p>Data sourced from <a href="https://kuhnfumusic.com/tour-dates" target="_blank" rel="noopener noreferrer">kuhnfumusic.com/tour-dates</a></p>
-        <p>Fallback data available in <code>public/concerts-manual.json</code></p>
       </footer>
     </div>
   );
