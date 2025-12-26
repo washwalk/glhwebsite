@@ -31,17 +31,15 @@ npm run lint:fix     # Auto-fix ESLint issues
 # npm run test:watch # Run tests in watch mode
 ```
 
-## Manual Concert Management (Admin Only)
+## Manual Concert Management
 
-The application includes admin-only functionality for manually adding, editing, and deleting concerts:
+The application includes functionality for manually adding concerts via a text file:
 
-- **Authentication**: Password-based admin login required
-- **State Management**: Manual concerts stored in localStorage with admin status
-- **UI Components**: ConcertForm component for adding/editing (admin only)
-- **Data Flow**: Manual concerts combined with scraped data and sorted by date
+- **File-based Management**: Manual concerts stored in `concerts.txt` file
+- **Format**: `Date|Venue|City|Link` (pipe-separated values)
+- **Data Loading**: File loaded at runtime and merged with scraped data
 - **Visual Indicators**: Manual concerts shown with green "MANUAL" badges and yellow background
-- **CRUD Operations**: Full create, read, update, delete functionality (admin only)
-- **Security**: Admin status persisted in localStorage with logout functionality
+- **Sorting**: All concerts (scraped + manual) sorted by date automatically
 
 ## Code Style Guidelines
 
