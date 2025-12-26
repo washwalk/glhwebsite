@@ -8,12 +8,20 @@ export default function Home() {
   const [error, setError] = useState(null);
   const [showAddForm, setShowAddForm] = useState(false);
   const [editingGig, setEditingGig] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [showAdminLogin, setShowAdminLogin] = useState(false);
+  const [adminPassword, setAdminPassword] = useState('');
 
-  // Load manual gigs from localStorage
+  // Load manual gigs from localStorage and check admin status
   useEffect(() => {
     const saved = localStorage.getItem('manualGigs');
     if (saved) {
       setManualGigs(JSON.parse(saved));
+    }
+
+    const adminStatus = localStorage.getItem('isAdmin');
+    if (adminStatus === 'true') {
+      setIsAdmin(true);
     }
   }, []);
 
@@ -73,29 +81,137 @@ export default function Home() {
     }
   };
 
+  const handleAdminLogin = () => {
+    // Simple password check - in production, use proper authentication
+    const correctPassword = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || 'george2024';
+    if (adminPassword === correctPassword) {
+      setIsAdmin(true);
+      localStorage.setItem('isAdmin', 'true');
+      setShowAdminLogin(false);
+      setAdminPassword('');
+    } else {
+      alert('Incorrect password');
+    }
+  };
+
+  const handleAdminLogout = () => {
+    setIsAdmin(false);
+    localStorage.removeItem('isAdmin');
+  };
+
   return (
     <div style={{ padding: '2rem', fontFamily: 'sans-serif', maxWidth: '1000px', margin: '0 auto' }}>
       <h1 style={{ color: '#333', marginBottom: '2rem' }}>George Hadow - Upcoming Concerts</h1>
 
-      <div style={{ marginBottom: '2rem' }}>
-        <button
-          onClick={() => {
-            setEditingGig(null);
-            setShowAddForm(!showAddForm);
-          }}
-          style={{
-            backgroundColor: '#0070f3',
-            color: 'white',
-            border: 'none',
-            padding: '0.5rem 1rem',
-            borderRadius: '4px',
-            cursor: 'pointer',
-            fontSize: '1rem'
-          }}
-        >
-          {showAddForm ? 'Cancel' : '+ Add Concert Manually'}
-        </button>
+      <div style={{ marginBottom: '2rem', display: 'flex', gap: '1rem', alignItems: 'center' }}>
+        {isAdmin ? (
+          <>
+            <button
+              onClick={() => {
+                setEditingGig(null);
+                setShowAddForm(!showAddForm);
+              }}
+              style={{
+                backgroundColor: '#0070f3',
+                color: 'white',
+                border: 'none',
+                padding: '0.5rem 1rem',
+                borderRadius: '4px',
+                cursor: 'pointer',
+                fontSize: '1rem'
+              }}
+            >
+              {showAddForm ? 'Cancel' : '+ Add Concert Manually'}
+            </button>
+            <button
+              onClick={handleAdminLogout}
+              style={{
+                backgroundColor: '#dc3545',
+                color: 'white',
+                border: 'none',
+                padding: '0.5rem 1rem',
+                borderRadius: '4px',
+                cursor: 'pointer',
+                fontSize: '1rem'
+              }}
+            >
+              Admin Logout
+            </button>
+            <span style={{ color: '#28a745', fontWeight: 'bold' }}>✓ Admin Mode</span>
+          </>
+        ) : (
+          <button
+            onClick={() => setShowAdminLogin(true)}
+            style={{
+              backgroundColor: '#6c757d',
+              color: 'white',
+              border: 'none',
+              padding: '0.5rem 1rem',
+              borderRadius: '4px',
+              cursor: 'pointer',
+              fontSize: '1rem'
+            }}
+          >
+            Admin Login
+          </button>
+        )}
       </div>
+
+      {showAdminLogin && !isAdmin && (
+        <div style={{
+          border: '2px solid #0070f3',
+          borderRadius: '8px',
+          padding: '1.5rem',
+          marginBottom: '2rem',
+          backgroundColor: '#f8f9fa'
+        }}>
+          <h3 style={{ marginTop: 0, color: '#333' }}>Admin Login</h3>
+          <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+            <input
+              type="password"
+              placeholder="Enter admin password"
+              value={adminPassword}
+              onChange={(e) => setAdminPassword(e.target.value)}
+              style={{
+                flex: 1,
+                padding: '0.5rem',
+                border: '1px solid #ddd',
+                borderRadius: '4px',
+                fontSize: '1rem'
+              }}
+            />
+            <button
+              onClick={handleAdminLogin}
+              style={{
+                backgroundColor: '#28a745',
+                color: 'white',
+                border: 'none',
+                padding: '0.5rem 1rem',
+                borderRadius: '4px',
+                cursor: 'pointer'
+              }}
+            >
+              Login
+            </button>
+            <button
+              onClick={() => {
+                setShowAdminLogin(false);
+                setAdminPassword('');
+              }}
+              style={{
+                backgroundColor: '#6c757d',
+                color: 'white',
+                border: 'none',
+                padding: '0.5rem 1rem',
+                borderRadius: '4px',
+                cursor: 'pointer'
+              }}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
 
       {showAddForm && (
         <ConcertForm

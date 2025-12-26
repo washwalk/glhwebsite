@@ -64,10 +64,16 @@ george-hadow-concerts/
 └── README.md            # This file
 ```
 
-## Manual Concert Management
+## Manual Concert Management (Admin Only)
 
-In addition to automatically scraped concerts, you can manually add, edit, and delete concerts:
+**Admin Access Required**: Only administrators can add, edit, or delete manual concerts.
 
+### Admin Login
+- Click "Admin Login" button in the top-right
+- Enter the admin password (contact George for access)
+- Once logged in, you'll see "✓ Admin Mode" indicator
+
+### Manual Concert Features
 - **Add Concerts**: Click "Add Concert Manually" to open the form
 - **Edit Concerts**: Click the "Edit" button on manually added concerts
 - **Delete Concerts**: Click the "Delete" button to remove concerts
@@ -125,7 +131,14 @@ This application is configured for deployment on Vercel with automatic deploymen
 
 ## Environment Variables
 
-No environment variables are required for basic functionality. The scraper makes direct requests to the public website.
+Create a `.env.local` file in the project root:
+
+```env
+# Admin authentication password
+NEXT_PUBLIC_ADMIN_PASSWORD=your_secure_password_here
+```
+
+The scraper makes direct requests to the public website and doesn't require additional environment variables.
 
 ## Contributing
 
