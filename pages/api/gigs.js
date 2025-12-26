@@ -226,10 +226,6 @@ export default async function handler(req, res) {
 
     // Debug: show what we found
     console.log(`Final result: ${gigs.length} concerts found`);
-          console.log('✅ Added concert:', { date: dateText, venue: venueText, city: cityText });
-        }
-      }
-    });
 
     console.log(`Total concerts found: ${gigs.length}`);
 
