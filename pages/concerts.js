@@ -151,7 +151,7 @@ export default function Concerts() {
                 justifyContent: 'space-between',
                 alignItems: 'center'
               }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                   <strong style={{
                     fontSize: '1.1rem',
                     color: 'var(--text-color)'
@@ -220,7 +220,7 @@ export default function Concerts() {
                 display: 'flex',
                 alignItems: 'center'
               }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                   <strong style={{
                     fontSize: '1rem',
                     color: 'var(--text-color)'
