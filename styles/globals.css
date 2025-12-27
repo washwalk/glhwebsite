@@ -61,16 +61,16 @@ li {
 .site-logo {
   text-align: center;
   font-family: sans-serif;
-  font-size: clamp(2rem, 5vw, 2.5rem);
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
   font-weight: bold;
   color: #000000;
-  margin: 1.5rem 0 1rem 0;
+  margin: 1rem 0 0.5rem 0;
   letter-spacing: -0.02em;
 }
 
 @media (max-width: 768px) {
   .site-logo {
-    font-size: 2rem;
-    margin: 1rem 0 0.75rem 0;
+    font-size: 1.75rem;
+    margin: 0.75rem 0 0.25rem 0;
   }
 }

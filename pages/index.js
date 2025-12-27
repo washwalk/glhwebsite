@@ -64,11 +64,7 @@ export default function Home() {
         maxWidth: '800px',
         margin: '0 auto'
       }}>
-        <h1 style={{
-          color: '#000000',
-          marginBottom: '1rem',
-          fontSize: '2rem'
-        }}>George Hadow</h1>
+
 
         <p style={{
           color: '#666666',

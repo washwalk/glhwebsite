@@ -4,7 +4,7 @@ export default function Navigation() {
   return (
     <nav style={{
       backgroundColor: '#ffffff',
-      padding: '0.75rem',
+      padding: '0.5rem',
       borderBottom: '1px solid #e0e0e0',
       position: 'sticky',
       top: 0,
@@ -21,7 +21,7 @@ export default function Navigation() {
           color: '#666666',
           textDecoration: 'none',
           fontSize: '1rem',
-          padding: '0.25rem 0.75rem',
+          padding: '0.125rem 0.5rem',
           transition: 'all 0.2s ease'
         }}
         onMouseEnter={(e) => {
@@ -40,7 +40,7 @@ export default function Navigation() {
           color: '#666666',
           textDecoration: 'none',
           fontSize: '1rem',
-          padding: '0.25rem 0.75rem',
+          padding: '0.125rem 0.5rem',
           transition: 'all 0.2s ease'
         }}
         onMouseEnter={(e) => {
@@ -59,7 +59,7 @@ export default function Navigation() {
           color: '#666666',
           textDecoration: 'none',
           fontSize: '1rem',
-          padding: '0.25rem 0.75rem',
+          padding: '0.125rem 0.5rem',
           transition: 'all 0.2s ease'
         }}
         onMouseEnter={(e) => {
@@ -78,7 +78,7 @@ export default function Navigation() {
           color: '#666666',
           textDecoration: 'none',
           fontSize: '1rem',
-          padding: '0.25rem 0.75rem',
+          padding: '0.125rem 0.5rem',
           transition: 'all 0.2s ease'
         }}
         onMouseEnter={(e) => {
