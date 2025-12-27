@@ -4,7 +4,7 @@ export default function About() {
   return (
     <div style={{
       backgroundColor: '#ffffff',
-      color: '#ffffff',
+      color: '#000000',
       minHeight: '100vh'
     }}>
       <Navigation />
@@ -34,14 +34,10 @@ export default function About() {
            </p>
          </div>
 
-         <div style={{
-           backgroundColor: '#1e1e1e',
-           padding: '2rem',
-           borderRadius: '12px',
-           border: '1px solid #333',
-           marginBottom: '2rem'
-         }}>
-           <h2 style={{ color: '#333333', marginTop: 0, marginBottom: '1rem', fontSize: '1.1rem' }}>Regular Groups & Ensembles</h2>
+          <div style={{
+            marginBottom: '2rem'
+          }}>
+            <h2 style={{ color: '#333333', marginTop: 0, marginBottom: '1rem', fontSize: '1.1rem' }}>Regular Groups & Ensembles</h2>
            <ul style={{ color: '#666666', lineHeight: '1.8', fontSize: '1rem', paddingLeft: '1.5rem' }}>
              <li>Blue Lines Trio</li>
              <li>Mulligan – Baker Project</li>
@@ -59,14 +55,10 @@ export default function About() {
            </ul>
          </div>
 
-         <div style={{
-           backgroundColor: '#1e1e1e',
-           padding: '2rem',
-           borderRadius: '12px',
-           border: '1px solid #333',
-           marginBottom: '2rem'
-         }}>
-           <h2 style={{ color: '#333333', marginTop: 0, marginBottom: '1rem', fontSize: '1.1rem' }}>Collaborations</h2>
+          <div style={{
+            marginBottom: '2rem'
+          }}>
+            <h2 style={{ color: '#333333', marginTop: 0, marginBottom: '1rem', fontSize: '1.1rem' }}>Collaborations</h2>
            <p style={{ color: '#666666', lineHeight: '1.6', fontSize: '1rem', marginBottom: '1rem' }}>
              George has collaborated with a wide array of artists including:
            </p>
@@ -76,13 +68,10 @@ export default function About() {
            </div>
          </div>
 
-         <div style={{
-           backgroundColor: '#1e1e1e',
-           padding: '2rem',
-           borderRadius: '12px',
-           border: '1px solid #333'
-         }}>
-           <h2 style={{ color: '#333333', marginTop: 0, marginBottom: '1rem', fontSize: '1.1rem' }}>Selected Discography</h2>
+          <div style={{
+            marginBottom: '2rem'
+          }}>
+            <h2 style={{ color: '#333333', marginTop: 0, marginBottom: '1rem', fontSize: '1.1rem' }}>Selected Discography</h2>
            <p style={{ color: '#666666', lineHeight: '1.6', fontSize: '1rem', marginBottom: '1rem' }}>
               George&apos;s work spans from 2014 to 2022 with releases on Creative Sources, Raw Tonk, and TRPTK labels:
            </p>
