@@ -162,13 +162,13 @@ export default function Concerts() {
                   <span style={{
                     color: 'var(--secondary-text)',
                     fontSize: '0.9rem'
-                  }}>{gig.venue}</span>
+                  }}>{gig.date}</span>
                 </div>
                 <div>
                   <span style={{
                     color: 'var(--secondary-text)',
                     fontSize: '0.9rem'
-                  }}>{gig.date}</span>
+                  }}>{gig.venue}</span>
                 </div>
                 <div>
                   <span style={{
@@ -225,7 +225,7 @@ export default function Concerts() {
                 padding: '0.5rem 1rem',
                 borderBottom: '1px solid var(--border-color)',
                 display: 'grid',
-                gridTemplateColumns: '1fr 1fr 1fr 1fr',
+                gridTemplateColumns: '1fr 1fr 1fr 1fr auto',
                 gap: '1rem',
                 alignItems: 'center'
               }}>
@@ -239,13 +239,13 @@ export default function Concerts() {
                   <span style={{
                     color: 'var(--secondary-text)',
                     fontSize: '0.85rem'
-                  }}>{gig.venue}</span>
+                  }}>{gig.date}</span>
                 </div>
                 <div>
                   <span style={{
                     color: 'var(--secondary-text)',
                     fontSize: '0.85rem'
-                  }}>{gig.date}</span>
+                  }}>{gig.venue}</span>
                 </div>
                 <div>
                   <span style={{
@@ -253,6 +253,7 @@ export default function Concerts() {
                     fontSize: '0.85rem'
                   }}>{gig.city}</span>
                 </div>
+                <div></div>
               </li>
             ))}
           </ul>
