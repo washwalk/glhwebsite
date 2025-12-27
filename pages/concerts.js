@@ -148,16 +148,24 @@ export default function Concerts() {
                 border: '1px solid var(--border-color)',
                 backgroundColor: 'var(--card-bg)'
               }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                   <div>
                     <strong style={{
-                      fontSize: '1rem',
-                      color: 'var(--text-color)',
-                      marginRight: '0.75rem'
-                    }}>{gig.band} - {gig.venue}</strong>
-                    <span style={{ color: 'var(--secondary-text)', fontSize: '0.9rem' }}>
-                      {gig.date}, {gig.city}
-                    </span>
+                      fontSize: '1.1rem',
+                      color: 'var(--text-color)'
+                    }}>{gig.band}</strong>
+                  </div>
+                  <div>
+                    <span style={{
+                      color: 'var(--secondary-text)',
+                      fontSize: '0.9rem'
+                    }}>{gig.venue}</span>
+                  </div>
+                  <div>
+                    <span style={{
+                      color: 'var(--secondary-text)',
+                      fontSize: '0.9rem'
+                    }}>{gig.date}, {gig.city}</span>
                   </div>
                   {gig.link && (
                     <a
@@ -171,7 +179,8 @@ export default function Concerts() {
                         borderRadius: '3px',
                         textDecoration: 'none',
                         fontSize: '0.8rem',
-                        border: '1px solid var(--button-bg)'
+                        border: '1px solid var(--button-bg)',
+                        alignSelf: 'flex-start'
                       }}
                       onMouseEnter={(e) => {
                         e.currentTarget.style.backgroundColor = 'var(--button-hover)';
@@ -206,20 +215,27 @@ export default function Concerts() {
                 margin: '0.5rem 0',
                 padding: '0.5rem 0',
                 borderBottom: '1px solid var(--border-color)'
-
-
               }}>
-                <strong style={{
-                  fontSize: '0.9rem',
-                  color: 'var(--text-color)',
-                  marginRight: '0.5rem'
-                }}>{gig.band} - {gig.venue}</strong>
-                <span style={{
-                  color: 'var(--secondary-text)',
-                  fontSize: '0.85rem'
-                }}>
-                  {gig.date}, {gig.city}
-                </span>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                  <div>
+                    <strong style={{
+                      fontSize: '1rem',
+                      color: 'var(--text-color)'
+                    }}>{gig.band}</strong>
+                  </div>
+                  <div>
+                    <span style={{
+                      color: 'var(--secondary-text)',
+                      fontSize: '0.85rem'
+                    }}>{gig.venue}</span>
+                  </div>
+                  <div>
+                    <span style={{
+                      color: 'var(--secondary-text)',
+                      fontSize: '0.85rem'
+                    }}>{gig.date}, {gig.city}</span>
+                  </div>
+                </div>
               </li>
             ))}
           </ul>
