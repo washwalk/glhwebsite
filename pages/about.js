@@ -59,8 +59,8 @@ export default function About() {
         />
       </Head>
       <div style={{
-        backgroundColor: '#ffffff',
-        color: '#000000',
+        backgroundColor: 'var(--bg-color)',
+        color: 'var(--text-color)',
         minHeight: '100vh'
       }}>
         <Logo />
@@ -78,7 +78,7 @@ export default function About() {
         margin: '0 auto'
       }}>
         <h1 style={{
-          color: '#333333',
+          color: 'var(--heading-color)',
           marginBottom: '1.5rem',
           fontSize: '1.5rem'
         }}>About</h1>
@@ -86,12 +86,12 @@ export default function About() {
          <div style={{
            marginBottom: '2rem'
          }}>
-           <h2 style={{ color: '#333333', marginTop: 0, marginBottom: '1rem', fontSize: '1.1rem' }}>Biography</h2>
-           <p style={{ color: '#666666', lineHeight: '1.6', fontSize: '0.95rem' }}>
+            <h2 style={{ color: 'var(--heading-color)', marginTop: 0, marginBottom: '1rem', fontSize: '1.1rem' }}>Biography</h2>
+            <p style={{ color: 'var(--secondary-text)', lineHeight: '1.6', fontSize: '0.95rem' }}>
              George Hadow represents the newest wave of improvisers to hit the Dutch scene. Like many of the active newcomers, George is an expat, hailing from Devon in the UK. George first came to the Netherlands in 2011 to take part in the Dutch Impro Academy, where he studied with Han Bennink and Michael Moore, among others. He has quickly developed into a mature musician, playing with acute sensitivity as well as unbridled power.
            </p>
 
-           <p style={{ color: '#666666', lineHeight: '1.6', fontSize: '0.95rem' }}>
+            <p style={{ color: 'var(--secondary-text)', lineHeight: '1.6', fontSize: '0.95rem' }}>
              Based in Amsterdam since June 2012, George has established himself as a prominent figure in the European avant-garde and improvisational music scene. His innovative approach to rhythm and percussion has led to collaborations across diverse musical projects.
            </p>
          </div>
@@ -99,8 +99,8 @@ export default function About() {
           <div style={{
             marginBottom: '2rem'
           }}>
-            <h2 style={{ color: '#333333', marginTop: 0, marginBottom: '1rem', fontSize: '1.1rem' }}>Regular Groups & Ensembles</h2>
-           <ul style={{ color: '#666666', lineHeight: '1.8', fontSize: '1rem', paddingLeft: '1.5rem' }}>
+            <h2 style={{ color: 'var(--heading-color)', marginTop: 0, marginBottom: '1rem', fontSize: '1.1rem' }}>Regular Groups & Ensembles</h2>
+           <ul style={{ color: 'var(--secondary-text)', lineHeight: '1.8', fontSize: '1rem', paddingLeft: '1.5rem' }}>
              <li>Blue Lines Trio</li>
              <li>Mulligan – Baker Project</li>
              <li>Terrie Ex/Raoul van der Weide/George Hadow</li>
@@ -120,11 +120,11 @@ export default function About() {
           <div style={{
             marginBottom: '2rem'
           }}>
-            <h2 style={{ color: '#333333', marginTop: 0, marginBottom: '1rem', fontSize: '1.1rem' }}>Collaborations</h2>
-           <p style={{ color: '#666666', lineHeight: '1.6', fontSize: '1rem', marginBottom: '1rem' }}>
+            <h2 style={{ color: 'var(--heading-color)', marginTop: 0, marginBottom: '1rem', fontSize: '1.1rem' }}>Collaborations</h2>
+           <p style={{ color: 'var(--secondary-text)', lineHeight: '1.6', fontSize: '1rem', marginBottom: '1rem' }}>
              George has collaborated with a wide array of artists including:
            </p>
-           <div style={{ color: '#666666', fontSize: '0.95rem', lineHeight: '1.6' }}>
+           <div style={{ color: 'var(--secondary-text)', fontSize: '0.95rem', lineHeight: '1.6' }}>
              <strong>Notable Collaborators:</strong> Andy Moor, Roy Paci, Anne-James Chaton, Joe Williamson, The Ex, Cactus Truck<br/>
              <strong>Additional Artists:</strong> Jasper Stadhouders, Onno Govaert, Wilbert de Joode, Felicity Provan, Wolter Wierbos, Eric Boeren, Michael Moore, Joost Buis, Renato Ferreira, Terrie Ex, Christian Ferlaino, Raoul van der Weide, Michel Scheen, Leo Svirsky, Dianne Verdonk, Frank van Bommel, Michael Foster, Leila Bordreuil, Yedo Gibson, Mikael Szafirowski, Nora Mulder, Laurens van de Wee, Andreas Fulgosi, DJ Sniff, Bart van de Putten, Alex Hood, Stephen Simpson, Jamie Benzies
            </div>
@@ -133,11 +133,11 @@ export default function About() {
           <div style={{
             marginBottom: '2rem'
           }}>
-            <h2 style={{ color: '#333333', marginTop: 0, marginBottom: '1rem', fontSize: '1.1rem' }}>Selected Discography</h2>
-           <p style={{ color: '#666666', lineHeight: '1.6', fontSize: '1rem', marginBottom: '1rem' }}>
+            <h2 style={{ color: 'var(--heading-color)', marginTop: 0, marginBottom: '1rem', fontSize: '1.1rem' }}>Selected Discography</h2>
+           <p style={{ color: 'var(--secondary-text)', lineHeight: '1.6', fontSize: '1rem', marginBottom: '1rem' }}>
               George&apos;s work spans from 2014 to 2022 with releases on Creative Sources, Raw Tonk, and TRPTK labels:
            </p>
-           <ul style={{ color: '#666666', lineHeight: '1.8', fontSize: '0.95rem', paddingLeft: '1.5rem' }}>
+           <ul style={{ color: 'var(--secondary-text)', lineHeight: '1.8', fontSize: '0.95rem', paddingLeft: '1.5rem' }}>
              <li><em>O Monstro</em> (with Gonçalo Almeida, John Dikeman) - 2014</li>
              <li><em>Live</em> (with Zwerv) - 2017</li>
              <li><em>Outermission</em> (with Dirk Serries) - 2017</li>

@@ -61,8 +61,8 @@ export default function Contact() {
         />
       </Head>
       <div style={{
-        backgroundColor: '#ffffff',
-        color: '#000000',
+        backgroundColor: 'var(--bg-color)',
+        color: 'var(--text-color)',
         minHeight: '100vh'
       }}>
         <Logo />
@@ -80,12 +80,12 @@ export default function Contact() {
           margin: '0 auto'
         }}>
           <h1 style={{
-            color: '#333333',
+            color: 'var(--heading-color)',
             marginBottom: '2rem',
             fontSize: '1.5rem'
           }}>Contact</h1>
 
-          <p style={{ color: '#666666', lineHeight: '1.6', fontSize: '1rem', marginBottom: '2rem' }}>
+          <p style={{ color: 'var(--secondary-text)', lineHeight: '1.6', fontSize: '1rem', marginBottom: '2rem' }}>
             Get in touch with George Hadow for booking inquiries, collaboration opportunities,
             or any questions about his music and performances.
           </p>
@@ -99,7 +99,7 @@ export default function Contact() {
               <div style={{ flex: 1 }}>
                 <label htmlFor="name" style={{
                   display: 'block',
-                  color: '#333333',
+                  color: 'var(--heading-color)',
                   fontSize: '0.9rem',
                   marginBottom: '0.5rem',
                   fontWeight: 'bold'
@@ -127,7 +127,7 @@ export default function Contact() {
               <div style={{ flex: 1 }}>
                 <label htmlFor="email" style={{
                   display: 'block',
-                  color: '#333333',
+                  color: 'var(--heading-color)',
                   fontSize: '0.9rem',
                   marginBottom: '0.5rem',
                   fontWeight: 'bold'
@@ -144,11 +144,11 @@ export default function Contact() {
                   style={{
                     width: '100%',
                     padding: '0.75rem',
-                    border: '1px solid #e0e0e0',
+                    border: '1px solid var(--border-color)',
                     borderRadius: '4px',
                     fontSize: '1rem',
-                    backgroundColor: '#ffffff',
-                    color: '#000000'
+                    backgroundColor: 'var(--bg-color)',
+                    color: 'var(--text-color)'
                   }}
                 />
               </div>
@@ -157,7 +157,7 @@ export default function Contact() {
             <div>
               <label htmlFor="subject" style={{
                 display: 'block',
-                color: '#333333',
+                color: 'var(--heading-color)',
                 fontSize: '0.9rem',
                 marginBottom: '0.5rem',
                 fontWeight: 'bold'
@@ -171,22 +171,22 @@ export default function Contact() {
                 value={formData.subject}
                 onChange={handleChange}
                 required
-                style={{
-                  width: '100%',
-                  padding: '0.75rem',
-                  border: '1px solid #e0e0e0',
-                  borderRadius: '4px',
-                  fontSize: '1rem',
-                  backgroundColor: '#ffffff',
-                  color: '#000000'
-                }}
+                  style={{
+                    width: '100%',
+                    padding: '0.75rem',
+                    border: '1px solid var(--border-color)',
+                    borderRadius: '4px',
+                    fontSize: '1rem',
+                    backgroundColor: 'var(--bg-color)',
+                    color: 'var(--text-color)'
+                  }}
               />
             </div>
 
             <div>
               <label htmlFor="message" style={{
                 display: 'block',
-                color: '#333333',
+                color: 'var(--heading-color)',
                 fontSize: '0.9rem',
                 marginBottom: '0.5rem',
                 fontWeight: 'bold'
@@ -203,11 +203,11 @@ export default function Contact() {
                 style={{
                   width: '100%',
                   padding: '0.75rem',
-                  border: '1px solid #e0e0e0',
+                  border: '1px solid var(--border-color)',
                   borderRadius: '4px',
                   fontSize: '1rem',
-                  backgroundColor: '#ffffff',
-                  color: '#000000',
+                  backgroundColor: 'var(--bg-color)',
+                  color: 'var(--text-color)',
                   resize: 'vertical',
                   fontFamily: 'inherit'
                 }}
@@ -219,9 +219,9 @@ export default function Contact() {
               disabled={isSubmitting}
               style={{
                 padding: '0.75rem 1.5rem',
-                backgroundColor: '#000000',
-                color: '#ffffff',
-                border: '1px solid #000000',
+                backgroundColor: 'var(--button-bg)',
+                color: 'var(--button-text)',
+                border: '1px solid var(--button-bg)',
                 borderRadius: '4px',
                 fontSize: '1rem',
                 fontWeight: 'bold',

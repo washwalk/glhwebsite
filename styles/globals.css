@@ -1,9 +1,44 @@
+:root {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --secondary-text: #666666;
+  --heading-color: #333333;
+  --border-color: #e0e0e0;
+  --link-color: #0066cc;
+  --link-hover-color: #004499;
+  --nav-bg: #ffffff;
+  --card-bg: #f9f9f9;
+  --accent-color: #000000;
+  --hover-bg: #f0f0f0;
+  --button-bg: #000000;
+  --button-text: #ffffff;
+  --button-hover: #333333;
+}
+
+.dark {
+  --bg-color: #000000;
+  --text-color: #ffffff;
+  --secondary-text: #cccccc;
+  --heading-color: #cccccc;
+  --border-color: #333333;
+  --link-color: #4da6ff;
+  --link-hover-color: #80c1ff;
+  --nav-bg: #000000;
+  --card-bg: #111111;
+  --accent-color: #ffffff;
+  --hover-bg: #333333;
+  --button-bg: #ffffff;
+  --button-text: #000000;
+  --button-hover: #cccccc;
+}
+
 html, body {
   margin: 0;
   padding: 0;
-  background-color: #ffffff !important;
-  color: #000000;
+  background-color: var(--bg-color) !important;
+  color: var(--text-color);
   font-family: sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 * {
@@ -12,26 +47,26 @@ html, body {
 
 body {
   min-height: 100vh;
-  background-color: #ffffff !important;
+  background-color: var(--bg-color) !important;
 }
 
-/* Ensure white backgrounds */
+/* Ensure theme backgrounds */
 # __next {
-  background-color: #ffffff !important;
+  background-color: var(--bg-color) !important;
 }
 
 html {
-  background-color: #ffffff !important;
+  background-color: var(--bg-color) !important;
 }
 
 /* Link styles */
 a {
-  color: #0066cc;
+  color: var(--link-color);
   text-decoration: none;
 }
 
 a:hover {
-  color: #004499;
+  color: var(--link-hover-color);
 }
 
 /* Navigation styles */
@@ -63,7 +98,7 @@ li {
   font-family: sans-serif;
   font-size: clamp(1.75rem, 4vw, 2.25rem);
   font-weight: bold;
-  color: #000000;
+  color: var(--text-color);
   margin: 1rem 0 0.5rem 0;
   letter-spacing: -0.02em;
 }

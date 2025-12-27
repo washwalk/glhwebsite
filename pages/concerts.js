@@ -77,8 +77,8 @@ export default function Concerts() {
         />
       </Head>
       <div style={{
-        backgroundColor: '#ffffff',
-        color: '#ffffff',
+        backgroundColor: 'var(--bg-color)',
+        color: 'var(--text-color)',
         minHeight: '100vh'
       }}>
         <Logo />
@@ -134,7 +134,7 @@ export default function Concerts() {
       {!loading && gigs.upcoming.length > 0 && (
         <div style={{ marginBottom: '3rem' }}>
           <h2 style={{
-            color: '#000000',
+            color: 'var(--text-color)',
             marginBottom: '2rem',
             fontSize: '1.2rem',
             textAlign: 'center'
@@ -145,17 +145,17 @@ export default function Concerts() {
               <li key={gig.id || idx} style={{
                 margin: '0.75rem 0',
                 padding: '1rem',
-                border: '1px solid #e0e0e0',
-                backgroundColor: '#f9f9f9'
+                border: '1px solid var(--border-color)',
+                backgroundColor: 'var(--card-bg)'
               }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <div>
                     <strong style={{
                       fontSize: '1rem',
-                      color: '#000000',
+                      color: 'var(--text-color)',
                       marginRight: '0.75rem'
                     }}>{gig.venue}</strong>
-                    <span style={{ color: '#666666', fontSize: '0.9rem' }}>
+                    <span style={{ color: 'var(--secondary-text)', fontSize: '0.9rem' }}>
                       {gig.date}, {gig.city}
                     </span>
                   </div>
@@ -165,19 +165,19 @@ export default function Concerts() {
                       target="_blank"
                       rel="noopener noreferrer"
                       style={{
-                        backgroundColor: '#000000',
-                        color: '#ffffff',
+                        backgroundColor: 'var(--button-bg)',
+                        color: 'var(--button-text)',
                         padding: '0.25rem 0.5rem',
                         borderRadius: '3px',
                         textDecoration: 'none',
                         fontSize: '0.8rem',
-                        border: '1px solid #000000'
+                        border: '1px solid var(--button-bg)'
                       }}
                       onMouseEnter={(e) => {
-                        e.currentTarget.style.backgroundColor = '#333333';
+                        e.currentTarget.style.backgroundColor = 'var(--button-hover)';
                       }}
                       onMouseLeave={(e) => {
-                        e.currentTarget.style.backgroundColor = '#000000';
+                        e.currentTarget.style.backgroundColor = 'var(--button-bg)';
                       }}
                     >
                       Tickets
@@ -194,7 +194,7 @@ export default function Concerts() {
       {!loading && gigs.past.length > 0 && (
         <div>
           <h2 style={{
-            color: '#000000',
+            color: 'var(--text-color)',
             marginBottom: '2rem',
             fontSize: '1.2rem',
             textAlign: 'center'
@@ -205,17 +205,17 @@ export default function Concerts() {
               <li key={gig.id || `past-${idx}`} style={{
                 margin: '0.5rem 0',
                 padding: '0.5rem 0',
-                borderBottom: '1px solid #e0e0e0',
+                borderBottom: '1px solid var(--border-color)'
 
 
               }}>
                 <strong style={{
                   fontSize: '0.9rem',
-                  color: '#000000',
+                  color: 'var(--text-color)',
                   marginRight: '0.5rem'
                 }}>{gig.venue}</strong>
                 <span style={{
-                  color: '#666666',
+                  color: 'var(--secondary-text)',
                   fontSize: '0.85rem'
                 }}>
                   {gig.date}, {gig.city}

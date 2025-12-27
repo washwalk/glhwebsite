@@ -45,8 +45,8 @@ export default function Home() {
         />
       </Head>
       <div style={{
-        backgroundColor: '#ffffff',
-        color: '#000000',
+        backgroundColor: 'var(--bg-color)',
+        color: 'var(--text-color)',
         minHeight: '100vh',
         textAlign: 'center'
       }}>
@@ -67,7 +67,7 @@ export default function Home() {
 
 
         <p style={{
-          color: '#666666',
+          color: 'var(--secondary-text)',
           marginBottom: '2rem',
           fontSize: '1rem',
           maxWidth: '600px',
@@ -80,7 +80,7 @@ export default function Home() {
         </p>
 
         <p style={{
-          color: '#666666',
+          color: 'var(--secondary-text)',
           marginBottom: '3rem',
           fontSize: '1rem',
           maxWidth: '600px',

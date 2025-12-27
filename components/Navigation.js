@@ -3,9 +3,9 @@ import Link from 'next/link';
 export default function Navigation() {
   return (
     <nav style={{
-      backgroundColor: '#ffffff',
+      backgroundColor: 'var(--nav-bg)',
       padding: '0.5rem',
-      borderBottom: '1px solid #e0e0e0',
+      borderBottom: '1px solid var(--border-color)',
       position: 'sticky',
       top: 0,
       zIndex: 100
@@ -18,76 +18,76 @@ export default function Navigation() {
         gap: '1.5rem'
       }}>
         <Link href="/" style={{
-          color: '#666666',
+          color: 'var(--secondary-text)',
           textDecoration: 'none',
           fontSize: '1rem',
           padding: '0.125rem 0.5rem',
           transition: 'all 0.2s ease'
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.backgroundColor = '#f0f0f0';
-          e.currentTarget.style.color = '#000000';
+          e.currentTarget.style.backgroundColor = 'var(--hover-bg)';
+          e.currentTarget.style.color = 'var(--text-color)';
         }}
         onMouseLeave={(e) => {
           e.currentTarget.style.backgroundColor = 'transparent';
-          e.currentTarget.style.color = '#666666';
+          e.currentTarget.style.color = 'var(--secondary-text)';
         }}
         >
           Home
         </Link>
 
         <Link href="/concerts" style={{
-          color: '#666666',
+          color: 'var(--secondary-text)',
           textDecoration: 'none',
           fontSize: '1rem',
           padding: '0.125rem 0.5rem',
           transition: 'all 0.2s ease'
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.backgroundColor = '#f0f0f0';
-          e.currentTarget.style.color = '#000000';
+          e.currentTarget.style.backgroundColor = 'var(--hover-bg)';
+          e.currentTarget.style.color = 'var(--text-color)';
         }}
         onMouseLeave={(e) => {
           e.currentTarget.style.backgroundColor = 'transparent';
-          e.currentTarget.style.color = '#666666';
+          e.currentTarget.style.color = 'var(--secondary-text)';
         }}
         >
           Concerts
         </Link>
 
         <Link href="/about" style={{
-          color: '#666666',
+          color: 'var(--secondary-text)',
           textDecoration: 'none',
           fontSize: '1rem',
           padding: '0.125rem 0.5rem',
           transition: 'all 0.2s ease'
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.backgroundColor = '#f0f0f0';
-          e.currentTarget.style.color = '#000000';
+          e.currentTarget.style.backgroundColor = 'var(--hover-bg)';
+          e.currentTarget.style.color = 'var(--text-color)';
         }}
         onMouseLeave={(e) => {
           e.currentTarget.style.backgroundColor = 'transparent';
-          e.currentTarget.style.color = '#666666';
+          e.currentTarget.style.color = 'var(--secondary-text)';
         }}
         >
           About
         </Link>
 
         <Link href="/contact" style={{
-          color: '#666666',
+          color: 'var(--secondary-text)',
           textDecoration: 'none',
           fontSize: '1rem',
           padding: '0.125rem 0.5rem',
           transition: 'all 0.2s ease'
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.backgroundColor = '#f0f0f0';
-          e.currentTarget.style.color = '#000000';
+          e.currentTarget.style.backgroundColor = 'var(--hover-bg)';
+          e.currentTarget.style.color = 'var(--text-color)';
         }}
         onMouseLeave={(e) => {
           e.currentTarget.style.backgroundColor = 'transparent';
-          e.currentTarget.style.color = '#666666';
+          e.currentTarget.style.color = 'var(--secondary-text)';
         }}
         >
           Contact
