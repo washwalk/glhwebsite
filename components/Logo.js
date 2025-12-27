@@ -1,7 +1,11 @@
+import Link from 'next/link';
+
 export default function Logo() {
   return (
-    <div className="site-logo">
-      George Hadow
-    </div>
+    <Link href="/" style={{ textDecoration: 'none' }}>
+      <div className="site-logo">
+        George Hadow
+      </div>
+    </Link>
   );
 }
