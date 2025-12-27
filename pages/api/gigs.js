@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
 
 import axios from 'axios';
+import path from 'path';
 
 const cheerio = require('cheerio');
 
@@ -258,7 +259,9 @@ console.log(`Total concerts found: ${gigs.length}`);
 
 try {
 
-  const manualData = fs.readFileSync('public/concerts-manual.json', 'utf8');
+  const manualPath = path.join(process.cwd(), 'public', 'concerts-manual.json');
+
+  const manualData = fs.readFileSync(manualPath, 'utf8');
 
   const manualGigs = JSON.parse(manualData);
 
@@ -279,6 +282,8 @@ try {
     });
 
   });
+
+  console.log(`Loaded ${manualGigs.length} manual concerts`);
 
 } catch (error) {
 
@@ -310,7 +315,7 @@ gigs.sort((a, b) => {
 
 });
 
- 
+console.log(`Total gigs after merge and sort: ${gigs.length}`);
 
 // Return the scraped data if found, otherwise show simple message
     if (gigs.length > 0) {
