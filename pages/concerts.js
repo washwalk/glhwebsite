@@ -146,7 +146,7 @@ export default function Concerts() {
                 margin: '0.75rem 0',
                 padding: '1rem',
                 border: '1px solid #e0e0e0',
-                backgroundColor: gig.source === 'manual' ? '#ffffcc' : '#f9f9f9'
+                backgroundColor: '#f9f9f9'
               }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <div>
@@ -158,7 +158,6 @@ export default function Concerts() {
                     <span style={{ color: '#666666', fontSize: '0.9rem' }}>
                       {gig.date}, {gig.city}
                     </span>
-{gig.source === 'manual' && <span style={{backgroundColor: 'green', color: 'white', padding: '2px 4px', fontSize: '0.7rem', marginLeft: '0.5rem'}}>MANUAL</span>}
                   </div>
                   {gig.link && (
                     <a
@@ -208,7 +207,7 @@ export default function Concerts() {
                 padding: '0.5rem 0',
                 borderBottom: '1px solid #e0e0e0',
 
-                backgroundColor: gig.source === 'manual' ? '#ffffcc' : 'transparent'
+
               }}>
                 <strong style={{
                   fontSize: '0.9rem',
@@ -221,7 +220,6 @@ export default function Concerts() {
                 }}>
                   {gig.date}, {gig.city}
                 </span>
-{gig.source === 'manual' && <span style={{backgroundColor: 'green', color: 'white', padding: '2px 4px', fontSize: '0.7rem', marginLeft: '0.5rem'}}>MANUAL</span>}
               </li>
             ))}
           </ul>
