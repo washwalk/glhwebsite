@@ -148,7 +148,7 @@ export default function Concerts() {
                 border: '1px solid var(--border-color)',
                 backgroundColor: 'var(--card-bg)',
                 display: 'grid',
-                gridTemplateColumns: '1fr 1fr 1fr auto',
+                gridTemplateColumns: '1fr 1fr 1fr 1fr auto',
                 gap: '1rem',
                 alignItems: 'center'
               }}>
@@ -168,7 +168,13 @@ export default function Concerts() {
                   <span style={{
                     color: 'var(--secondary-text)',
                     fontSize: '0.9rem'
-                  }}>{gig.date}, {gig.city}</span>
+                  }}>{gig.date}</span>
+                </div>
+                <div>
+                  <span style={{
+                    color: 'var(--secondary-text)',
+                    fontSize: '0.9rem'
+                  }}>{gig.city}</span>
                 </div>
                 <div>
                   {gig.link && (
@@ -219,7 +225,7 @@ export default function Concerts() {
                 padding: '0.5rem 1rem',
                 borderBottom: '1px solid var(--border-color)',
                 display: 'grid',
-                gridTemplateColumns: '1fr 1fr 1fr',
+                gridTemplateColumns: '1fr 1fr 1fr 1fr',
                 gap: '1rem',
                 alignItems: 'center'
               }}>
@@ -239,7 +245,13 @@ export default function Concerts() {
                   <span style={{
                     color: 'var(--secondary-text)',
                     fontSize: '0.85rem'
-                  }}>{gig.date}, {gig.city}</span>
+                  }}>{gig.date}</span>
+                </div>
+                <div>
+                  <span style={{
+                    color: 'var(--secondary-text)',
+                    fontSize: '0.85rem'
+                  }}>{gig.city}</span>
                 </div>
               </li>
             ))}
