@@ -78,7 +78,7 @@ export default async function handler(req, res) {
   const msg = {
     to: 'georgehadow@gmail.com',
     from: {
-      email: 'noreply@sendgrid.net', // Using SendGrid's default verified sender
+      email: 'noreply@sendgrid.net', // Using SendGrid's verified sender
       name: 'George Hadow Website'
     },
     replyTo: {
