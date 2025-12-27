@@ -81,15 +81,6 @@ export default function Concerts() {
         margin: '0 auto'
       }}>
 
-      <h2 style={{
-        color: '#000000',
-        marginBottom: '2rem',
-        fontSize: '1.2rem',
-        textAlign: 'center'
-      }}>Upcoming Concerts</h2>
-
-
-
       {loading && (
         <div style={{
           textAlign: 'center',
