@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Logo from '../components/Logo';
 import Navigation from '../components/Navigation';
 
 export default function Contact() {
@@ -16,6 +17,7 @@ export default function Contact() {
         color: '#000000',
         minHeight: '100vh'
       }}>
+        <Logo />
         <Navigation />
 
         {/* Hidden SEO text for search engines */}

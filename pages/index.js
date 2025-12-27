@@ -1,5 +1,6 @@
 
 import Head from 'next/head';
+import Logo from '../components/Logo';
 import Navigation from '../components/Navigation';
 
 export default function Home() {
@@ -49,6 +50,7 @@ export default function Home() {
         minHeight: '100vh',
         textAlign: 'center'
       }}>
+        <Logo />
         <Navigation />
 
       {/* Hidden SEO text for search engines */}

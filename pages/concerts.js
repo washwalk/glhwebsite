@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Head from 'next/head';
+import Logo from '../components/Logo';
 import Navigation from '../components/Navigation';
 
 export default function Concerts() {
@@ -80,6 +81,7 @@ export default function Concerts() {
         color: '#ffffff',
         minHeight: '100vh'
       }}>
+        <Logo />
         <Navigation />
 
         {/* Hidden SEO text for search engines */}
