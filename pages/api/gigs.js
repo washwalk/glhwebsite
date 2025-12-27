@@ -273,9 +273,15 @@ try {
 
   });
 
+  console.log('Labasheeda response length:', labasheedaResponse.data.length);
+
   const $lab = cheerio.load(labasheedaResponse.data);
 
-  $lab('.event_listing').each((i, elem) => {
+  const events = $lab('.event_listing');
+
+  console.log('Labasheeda events found:', events.length);
+
+  events.each((i, elem) => {
 
     const title = $lab(elem).find('h3.wpem-heading-text').text().trim();
 
@@ -284,6 +290,8 @@ try {
     const locationText = $lab(elem).find('.wpem-event-location-text').text().trim();
 
     const link = $lab(elem).find('a.wpem-event-action-url').attr('href');
+
+    console.log('Processing labasheeda event:', { title, dateTimeText, locationText, link });
 
     // Parse date from dateTimeText, e.g., "22-11-2025 > 19:00 - 00:00"
 
@@ -297,9 +305,9 @@ try {
 
         date: date,
 
-        venue: title, // Use title as venue since it's the event name, or locationText
+        venue: title, // Use title as venue
 
-        city: locationText, // Use location as city for simplicity
+        city: locationText, // Use location as city
 
         band: 'Labasheeda',
 
@@ -309,11 +317,13 @@ try {
 
       });
 
+      console.log('Added labasheeda gig:', date, title);
+
     }
 
   });
 
-  console.log('Scraped from Labasheeda');
+  console.log('Scraped from Labasheeda, total added:', events.length);
 
 } catch (error) {
 
