@@ -198,6 +198,7 @@ export default async function handler(req, res) {
               date: dateText,
               venue: venueText,
               city: cityText,
+              band: 'KUHN FU',
               link: link.startsWith('http') ? link : (link ? `https://kuhnfumusic.com${link}` : ''),
               source: 'scraped'
             });
@@ -238,6 +239,7 @@ export default async function handler(req, res) {
                 date: dateText,
                 venue: venueText,
                 city: cityText,
+                band: 'KUHN FU',
                 link: link.startsWith('http') ? link : (link ? `https://kuhnfumusic.com${link}` : ''),
                 source: 'scraped-comprehensive'
               });
@@ -274,6 +276,8 @@ try {
       venue: gig.venue,
 
       city: gig.city,
+
+      band: gig.band,
 
       link: gig.link,
 

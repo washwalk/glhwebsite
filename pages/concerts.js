@@ -154,7 +154,7 @@ export default function Concerts() {
                       fontSize: '1rem',
                       color: 'var(--text-color)',
                       marginRight: '0.75rem'
-                    }}>{gig.venue}</strong>
+                    }}>{gig.band} - {gig.venue}</strong>
                     <span style={{ color: 'var(--secondary-text)', fontSize: '0.9rem' }}>
                       {gig.date}, {gig.city}
                     </span>
@@ -213,7 +213,7 @@ export default function Concerts() {
                   fontSize: '0.9rem',
                   color: 'var(--text-color)',
                   marginRight: '0.5rem'
-                }}>{gig.venue}</strong>
+                }}>{gig.band} - {gig.venue}</strong>
                 <span style={{
                   color: 'var(--secondary-text)',
                   fontSize: '0.85rem'
