@@ -255,7 +255,71 @@ export default async function handler(req, res) {
 
 console.log(`Total concerts found: ${gigs.length}`);
 
- 
+// Scrape from labasheeda.nl
+
+try {
+
+  const labasheedaResponse = await axios.get('https://www.labasheeda.nl/agenda/', {
+
+    headers: {
+
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+
+      'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+
+    },
+
+    timeout: 15000
+
+  });
+
+  const $lab = cheerio.load(labasheedaResponse.data);
+
+  $lab('.event_listing').each((i, elem) => {
+
+    const title = $lab(elem).find('h3.wpem-heading-text').text().trim();
+
+    const dateTimeText = $lab(elem).find('.wpem-event-date-time-text').text().trim();
+
+    const locationText = $lab(elem).find('.wpem-event-location-text').text().trim();
+
+    const link = $lab(elem).find('a.wpem-event-action-url').attr('href');
+
+    // Parse date from dateTimeText, e.g., "22-11-2025 > 19:00 - 00:00"
+
+    const dateMatch = dateTimeText.match(/(\d{2}-\d{2}-\d{4})/);
+
+    if (dateMatch && title) {
+
+      const date = dateMatch[1]; // DD-MM-YYYY
+
+      gigs.push({
+
+        date: date,
+
+        venue: title, // Use title as venue since it's the event name, or locationText
+
+        city: locationText, // Use location as city for simplicity
+
+        band: 'Labasheeda',
+
+        link: link,
+
+        source: 'labasheeda'
+
+      });
+
+    }
+
+  });
+
+  console.log('Scraped from Labasheeda');
+
+} catch (error) {
+
+  console.log('Failed to scrape labasheeda:', error.message);
+
+}
 
 // Load manual concerts
 
