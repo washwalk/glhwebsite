@@ -3,7 +3,7 @@ import axios from 'axios';
 import Navigation from '../components/Navigation';
 
 export default function Concerts() {
-  const [gigs, setGigs] = useState([]);
+  const [gigs, setGigs] = useState({ upcoming: [], past: [] });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -14,24 +14,48 @@ export default function Concerts() {
         setLoading(true);
         const { data } = await axios.get('/api/gigs');
 
-        // Filter to only show upcoming concerts (today or future)
+        // Filter concerts into upcoming and past
         const today = new Date();
         today.setHours(0, 0, 0, 0); // Reset time to start of day
 
-        const upcomingGigs = data.filter(gig => {
+        const upcomingGigs = [];
+        const pastGigs = [];
+
+        data.forEach(gig => {
           try {
             // Parse European date format (DD.MM.YYYY)
             const [day, month, year] = gig.date.split('.');
             const concertDate = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
-            return concertDate >= today;
+
+            if (concertDate >= today) {
+              upcomingGigs.push(gig);
+            } else {
+              pastGigs.push(gig);
+            }
           } catch (error) {
-            // If date parsing fails, include the concert to be safe
+            // If date parsing fails, include in upcoming to be safe
             console.warn('Failed to parse date:', gig.date, error);
-            return true;
+            upcomingGigs.push(gig);
           }
         });
 
-        setGigs(upcomingGigs);
+        // Sort past gigs by most recent first
+        pastGigs.sort((a, b) => {
+          try {
+            const [dayA, monthA, yearA] = a.date.split('.');
+            const [dayB, monthB, yearB] = b.date.split('.');
+            const dateA = new Date(parseInt(yearA), parseInt(monthA) - 1, parseInt(dayA));
+            const dateB = new Date(parseInt(yearB), parseInt(monthB) - 1, parseInt(dayB));
+            return dateB - dateA; // Most recent first
+          } catch {
+            return 0;
+          }
+        });
+
+        // Limit past gigs to most recent 20
+        const limitedPastGigs = pastGigs.slice(0, 20);
+
+        setGigs({ upcoming: upcomingGigs, past: limitedPastGigs });
       } catch (err) {
         console.error('Failed to fetch gigs:', err);
         setError('Failed to load concert data');
@@ -89,68 +113,112 @@ export default function Concerts() {
         </div>
       )}
 
-      {!loading && !error && gigs.length === 0 && (
+      {!loading && !error && gigs.upcoming.length === 0 && gigs.past.length === 0 && (
         <div style={{
           textAlign: 'center',
           padding: '2rem',
           color: '#666666',
           fontSize: '1rem'
         }}>
-          No upcoming concerts found.
+          No concerts found.
         </div>
       )}
 
-      {!loading && gigs.length > 0 && (
-        <ul style={{ listStyle: 'none', padding: 0 }}>
-          {gigs.map((gig, idx) => (
-            <li key={gig.id || idx} style={{
-              margin: '0.75rem 0',
-              padding: '1rem',
-              border: '1px solid #e0e0e0',
-              backgroundColor: '#f9f9f9'
-            }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <div>
-                  <strong style={{
-                    fontSize: '1rem',
-                    color: '#000000',
-                    marginRight: '0.75rem'
-                  }}>{gig.date}</strong>
-                  <span style={{ color: '#666666', fontSize: '0.9rem' }}>
-                    {gig.venue}, {gig.city}
-                  </span>
+      {/* Upcoming Concerts */}
+      {!loading && gigs.upcoming.length > 0 && (
+        <div style={{ marginBottom: '3rem' }}>
+          <h2 style={{
+            color: '#000000',
+            marginBottom: '2rem',
+            fontSize: '1.2rem',
+            textAlign: 'center'
+          }}>Upcoming Concerts</h2>
+
+          <ul style={{ listStyle: 'none', padding: 0 }}>
+            {gigs.upcoming.map((gig, idx) => (
+              <li key={gig.id || idx} style={{
+                margin: '0.75rem 0',
+                padding: '1rem',
+                border: '1px solid #e0e0e0',
+                backgroundColor: '#f9f9f9'
+              }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div>
+                    <strong style={{
+                      fontSize: '1rem',
+                      color: '#000000',
+                      marginRight: '0.75rem'
+                    }}>{gig.venue}</strong>
+                    <span style={{ color: '#666666', fontSize: '0.9rem' }}>
+                      {gig.date}, {gig.city}
+                    </span>
+                  </div>
+                  {gig.link && (
+                    <a
+                      href={gig.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        backgroundColor: '#000000',
+                        color: '#ffffff',
+                        padding: '0.25rem 0.5rem',
+                        borderRadius: '3px',
+                        textDecoration: 'none',
+                        fontSize: '0.8rem',
+                        border: '1px solid #000000'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = '#333333';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = '#000000';
+                      }}
+                    >
+                      Tickets
+                    </a>
+                  )}
                 </div>
-                {gig.link && (
-                  <a
-                    href={gig.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      backgroundColor: '#000000',
-                      color: '#ffffff',
-                      padding: '0.25rem 0.5rem',
-                      borderRadius: '3px',
-                      textDecoration: 'none',
-                      fontSize: '0.8rem',
-                      border: '1px solid #000000'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = '#333333';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = '#000000';
-                    }}
-                  >
-                    🎫 Tickets
-                  </a>
-                )}
-              </div>
-            </li>
-          ))}
-        </ul>
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
 
-        <footer style={{
+      {/* Past Performances */}
+      {!loading && gigs.past.length > 0 && (
+        <div>
+          <h2 style={{
+            color: '#000000',
+            marginBottom: '2rem',
+            fontSize: '1.2rem',
+            textAlign: 'center'
+          }}>Past Performances</h2>
+
+          <ul style={{ listStyle: 'none', padding: 0 }}>
+            {gigs.past.map((gig, idx) => (
+              <li key={gig.id || `past-${idx}`} style={{
+                margin: '0.5rem 0',
+                padding: '0.5rem 0',
+                borderBottom: '1px solid #e0e0e0'
+              }}>
+                <strong style={{
+                  fontSize: '0.9rem',
+                  color: '#000000',
+                  marginRight: '0.5rem'
+                }}>{gig.venue}</strong>
+                <span style={{
+                  color: '#666666',
+                  fontSize: '0.85rem'
+                }}>
+                  {gig.date}, {gig.city}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <footer style={{
           marginTop: '3rem',
           textAlign: 'center',
           color: '#888',
