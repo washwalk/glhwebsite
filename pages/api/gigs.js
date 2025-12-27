@@ -1,6 +1,10 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
+
 import axios from 'axios';
-// eslint-disable-next-line @typescript-eslint/no-require-imports
+
 const cheerio = require('cheerio');
+
+const fs = require('fs');
 
 export default async function handler(req, res) {
   // Set CORS headers
@@ -246,9 +250,69 @@ export default async function handler(req, res) {
     // Debug: show what we found
     console.log(`Final result: ${gigs.length} concerts found`);
 
-    console.log(`Total concerts found: ${gigs.length}`);
+console.log(`Total concerts found: ${gigs.length}`);
 
-    // Return the scraped data if found, otherwise show simple message
+ 
+
+// Load manual concerts
+
+try {
+
+  const manualData = fs.readFileSync('public/concerts-manual.json', 'utf8');
+
+  const manualGigs = JSON.parse(manualData);
+
+  manualGigs.forEach(gig => {
+
+    gigs.push({
+
+      date: gig.date,
+
+      venue: gig.venue,
+
+      city: gig.city,
+
+      link: gig.link,
+
+      source: 'manual'
+
+    });
+
+  });
+
+} catch (error) {
+
+  console.log('Failed to load manual concerts:', error.message);
+
+}
+
+// Sort all gigs by date
+
+gigs.sort((a, b) => {
+
+  try {
+
+    const [dayA, monthA, yearA] = a.date.split('.');
+
+    const [dayB, monthB, yearB] = b.date.split('.');
+
+    const dateA = new Date(parseInt(yearA), parseInt(monthA) - 1, parseInt(dayA));
+
+    const dateB = new Date(parseInt(yearB), parseInt(monthB) - 1, parseInt(dayB));
+
+    return dateA - dateB;
+
+  } catch {
+
+    return 0;
+
+  }
+
+});
+
+ 
+
+// Return the scraped data if found, otherwise show simple message
     if (gigs.length > 0) {
       console.log(`Successfully scraped ${gigs.length} concerts`);
       return res.status(200).json(gigs);

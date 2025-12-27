@@ -1,5 +1,11 @@
 [
   {
+    "date": "15.01.2026",
+    "venue": "Test Venue",
+    "city": "Test City (TST)",
+    "link": "https://example.com/test-gig"
+  },
+  {
     "date": "30.01.2026",
     "venue": "Rabbit Hole Theater",
     "city": "Essen (GER)",
