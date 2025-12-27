@@ -56,38 +56,38 @@ export default function Navigation() {
         </Link>
 
         <Link href="/about" style={{
-          color: '#ffffff',
+          color: '#cccccc',
           textDecoration: 'none',
           fontSize: '1rem',
           padding: '0.25rem 0.75rem',
           transition: 'all 0.2s ease'
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.backgroundColor = '#ffffff';
+          e.currentTarget.style.backgroundColor = '#cccccc';
           e.currentTarget.style.color = '#000000';
         }}
         onMouseLeave={(e) => {
           e.currentTarget.style.backgroundColor = 'transparent';
-          e.currentTarget.style.color = '#ffffff';
+          e.currentTarget.style.color = '#cccccc';
         }}
         >
           About
         </Link>
 
         <Link href="/contact" style={{
-          color: '#ffffff',
+          color: '#cccccc',
           textDecoration: 'none',
           fontSize: '1rem',
           padding: '0.25rem 0.75rem',
           transition: 'all 0.2s ease'
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.backgroundColor = '#ffffff';
+          e.currentTarget.style.backgroundColor = '#cccccc';
           e.currentTarget.style.color = '#000000';
         }}
         onMouseLeave={(e) => {
           e.currentTarget.style.backgroundColor = 'transparent';
-          e.currentTarget.style.color = '#ffffff';
+          e.currentTarget.style.color = '#cccccc';
         }}
         >
           Contact
