@@ -43,3 +43,16 @@ nav a {
 li {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+
+/* Screen reader only content - visible to search engines but hidden visually */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

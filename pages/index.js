@@ -1,20 +1,34 @@
 
+import Head from 'next/head';
 import Navigation from '../components/Navigation';
 
 export default function Home() {
   return (
-    <div style={{
-      backgroundColor: '#ffffff',
-      color: '#000000',
-      minHeight: '100vh',
-      textAlign: 'center'
-    }}>
-      <Navigation />
+    <>
+      <Head>
+        <title>George Hadow | Amsterdam-based Drummer & Avant-Garde Percussionist</title>
+        <meta
+          name="description"
+          content="Official site of George Hadow, Amsterdam-based drummer and avant-garde artist. Live performances, projects, and recordings."
+        />
+      </Head>
+      <div style={{
+        backgroundColor: '#ffffff',
+        color: '#000000',
+        minHeight: '100vh',
+        textAlign: 'center'
+      }}>
+        <Navigation />
+
+      {/* Hidden SEO text for search engines */}
+      <div className="sr-only">
+        George Hadow is an English drummer and avant-garde percussionist based in Amsterdam, active in experimental, improvised, and contemporary music since 2012.
+      </div>
 
       <div style={{
         padding: '2rem',
         fontFamily: 'sans-serif',
-        maxWidth: '1000px',
+        maxWidth: '800px',
         margin: '0 auto'
       }}>
         <h1 style={{
@@ -73,5 +87,6 @@ export default function Home() {
         </footer>
       </div>
     </div>
+    </>
   );
 }
