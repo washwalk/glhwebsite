@@ -1,13 +1,73 @@
+import Head from 'next/head';
 import Navigation from '../components/Navigation';
 
 export default function About() {
   return (
-    <div style={{
-      backgroundColor: '#ffffff',
-      color: '#000000',
-      minHeight: '100vh'
-    }}>
-      <Navigation />
+    <>
+      <Head>
+        <title>About | George Hadow</title>
+        <meta
+          name="description"
+          content="Biography of George Hadow, Amsterdam-based drummer and avant-garde percussionist. Musical background, ensembles, collaborations, and discography."
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "Person",
+                  "name": "George Hadow",
+                  "jobTitle": "Drummer and Avant-Garde Percussionist",
+                  "description": "English drummer and avant-garde percussionist based in Amsterdam, active in experimental, improvised, and contemporary music since 2012.",
+                  "url": "https://www.georgehadow.com/about",
+                  "homeLocation": {
+                    "@type": "Place",
+                    "name": "Amsterdam, Netherlands"
+                  },
+                  "knowsAbout": [
+                    "Avant-garde music",
+                    "Experimental percussion",
+                    "Improvised music",
+                    "Contemporary music",
+                    "Jazz ensembles"
+                  ]
+                },
+                {
+                  "@type": "MusicGroup",
+                  "name": "Blue Lines Trio",
+                  "genre": "Avant-garde Jazz",
+                  "member": {
+                    "@type": "Person",
+                    "name": "George Hadow"
+                  }
+                },
+                {
+                  "@type": "MusicGroup",
+                  "name": "Mulligan – Baker Project",
+                  "genre": "Avant-garde Jazz",
+                  "member": {
+                    "@type": "Person",
+                    "name": "George Hadow"
+                  }
+                }
+              ]
+            })
+          }}
+        />
+      </Head>
+      <div style={{
+        backgroundColor: '#ffffff',
+        color: '#000000',
+        minHeight: '100vh'
+      }}>
+        <Navigation />
+
+      {/* Hidden SEO text for search engines */}
+      <div className="sr-only">
+        George Hadow biography, Amsterdam-based drummer and avant-garde percussionist. Musical background, ensembles, collaborations, and discography. Active in experimental, improvised, and contemporary music since 2012.
+      </div>
 
       <div style={{
         padding: '2rem',
@@ -87,7 +147,8 @@ export default function About() {
          </div>
 
 
-      </div>
+       </div>
     </div>
+    </>
   );
 }

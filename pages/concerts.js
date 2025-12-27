@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import Head from 'next/head';
 import Navigation from '../components/Navigation';
 
 export default function Concerts() {
   const [gigs, setGigs] = useState({ upcoming: [], past: [] });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
 
   useEffect(() => {
     async function fetchGigs() {
@@ -67,12 +67,25 @@ export default function Concerts() {
   }, []);
 
   return (
-    <div style={{
-      backgroundColor: '#ffffff',
-      color: '#ffffff',
-      minHeight: '100vh'
-    }}>
-      <Navigation />
+    <>
+      <Head>
+        <title>Concerts & Performances | George Hadow</title>
+        <meta
+          name="description"
+          content="Upcoming and past live performances by George Hadow. Concert dates, venues, and booking information for avant-garde music shows."
+        />
+      </Head>
+      <div style={{
+        backgroundColor: '#ffffff',
+        color: '#ffffff',
+        minHeight: '100vh'
+      }}>
+        <Navigation />
+
+        {/* Hidden SEO text for search engines */}
+        <div className="sr-only">
+          George Hadow concerts and live performances. Upcoming shows, past performances, booking information for avant-garde music events in Amsterdam and Europe.
+        </div>
 
       <div style={{
         padding: '2rem',
@@ -218,6 +231,7 @@ export default function Concerts() {
           <p>George Hadow - Live Music Experience</p>
         </footer>
       </div>
-    </div>
+      </div>
+    </>
   );
 }
