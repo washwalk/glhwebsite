@@ -154,11 +154,8 @@ export default function Concerts() {
           marginTop: '3rem',
           textAlign: 'center',
           color: '#888',
-          fontSize: '0.8em',
-          borderTop: '1px solid #e0e0e0',
-          paddingTop: '1rem'
+          fontSize: '0.8em'
         }}>
-          <p>Data sourced from <a href="https://kuhnfumusic.com/tour-dates" target="_blank" rel="noopener noreferrer" style={{ color: '#0066cc', textDecoration: 'none' }}>kuhnfumusic.com</a></p>
           <p>George Hadow - Live Music Experience</p>
         </footer>
       </div>

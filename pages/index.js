@@ -70,9 +70,6 @@ export default function Home() {
           fontSize: '0.8em'
         }}>
           <p>George Hadow - Amsterdam-based drummer and avant-garde artist</p>
-          <p style={{ marginTop: '0.5rem' }}>
-            Data sourced from <a href="https://kuhnfumusic.com/tour-dates" target="_blank" rel="noopener noreferrer" style={{ color: '#0066cc', textDecoration: 'none' }}>kuhnfumusic.com</a>
-          </p>
         </footer>
       </div>
     </div>
