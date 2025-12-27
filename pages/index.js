@@ -91,16 +91,7 @@ export default function Home() {
           Explore selected performances, current projects, and upcoming live dates.
         </p>
 
-        <footer style={{
-          marginTop: '4rem',
-          textAlign: 'center',
-          color: '#888',
-          fontSize: '0.8em'
-        }}>
-          <p style={{ marginTop: '0.5rem' }}>
-            Data sourced from <a href="https://kuhnfumusic.com/tour-dates" target="_blank" rel="noopener noreferrer" style={{ color: '#0066cc', textDecoration: 'none' }}>kuhnfumusic.com</a>
-          </p>
-        </footer>
+
       </div>
     </div>
     </>
