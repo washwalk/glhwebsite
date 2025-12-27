@@ -259,7 +259,7 @@ console.log(`Total concerts found: ${gigs.length}`);
 
 try {
 
-  const manualPath = path.join(process.cwd(), 'public', 'concerts-manual.json');
+  const manualPath = path.join(process.cwd(), 'data', 'concerts-manual.json');
 
   const manualData = fs.readFileSync(manualPath, 'utf8');
 
