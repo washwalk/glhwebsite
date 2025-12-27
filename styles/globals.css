@@ -60,7 +60,7 @@ li {
 /* Site logo styling */
 .site-logo {
   text-align: center;
-  font-family: 'Helvetica', 'Arial', sans-serif;
+  font-family: sans-serif;
   font-size: clamp(2rem, 5vw, 2.5rem);
   font-weight: bold;
   color: #000000;
