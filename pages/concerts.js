@@ -221,7 +221,7 @@ export default function Concerts() {
                  padding: '0.5rem 1rem',
                  borderBottom: '1px solid var(--border-color)',
                  display: 'grid',
-                 gridTemplateColumns: 'minmax(150px, auto) 100px 1.2fr 1.8fr',
+                 gridTemplateColumns: 'minmax(150px, auto) 100px 1.2fr 1.8fr auto',
                  gap: '0.75rem',
                  alignItems: 'center'
                }}>
@@ -245,6 +245,9 @@ export default function Concerts() {
                    fontSize: '0.85rem',
                    textAlign: 'left'
                  }}>{gig.city}</span>
+                 <div className="gig-link" style={{ visibility: 'hidden' }}>
+                   {/* Empty space to maintain grid alignment */}
+                 </div>
                </li>
              ))}
           </ul>

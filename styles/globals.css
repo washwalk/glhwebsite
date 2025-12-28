@@ -157,3 +157,8 @@ li {
     gap: 0.75rem;
   }
 }
+
+/* Hide empty ticket column in past gigs */
+.past-gig .gig-link {
+  display: none;
+}
