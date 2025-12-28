@@ -277,23 +277,30 @@ try {
 
   const $lab = cheerio.load(labasheedaResponse.data);
 
+  console.log('Labasheeda page title:', $lab('title').text());
+  console.log('Labasheeda total divs:', $lab('div').length);
+  console.log('Labasheeda event_listing divs:', $lab('.event_listing').length);
+  console.log('Labasheeda wpem-event-layout-wrapper divs:', $lab('.wpem-event-layout-wrapper').length);
+  console.log('Labasheeda h3 elements:', $lab('h3').length);
+  console.log('Labasheeda wpem-heading-text elements:', $lab('.wpem-heading-text').length);
+
   const events = $lab('.event_listing');
 
   console.log('Labasheeda events found:', events.length);
 
   events.each((i, elem) => {
 
-    const title = $lab(elem).find('h3.wpem-heading-text').text().trim();
+    const title = $lab(elem).find('a h3.wpem-heading-text').text().trim();
 
-    const dateTimeText = $lab(elem).find('.wpem-event-date-time-text').text().trim();
+    const dateTimeText = $lab(elem).find('a .wpem-event-date-time-text').text().trim();
 
-    const locationText = $lab(elem).find('.wpem-event-location-text').text().trim();
+    const locationText = $lab(elem).find('a .wpem-event-location-text').text().trim();
 
     const link = $lab(elem).find('a.wpem-event-action-url').attr('href');
 
     console.log('Processing labasheeda event:', { title, dateTimeText, locationText, link });
 
-    // Parse date from dateTimeText, e.g., "22-11-2025 > 19:00 - 00:00"
+    // Parse date from dateTimeText, e.g., "22-11-2025 > 19:00 - 00:00" or "27-11-2025"
 
     const dateMatch = dateTimeText.match(/(\d{2}-\d{2}-\d{4})/);
 
@@ -301,9 +308,15 @@ try {
 
       const date = dateMatch[1]; // DD-MM-YYYY
 
+      // Convert DD-MM-YYYY to DD.MM.YYYY for consistency
+
+      const [day, month, year] = date.split('-');
+
+      const formattedDate = `${day}.${month}.${year}`;
+
       gigs.push({
 
-        date: date,
+        date: formattedDate,
 
         venue: title, // Use title as venue
 
@@ -317,7 +330,7 @@ try {
 
       });
 
-      console.log('Added labasheeda gig:', date, title);
+      console.log('Added labasheeda gig:', formattedDate, title);
 
     }
 
