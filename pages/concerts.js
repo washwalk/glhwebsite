@@ -147,28 +147,29 @@ export default function Concerts() {
                  padding: '1rem',
                  border: '1px solid var(--border-color)',
                  backgroundColor: 'var(--card-bg)',
-                 display: 'flex',
-                 justifyContent: 'space-between',
+                 display: 'grid',
+                 gridTemplateColumns: 'minmax(200px, auto) 120px 1fr 1fr auto',
+                 gap: '1rem',
                  alignItems: 'center'
                }}>
-                 <div className="gig-info" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                 <div className="gig-info">
                    <strong style={{
                      fontSize: '1.1rem',
                      color: 'var(--text-color)'
                    }}>{gig.band}</strong>
-                   <span style={{
-                     color: 'var(--secondary-text)',
-                     fontSize: '0.9rem'
-                   }}>{gig.date}</span>
-                   <span style={{
-                     color: 'var(--secondary-text)',
-                     fontSize: '0.9rem'
-                   }}>{gig.venue}</span>
-                   <span style={{
-                     color: 'var(--secondary-text)',
-                     fontSize: '0.9rem'
-                   }}>{gig.city}</span>
                  </div>
+                 <span style={{
+                   color: 'var(--secondary-text)',
+                   fontSize: '0.9rem'
+                 }}>{gig.date}</span>
+                 <span style={{
+                   color: 'var(--secondary-text)',
+                   fontSize: '0.9rem'
+                 }}>{gig.venue}</span>
+                 <span style={{
+                   color: 'var(--secondary-text)',
+                   fontSize: '0.9rem'
+                 }}>{gig.city}</span>
                  <div className="gig-link">
                    {gig.link && (
                      <a
@@ -217,27 +218,29 @@ export default function Concerts() {
                  margin: '0.5rem 0',
                  padding: '0.5rem 1rem',
                  borderBottom: '1px solid var(--border-color)',
-                 display: 'flex',
+                 display: 'grid',
+                 gridTemplateColumns: 'minmax(200px, auto) 120px 1fr 1fr',
+                 gap: '1rem',
                  alignItems: 'center'
                }}>
-                 <div className="gig-info" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                 <div className="gig-info">
                    <strong style={{
                      fontSize: '1rem',
                      color: 'var(--text-color)'
                    }}>{gig.band}</strong>
-                   <span style={{
-                     color: 'var(--secondary-text)',
-                     fontSize: '0.85rem'
-                   }}>{gig.date}</span>
-                   <span style={{
-                     color: 'var(--secondary-text)',
-                     fontSize: '0.85rem'
-                   }}>{gig.venue}</span>
-                   <span style={{
-                     color: 'var(--secondary-text)',
-                     fontSize: '0.85rem'
-                   }}>{gig.city}</span>
                  </div>
+                 <span style={{
+                   color: 'var(--secondary-text)',
+                   fontSize: '0.85rem'
+                 }}>{gig.date}</span>
+                 <span style={{
+                   color: 'var(--secondary-text)',
+                   fontSize: '0.85rem'
+                 }}>{gig.venue}</span>
+                 <span style={{
+                   color: 'var(--secondary-text)',
+                   fontSize: '0.85rem'
+                 }}>{gig.city}</span>
                </li>
              ))}
           </ul>
