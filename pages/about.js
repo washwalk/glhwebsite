@@ -71,21 +71,15 @@ export default function About() {
         George Hadow biography, Amsterdam-based drummer and avant-garde percussionist. Musical background, ensembles, collaborations, and discography. Active in experimental, improvised, and contemporary music since 2012.
       </div>
 
-      <div style={{
-        padding: '2rem',
-        fontFamily: 'sans-serif',
-        maxWidth: '800px',
-        margin: '0 auto'
-      }}>
-        <h1 style={{
-          color: 'var(--heading-color)',
-          marginBottom: '1.5rem',
-          fontSize: '1.5rem'
-        }}>About</h1>
-
-         <div style={{
-           marginBottom: '2rem'
-         }}>
+       <div style={{
+         padding: '2rem',
+         fontFamily: 'sans-serif',
+         maxWidth: '800px',
+         margin: '0 auto'
+       }}>
+          <div style={{
+            marginBottom: '2rem'
+          }}>
             <h2 style={{ color: 'var(--heading-color)', marginTop: 0, marginBottom: '1rem', fontSize: '1.1rem' }}>Biography</h2>
             <p style={{ color: 'var(--secondary-text)', lineHeight: '1.6', fontSize: '0.95rem' }}>
              George Hadow represents the newest wave of improvisers to hit the Dutch scene. Like many of the active newcomers, George is an expat, hailing from Devon in the UK. George first came to the Netherlands in 2011 to take part in the Dutch Impro Academy, where he studied with Han Bennink and Michael Moore, among others. He has quickly developed into a mature musician, playing with acute sensitivity as well as unbridled power.
