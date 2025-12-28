@@ -198,7 +198,7 @@ export default function Concerts() {
                      </a>
                    )}
                  </div>
-               </li>
+                </li>
              ))}
           </ul>
         </div>
@@ -221,7 +221,7 @@ export default function Concerts() {
                  padding: '0.5rem 1rem',
                  borderBottom: '1px solid var(--border-color)',
                  display: 'grid',
-                 gridTemplateColumns: 'minmax(150px, auto) 100px 1.2fr 1.8fr auto',
+                 gridTemplateColumns: 'minmax(150px, auto) 100px 1.2fr 1fr',
                  gap: '0.75rem',
                  alignItems: 'center'
                }}>
@@ -243,11 +243,9 @@ export default function Concerts() {
                  <span style={{
                    color: 'var(--secondary-text)',
                    fontSize: '0.85rem',
-                   textAlign: 'left'
+                   textAlign: 'left',
+                   gridColumn: '4 / -1'
                  }}>{gig.city}</span>
-                 <div className="gig-link" style={{ visibility: 'hidden' }}>
-                   {/* Empty space to maintain grid alignment */}
-                 </div>
                </li>
              ))}
           </ul>
