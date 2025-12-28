@@ -140,63 +140,63 @@ export default function Concerts() {
             textAlign: 'center'
           }}>Upcoming Concerts</h2>
 
-          <ul style={{ listStyle: 'none', padding: 0 }}>
-            {gigs.upcoming.map((gig, idx) => (
-              <li key={gig.id || idx} style={{
-                margin: '0.75rem 0',
-                padding: '1rem',
-                border: '1px solid var(--border-color)',
-                backgroundColor: 'var(--card-bg)',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center'
-              }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                  <strong style={{
-                    fontSize: '1.1rem',
-                    color: 'var(--text-color)'
-                  }}>{gig.band}</strong>
-                  <span style={{
-                    color: 'var(--secondary-text)',
-                    fontSize: '0.9rem'
-                  }}>{gig.date}</span>
-                  <span style={{
-                    color: 'var(--secondary-text)',
-                    fontSize: '0.9rem'
-                  }}>{gig.venue}</span>
-                  <span style={{
-                    color: 'var(--secondary-text)',
-                    fontSize: '0.9rem'
-                  }}>{gig.city}</span>
-                </div>
-                <div>
-                  {gig.link && (
-                    <a
-                      href={gig.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{
-                        backgroundColor: 'var(--button-bg)',
-                        color: 'var(--button-text)',
-                        padding: '0.25rem 0.5rem',
-                        borderRadius: '3px',
-                        textDecoration: 'none',
-                        fontSize: '0.8rem',
-                        border: '1px solid var(--button-bg)'
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.backgroundColor = 'var(--button-hover)';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.backgroundColor = 'var(--button-bg)';
-                      }}
-                    >
-                      Tickets
-                    </a>
-                  )}
-                </div>
-              </li>
-            ))}
+           <ul style={{ listStyle: 'none', padding: 0 }}>
+             {gigs.upcoming.map((gig, idx) => (
+               <li key={gig.id || idx} className="upcoming-gig" style={{
+                 margin: '0.75rem 0',
+                 padding: '1rem',
+                 border: '1px solid var(--border-color)',
+                 backgroundColor: 'var(--card-bg)',
+                 display: 'flex',
+                 justifyContent: 'space-between',
+                 alignItems: 'center'
+               }}>
+                 <div className="gig-info" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                   <strong style={{
+                     fontSize: '1.1rem',
+                     color: 'var(--text-color)'
+                   }}>{gig.band}</strong>
+                   <span style={{
+                     color: 'var(--secondary-text)',
+                     fontSize: '0.9rem'
+                   }}>{gig.date}</span>
+                   <span style={{
+                     color: 'var(--secondary-text)',
+                     fontSize: '0.9rem'
+                   }}>{gig.venue}</span>
+                   <span style={{
+                     color: 'var(--secondary-text)',
+                     fontSize: '0.9rem'
+                   }}>{gig.city}</span>
+                 </div>
+                 <div className="gig-link">
+                   {gig.link && (
+                     <a
+                       href={gig.link}
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       style={{
+                         backgroundColor: 'var(--button-bg)',
+                         color: 'var(--button-text)',
+                         padding: '0.25rem 0.5rem',
+                         borderRadius: '3px',
+                         textDecoration: 'none',
+                         fontSize: '0.8rem',
+                         border: '1px solid var(--button-bg)'
+                       }}
+                       onMouseEnter={(e) => {
+                         e.currentTarget.style.backgroundColor = 'var(--button-hover)';
+                       }}
+                       onMouseLeave={(e) => {
+                         e.currentTarget.style.backgroundColor = 'var(--button-bg)';
+                       }}
+                     >
+                       Tickets
+                     </a>
+                   )}
+                 </div>
+               </li>
+             ))}
           </ul>
         </div>
       )}
@@ -211,35 +211,35 @@ export default function Concerts() {
             textAlign: 'center'
           }}>Past Performances</h2>
 
-          <ul style={{ listStyle: 'none', padding: 0 }}>
-            {gigs.past.map((gig, idx) => (
-              <li key={gig.id || `past-${idx}`} style={{
-                margin: '0.5rem 0',
-                padding: '0.5rem 1rem',
-                borderBottom: '1px solid var(--border-color)',
-                display: 'flex',
-                alignItems: 'center'
-              }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                  <strong style={{
-                    fontSize: '1rem',
-                    color: 'var(--text-color)'
-                  }}>{gig.band}</strong>
-                  <span style={{
-                    color: 'var(--secondary-text)',
-                    fontSize: '0.85rem'
-                  }}>{gig.date}</span>
-                  <span style={{
-                    color: 'var(--secondary-text)',
-                    fontSize: '0.85rem'
-                  }}>{gig.venue}</span>
-                  <span style={{
-                    color: 'var(--secondary-text)',
-                    fontSize: '0.85rem'
-                  }}>{gig.city}</span>
-                </div>
-              </li>
-            ))}
+           <ul style={{ listStyle: 'none', padding: 0 }}>
+             {gigs.past.map((gig, idx) => (
+               <li key={gig.id || `past-${idx}`} className="past-gig" style={{
+                 margin: '0.5rem 0',
+                 padding: '0.5rem 1rem',
+                 borderBottom: '1px solid var(--border-color)',
+                 display: 'flex',
+                 alignItems: 'center'
+               }}>
+                 <div className="gig-info" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                   <strong style={{
+                     fontSize: '1rem',
+                     color: 'var(--text-color)'
+                   }}>{gig.band}</strong>
+                   <span style={{
+                     color: 'var(--secondary-text)',
+                     fontSize: '0.85rem'
+                   }}>{gig.date}</span>
+                   <span style={{
+                     color: 'var(--secondary-text)',
+                     fontSize: '0.85rem'
+                   }}>{gig.venue}</span>
+                   <span style={{
+                     color: 'var(--secondary-text)',
+                     fontSize: '0.85rem'
+                   }}>{gig.city}</span>
+                 </div>
+               </li>
+             ))}
           </ul>
         </div>
       )}
