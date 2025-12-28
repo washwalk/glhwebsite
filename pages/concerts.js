@@ -147,32 +147,50 @@ export default function Concerts() {
                  padding: '1rem',
                  border: '1px solid var(--border-color)',
                  backgroundColor: 'var(--card-bg)',
-                 display: 'grid',
-                 gridTemplateColumns: 'minmax(150px, auto) 100px 1.2fr 1.8fr auto',
-                 gap: '0.75rem',
-                 alignItems: 'center'
+                 display: 'flex',
+                 alignItems: 'center',
+                 gap: '1rem'
                }}>
-                 <div className="gig-info">
+                 <div className="gig-band" style={{
+                   minWidth: '150px',
+                   flexShrink: 0
+                 }}>
                    <strong style={{
                      fontSize: '1.1rem',
                      color: 'var(--text-color)'
                    }}>{gig.band}</strong>
                  </div>
-                 <span style={{
-                   color: 'var(--secondary-text)',
-                   fontSize: '0.9rem'
-                 }}>{gig.date}</span>
-                 <span style={{
-                   color: 'var(--secondary-text)',
-                   fontSize: '0.9rem',
-                   textAlign: 'left'
-                 }}>{gig.venue}</span>
-                 <span style={{
-                   color: 'var(--secondary-text)',
-                   fontSize: '0.9rem',
-                   textAlign: 'left'
-                 }}>{gig.city}</span>
-                 <div className="gig-link">
+                 <div className="gig-date" style={{
+                   minWidth: '100px',
+                   flexShrink: 0
+                 }}>
+                   <span style={{
+                     color: 'var(--secondary-text)',
+                     fontSize: '0.9rem'
+                   }}>{gig.date}</span>
+                 </div>
+                 <div className="gig-venue" style={{
+                   minWidth: '200px',
+                   flexShrink: 0
+                 }}>
+                   <span style={{
+                     color: 'var(--secondary-text)',
+                     fontSize: '0.9rem'
+                   }}>{gig.venue}</span>
+                 </div>
+                 <div className="gig-city" style={{
+                   flex: 1,
+                   minWidth: '150px'
+                 }}>
+                   <span style={{
+                     color: 'var(--secondary-text)',
+                     fontSize: '0.9rem'
+                   }}>{gig.city}</span>
+                 </div>
+                 <div className="gig-link" style={{
+                   minWidth: '80px',
+                   flexShrink: 0
+                 }}>
                    {gig.link && (
                      <a
                        href={gig.link}
@@ -198,7 +216,7 @@ export default function Concerts() {
                      </a>
                    )}
                  </div>
-                </li>
+               </li>
              ))}
           </ul>
         </div>
@@ -220,32 +238,53 @@ export default function Concerts() {
                  margin: '0.5rem 0',
                  padding: '0.5rem 1rem',
                  borderBottom: '1px solid var(--border-color)',
-                 display: 'grid',
-                 gridTemplateColumns: 'minmax(150px, auto) 100px 1.2fr 1fr',
-                 gap: '0.75rem',
-                 alignItems: 'center'
+                 display: 'flex',
+                 alignItems: 'center',
+                 gap: '1rem'
                }}>
-                 <div className="gig-info">
+                 <div className="gig-band" style={{
+                   minWidth: '150px',
+                   flexShrink: 0
+                 }}>
                    <strong style={{
                      fontSize: '1rem',
                      color: 'var(--text-color)'
                    }}>{gig.band}</strong>
                  </div>
-                 <span style={{
-                   color: 'var(--secondary-text)',
-                   fontSize: '0.85rem'
-                 }}>{gig.date}</span>
-                 <span style={{
-                   color: 'var(--secondary-text)',
-                   fontSize: '0.85rem',
-                   textAlign: 'left'
-                 }}>{gig.venue}</span>
-                 <span style={{
-                   color: 'var(--secondary-text)',
-                   fontSize: '0.85rem',
-                   textAlign: 'left',
-                   gridColumn: '4 / -1'
-                 }}>{gig.city}</span>
+                 <div className="gig-date" style={{
+                   minWidth: '100px',
+                   flexShrink: 0
+                 }}>
+                   <span style={{
+                     color: 'var(--secondary-text)',
+                     fontSize: '0.85rem'
+                   }}>{gig.date}</span>
+                 </div>
+                 <div className="gig-venue" style={{
+                   minWidth: '200px',
+                   flexShrink: 0
+                 }}>
+                   <span style={{
+                     color: 'var(--secondary-text)',
+                     fontSize: '0.85rem'
+                   }}>{gig.venue}</span>
+                 </div>
+                 <div className="gig-city" style={{
+                   flex: 1,
+                   minWidth: '150px'
+                 }}>
+                   <span style={{
+                     color: 'var(--secondary-text)',
+                     fontSize: '0.85rem'
+                   }}>{gig.city}</span>
+                 </div>
+                 <div className="gig-link" style={{
+                   minWidth: '80px',
+                   flexShrink: 0,
+                   visibility: 'hidden'
+                 }}>
+                   {/* Empty space for alignment */}
+                 </div>
                </li>
              ))}
           </ul>
