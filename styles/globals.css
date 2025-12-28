@@ -145,7 +145,7 @@ li {
 /* Tablet and smaller desktop adjustments for grid layout */
 @media (max-width: 1024px) {
   .upcoming-gig, .past-gig {
-    grid-template-columns: minmax(140px, auto) 90px 1fr 1fr auto;
+    grid-template-columns: minmax(140px, auto) 90px 1.2fr 1.8fr auto;
     gap: 0.5rem;
   }
 }
@@ -153,7 +153,7 @@ li {
 /* Small desktop adjustments */
 @media (max-width: 1200px) and (min-width: 1025px) {
   .upcoming-gig, .past-gig {
-    grid-template-columns: minmax(170px, auto) 110px 1fr 1fr auto;
+    grid-template-columns: minmax(170px, auto) 110px 1.2fr 1.8fr auto;
     gap: 0.75rem;
   }
 }

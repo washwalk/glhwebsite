@@ -148,7 +148,7 @@ export default function Concerts() {
                  border: '1px solid var(--border-color)',
                  backgroundColor: 'var(--card-bg)',
                  display: 'grid',
-                 gridTemplateColumns: 'minmax(150px, auto) 100px 1fr 1fr auto',
+                 gridTemplateColumns: 'minmax(150px, auto) 100px 1.2fr 1.8fr auto',
                  gap: '0.75rem',
                  alignItems: 'center'
                }}>
@@ -164,11 +164,13 @@ export default function Concerts() {
                  }}>{gig.date}</span>
                  <span style={{
                    color: 'var(--secondary-text)',
-                   fontSize: '0.9rem'
+                   fontSize: '0.9rem',
+                   textAlign: 'left'
                  }}>{gig.venue}</span>
                  <span style={{
                    color: 'var(--secondary-text)',
-                   fontSize: '0.9rem'
+                   fontSize: '0.9rem',
+                   textAlign: 'left'
                  }}>{gig.city}</span>
                  <div className="gig-link">
                    {gig.link && (
@@ -219,7 +221,7 @@ export default function Concerts() {
                  padding: '0.5rem 1rem',
                  borderBottom: '1px solid var(--border-color)',
                  display: 'grid',
-                 gridTemplateColumns: 'minmax(150px, auto) 100px 1fr 1fr',
+                 gridTemplateColumns: 'minmax(150px, auto) 100px 1.2fr 1.8fr',
                  gap: '0.75rem',
                  alignItems: 'center'
                }}>
@@ -235,11 +237,13 @@ export default function Concerts() {
                  }}>{gig.date}</span>
                  <span style={{
                    color: 'var(--secondary-text)',
-                   fontSize: '0.85rem'
+                   fontSize: '0.85rem',
+                   textAlign: 'left'
                  }}>{gig.venue}</span>
                  <span style={{
                    color: 'var(--secondary-text)',
-                   fontSize: '0.85rem'
+                   fontSize: '0.85rem',
+                   textAlign: 'left'
                  }}>{gig.city}</span>
                </li>
              ))}
