@@ -148,8 +148,8 @@ export default function Concerts() {
                  border: '1px solid var(--border-color)',
                  backgroundColor: 'var(--card-bg)',
                  display: 'grid',
-                 gridTemplateColumns: 'minmax(200px, auto) 120px 1fr 1fr auto',
-                 gap: '1rem',
+                 gridTemplateColumns: 'minmax(150px, auto) 100px 1fr 1fr auto',
+                 gap: '0.75rem',
                  alignItems: 'center'
                }}>
                  <div className="gig-info">
@@ -219,8 +219,8 @@ export default function Concerts() {
                  padding: '0.5rem 1rem',
                  borderBottom: '1px solid var(--border-color)',
                  display: 'grid',
-                 gridTemplateColumns: 'minmax(200px, auto) 120px 1fr 1fr',
-                 gap: '1rem',
+                 gridTemplateColumns: 'minmax(150px, auto) 100px 1fr 1fr',
+                 gap: '0.75rem',
                  alignItems: 'center'
                }}>
                  <div className="gig-info">

@@ -145,15 +145,15 @@ li {
 /* Tablet and smaller desktop adjustments for grid layout */
 @media (max-width: 1024px) {
   .upcoming-gig, .past-gig {
-    grid-template-columns: minmax(180px, auto) 100px 1fr 1fr auto;
-    gap: 0.75rem;
+    grid-template-columns: minmax(140px, auto) 90px 1fr 1fr auto;
+    gap: 0.5rem;
   }
 }
 
 /* Small desktop adjustments */
 @media (max-width: 1200px) and (min-width: 1025px) {
   .upcoming-gig, .past-gig {
-    grid-template-columns: minmax(220px, auto) 130px 1fr 1fr auto;
-    gap: 1rem;
+    grid-template-columns: minmax(170px, auto) 110px 1fr 1fr auto;
+    gap: 0.75rem;
   }
 }
