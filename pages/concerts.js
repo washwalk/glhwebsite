@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import Head from 'next/head';
+import SEO from '../components/SEO';
 import Logo from '../components/Logo';
 import Navigation from '../components/Navigation';
 
@@ -69,13 +69,10 @@ export default function Concerts() {
 
   return (
     <>
-      <Head>
-        <title>Concerts & Performances | George Hadow</title>
-        <meta
-          name="description"
-          content="Upcoming and past live performances by George Hadow. Concert dates, venues, and booking information for avant-garde music shows."
-        />
-      </Head>
+      <SEO
+        title="Concerts & Performances | George Hadow"
+        description="Upcoming and past live performances by George Hadow. Concert dates, venues, and booking information for avant-garde music shows."
+      />
       <div style={{
         backgroundColor: 'var(--bg-color)',
         color: 'var(--text-color)',
@@ -84,10 +81,7 @@ export default function Concerts() {
         <Logo />
         <Navigation />
 
-        {/* Hidden SEO text for search engines */}
-        <div className="sr-only">
-          George Hadow concerts and live performances. Upcoming shows, past performances, booking information for avant-garde music events in Amsterdam and Europe.
-        </div>
+
 
       <div style={{
         padding: '2rem',
@@ -141,82 +135,27 @@ export default function Concerts() {
           }}>Upcoming Concerts</h2>
 
            <ul style={{ listStyle: 'none', padding: 0 }}>
-             {gigs.upcoming.map((gig, idx) => (
-               <li key={gig.id || idx} className="upcoming-gig" style={{
-                 margin: '0.75rem 0',
-                 padding: '1rem',
-                 border: '1px solid var(--border-color)',
-                 backgroundColor: 'var(--card-bg)',
-                 display: 'flex',
-                 alignItems: 'center',
-                 gap: '1rem'
-               }}>
-                 <div className="gig-band" style={{
-                   minWidth: '150px',
-                   flexShrink: 0
-                 }}>
-                   <strong style={{
-                     fontSize: '1.1rem',
-                     color: 'var(--text-color)'
-                   }}>{gig.band}</strong>
-                 </div>
-                 <div className="gig-date" style={{
-                   minWidth: '100px',
-                   flexShrink: 0
-                 }}>
-                   <span style={{
-                     color: 'var(--secondary-text)',
-                     fontSize: '0.9rem'
-                   }}>{gig.date}</span>
-                 </div>
-                 <div className="gig-venue" style={{
-                   minWidth: '200px',
-                   flexShrink: 0
-                 }}>
-                   <span style={{
-                     color: 'var(--secondary-text)',
-                     fontSize: '0.9rem'
-                   }}>{gig.venue}</span>
-                 </div>
-                 <div className="gig-city" style={{
-                   flex: 1,
-                   minWidth: '150px'
-                 }}>
-                   <span style={{
-                     color: 'var(--secondary-text)',
-                     fontSize: '0.9rem'
-                   }}>{gig.city}</span>
-                 </div>
-                 <div className="gig-link" style={{
-                   minWidth: '80px',
-                   flexShrink: 0
-                 }}>
-                   {gig.link && (
-                     <a
-                       href={gig.link}
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       style={{
-                         backgroundColor: 'var(--button-bg)',
-                         color: 'var(--button-text)',
-                         padding: '0.25rem 0.5rem',
-                         borderRadius: '3px',
-                         textDecoration: 'none',
-                         fontSize: '0.8rem',
-                         border: '1px solid var(--button-bg)'
-                       }}
-                       onMouseEnter={(e) => {
-                         e.currentTarget.style.backgroundColor = 'var(--button-hover)';
-                       }}
-                       onMouseLeave={(e) => {
-                         e.currentTarget.style.backgroundColor = 'var(--button-bg)';
-                       }}
-                     >
-                       Tickets
-                     </a>
-                   )}
-                 </div>
-               </li>
+              {gigs.upcoming.map((gig, idx) => (
+                <li key={gig.id || idx} className="upcoming-gig">
+                  <div className="gig-info-container">
+                    <div className="gig-band">
+                      <strong>{gig.band}</strong>
+                    </div>
+                    <div className="gig-date">{gig.date}</div>
+                    <div className="gig-venue">{gig.venue}</div>
+                    <div className="gig-city">{gig.city}</div>
+                  </div>
+                  {gig.link && (
+                    <a
+                      href={gig.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="gig-link"
+                    >
+                      TICKETS
+                    </a>
+                  )}
+                </li>
              ))}
           </ul>
         </div>
@@ -233,59 +172,27 @@ export default function Concerts() {
           }}>Past Performances</h2>
 
            <ul style={{ listStyle: 'none', padding: 0 }}>
-             {gigs.past.map((gig, idx) => (
-               <li key={gig.id || `past-${idx}`} className="past-gig" style={{
-                 margin: '0.5rem 0',
-                 padding: '0.5rem 1rem',
-                 borderBottom: '1px solid var(--border-color)',
-                 display: 'flex',
-                 alignItems: 'center',
-                 gap: '1rem'
-               }}>
-                 <div className="gig-band" style={{
-                   minWidth: '150px',
-                   flexShrink: 0
-                 }}>
-                   <strong style={{
-                     fontSize: '1rem',
-                     color: 'var(--text-color)'
-                   }}>{gig.band}</strong>
-                 </div>
-                 <div className="gig-date" style={{
-                   minWidth: '100px',
-                   flexShrink: 0
-                 }}>
-                   <span style={{
-                     color: 'var(--secondary-text)',
-                     fontSize: '0.85rem'
-                   }}>{gig.date}</span>
-                 </div>
-                 <div className="gig-venue" style={{
-                   minWidth: '200px',
-                   flexShrink: 0
-                 }}>
-                   <span style={{
-                     color: 'var(--secondary-text)',
-                     fontSize: '0.85rem'
-                   }}>{gig.venue}</span>
-                 </div>
-                 <div className="gig-city" style={{
-                   flex: 1,
-                   minWidth: '150px'
-                 }}>
-                   <span style={{
-                     color: 'var(--secondary-text)',
-                     fontSize: '0.85rem'
-                   }}>{gig.city}</span>
-                 </div>
-                 <div className="gig-link" style={{
-                   minWidth: '80px',
-                   flexShrink: 0,
-                   visibility: 'hidden'
-                 }}>
-                   {/* Empty space for alignment */}
-                 </div>
-               </li>
+              {gigs.past.map((gig, idx) => (
+                <li key={gig.id || `past-${idx}`} className="past-gig">
+                  <div className="gig-info-container">
+                    <div className="gig-band">
+                      <strong>{gig.band}</strong>
+                    </div>
+                    <div className="gig-date">{gig.date}</div>
+                    <div className="gig-venue">{gig.venue}</div>
+                    <div className="gig-city">{gig.city}</div>
+                  </div>
+                  {gig.link && (
+                    <a
+                      href={gig.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="gig-link"
+                    >
+                      TICKETS
+                    </a>
+                  )}
+                </li>
              ))}
           </ul>
         </div>

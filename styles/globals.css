@@ -175,39 +175,64 @@ li {
   }
 }
 
-/* Optimized Compact Layout for Android Portrait Mode */
-@media screen and (max-width: 480px) and (orientation: portrait) {
-  /* Reduce vertical spacing in the concert list container */
-  .concert-list {
-    gap: 0.5rem !important; /* Tightens space between tabs */
-  }
+/* Optimized Concert Entry */
+.upcoming-gig, .past-gig {
+  display: flex !important;
+  justify-content: space-between; /* Pushes tickets to the far right */
+  align-items: center;
+  padding: 0.5rem 1rem !important; /* Reduced vertical padding */
+  margin-bottom: 4px !important; /* Tightens space between tabs */
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--card-bg);
+}
 
-  /* Compact individual concert tab */
-  .concert-tab {
-    padding: 0.5rem 0.75rem !important; /* Smaller internal padding */
-    display: grid !important;
-    grid-template-columns: 1fr auto; /* Pushes content to left and right */
-    align-items: center;
-    line-height: 1.2 !important; /* Reduced line height for text density */
-  }
+/* Grouping text info together */
+.gig-info-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2px !important; /* Minimal vertical space between lines */
+  flex-grow: 1;
+}
 
-  /* Stack date and venue info closely */
-  .concert-info {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
+/* Individual line styling */
+.gig-date, .gig-venue, .gig-city {
+  font-size: 0.9rem !important;
+  line-height: 1.2 !important; /* Less vertical space per line */
+  margin: 0 !important;
+  color: var(--secondary-text);
+}
 
-  /* Reduce font sizes for maximum visibility */
-  .concert-date, .concert-venue {
-    font-size: 0.85rem !important;
-  }
+.gig-band {
+  font-size: 1rem !important;
+  color: var(--text-color);
+  margin: 0 !important;
+}
 
-  /* Force the ticket/link to the right */
-  .concert-link {
-    grid-column: 2;
-    text-align: right;
+/* Ticket Link Styling */
+.gig-link {
+  margin-left: 20px;
+  white-space: nowrap; /* Prevents wrapping */
+  font-weight: bold;
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  text-decoration: none;
+  font-size: 0.8rem;
+  border: 1px solid var(--button-bg);
+}
+
+.gig-link:hover {
+  background-color: var(--button-hover);
+}
+
+/* Mobile adjustments */
+@media (max-width: 480px) {
+  .upcoming-gig, .past-gig {
+    padding: 0.4rem 0.6rem !important;
+  }
+  .gig-date, .gig-venue, .gig-city, .gig-band {
     font-size: 0.8rem !important;
-    padding-left: 10px;
   }
 }
