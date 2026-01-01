@@ -115,12 +115,6 @@ export default function Concerts() {
 
        {loading && (
          <div>
-           <h2 style={{
-             color: 'var(--text-color)',
-             marginBottom: '2rem',
-             fontSize: '1.2rem',
-             textAlign: 'center'
-           }}>Loading...</h2>
            <ul style={{ listStyle: 'none', padding: 0 }}>
              {Array.from({ length: 5 }, (_, idx) => (
                <li key={`skeleton-${idx}`} className="upcoming-gig" style={{ backgroundColor: 'var(--hover-bg)', borderBottom: '1px solid var(--border-color)' }}>
