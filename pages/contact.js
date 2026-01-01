@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Head from 'next/head';
+import SEO from '../components/SEO';
 import Logo from '../components/Logo';
 import Navigation from '../components/Navigation';
 
@@ -53,13 +53,10 @@ export default function Contact() {
 
   return (
     <>
-      <Head>
-        <title>Contact | George Hadow</title>
-        <meta
-          name="description"
-          content="Contact George Hadow for booking, collaborations, and inquiries. Amsterdam-based drummer and avant-garde artist available for performances and projects."
-        />
-      </Head>
+      <SEO
+        title="Contact | George Hadow"
+        description="Contact George Hadow for booking, collaborations, and inquiries. Amsterdam-based drummer and avant-garde artist available for performances and projects."
+      />
       <div style={{
         backgroundColor: 'var(--bg-color)',
         color: 'var(--text-color)',
@@ -68,10 +65,7 @@ export default function Contact() {
         <Logo />
         <Navigation />
 
-        {/* Hidden SEO text for search engines */}
-        <div className="sr-only">
-          Contact George Hadow for booking, collaborations, and performance inquiries. Amsterdam-based drummer and avant-garde artist available for live shows and musical projects.
-        </div>
+
 
         <div style={{
           padding: '2rem',
