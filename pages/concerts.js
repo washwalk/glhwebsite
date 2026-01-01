@@ -161,6 +161,7 @@ export default function Concerts() {
               {gigs.upcoming.map((gig, idx) => (
                 <li key={gig.id || idx} className="upcoming-gig">
                   <div className="gig-details">
+                    <span className="gig-band"><strong>{gig.band}</strong></span>
                     <span className="gig-date">{gig.date}</span>
                     <span className="gig-venue">{gig.venue}</span>
                     <span className="gig-city">{gig.city}</span>
@@ -190,6 +191,7 @@ export default function Concerts() {
               {gigs.past.map((gig, idx) => (
                 <li key={gig.id || `past-${idx}`} className="past-gig">
                   <div className="gig-details">
+                    <span className="gig-band"><strong>{gig.band}</strong></span>
                     <span className="gig-date">{gig.date}</span>
                     <span className="gig-venue">{gig.venue}</span>
                     <span className="gig-city">{gig.city}</span>

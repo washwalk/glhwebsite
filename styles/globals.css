@@ -207,7 +207,7 @@ li {
 }
 
 /* 4. Fix the JavaScript-style errors you saw */
-.gig-band { min-width: 150px; }
+.gig-band { font-weight: bold; }
 .gig-date { min-width: 100px; }
 .gig-venue { min-width: 200px; }
 
