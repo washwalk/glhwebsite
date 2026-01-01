@@ -54,7 +54,7 @@ body {
 }
 
 /* Ensure theme backgrounds */
-# __next {
+#__next {
   background-color: var(--bg-color) !important;
 }
 
@@ -127,7 +127,7 @@ li {
   .upcoming-gig .gig-link, .past-gig .gig-link {
     display: block !important;
     margin-bottom: 0.5rem;
-    minWidth: 'auto';
+    min-width: auto;
   }
 
   .upcoming-gig .gig-band, .past-gig .gig-band {
@@ -146,32 +146,32 @@ li {
 /* Tablet adjustments */
 @media (max-width: 1024px) {
   .upcoming-gig .gig-band, .past-gig .gig-band {
-    minWidth: '130px';
+    min-width: 130px;
   }
   .upcoming-gig .gig-date, .past-gig .gig-date {
-    minWidth: '90px';
+    min-width: 90px;
   }
   .upcoming-gig .gig-venue, .past-gig .gig-venue {
-    minWidth: '180px';
+    min-width: 180px;
   }
   .upcoming-gig .gig-city, .past-gig .gig-city {
-    minWidth: '130px';
+    min-width: 130px;
   }
 }
 
 /* Small desktop adjustments */
 @media (max-width: 1200px) and (min-width: 1025px) {
   .upcoming-gig .gig-band, .past-gig .gig-band {
-    minWidth: '160px';
+    min-width: 160px;
   }
   .upcoming-gig .gig-date, .past-gig .gig-date {
-    minWidth: '100px';
+    min-width: 100px;
   }
   .upcoming-gig .gig-venue, .past-gig .gig-venue {
-    minWidth: '200px';
+    min-width: 200px;
   }
   .upcoming-gig .gig-city, .past-gig .gig-city {
-    minWidth: '140px';
+    min-width: 140px;
   }
 }
 
