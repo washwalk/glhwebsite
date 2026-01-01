@@ -137,10 +137,10 @@ export default function Concerts() {
            <ul style={{ listStyle: 'none', padding: 0 }}>
               {gigs.upcoming.map((gig, idx) => (
                 <li key={gig.id || idx} className="upcoming-gig">
-                  <div className="gig-info-container">
-                    <div className="gig-band">
-                      <strong>{gig.band}</strong>
-                    </div>
+                  <div className="gig-band">
+                    <strong>{gig.band}</strong>
+                  </div>
+                  <div className="gig-details">
                     <div className="gig-date">{gig.date}</div>
                     <div className="gig-venue">{gig.venue}</div>
                     <div className="gig-city">{gig.city}</div>
@@ -174,10 +174,10 @@ export default function Concerts() {
            <ul style={{ listStyle: 'none', padding: 0 }}>
               {gigs.past.map((gig, idx) => (
                 <li key={gig.id || `past-${idx}`} className="past-gig">
-                  <div className="gig-info-container">
-                    <div className="gig-band">
-                      <strong>{gig.band}</strong>
-                    </div>
+                  <div className="gig-band">
+                    <strong>{gig.band}</strong>
+                  </div>
+                  <div className="gig-details">
                     <div className="gig-date">{gig.date}</div>
                     <div className="gig-venue">{gig.venue}</div>
                     <div className="gig-city">{gig.city}</div>

@@ -178,7 +178,7 @@ li {
 /* Optimized Concert Entry */
 .upcoming-gig, .past-gig {
   display: flex !important;
-  justify-content: space-between; /* Pushes tickets to the far right */
+  justify-content: space-between; /* Band left, tickets right, details in middle */
   align-items: center;
   padding: 0.5rem 1rem !important; /* Reduced vertical padding */
   margin-bottom: 4px !important; /* Tightens space between tabs */
@@ -187,15 +187,23 @@ li {
   background-color: var(--card-bg);
 }
 
-/* Grouping text info together */
-.gig-info-container {
+.gig-band {
+  flex-shrink: 0;
+  min-width: 150px;
+  font-size: 1.1rem !important;
+  color: var(--text-color);
+  margin: 0 !important;
+  font-weight: bold;
+}
+
+.gig-details {
   display: flex;
   flex-direction: column;
   gap: 2px !important; /* Minimal vertical space between lines */
-  flex-grow: 1;
+  flex: 1;
+  margin: 0 1rem;
 }
 
-/* Individual line styling */
 .gig-date, .gig-venue, .gig-city {
   font-size: 0.9rem !important;
   line-height: 1.2 !important; /* Less vertical space per line */
@@ -203,15 +211,9 @@ li {
   color: var(--secondary-text);
 }
 
-.gig-band {
-  font-size: 1rem !important;
-  color: var(--text-color);
-  margin: 0 !important;
-}
-
 /* Ticket Link Styling */
 .gig-link {
-  margin-left: 20px;
+  flex-shrink: 0;
   white-space: nowrap; /* Prevents wrapping */
   font-weight: bold;
   background-color: var(--button-bg);
@@ -219,7 +221,7 @@ li {
   padding: 0.25rem 0.5rem;
   border-radius: 3px;
   text-decoration: none;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   border: 1px solid var(--button-bg);
 }
 
@@ -232,7 +234,14 @@ li {
   .upcoming-gig, .past-gig {
     padding: 0.4rem 0.6rem !important;
   }
-  .gig-date, .gig-venue, .gig-city, .gig-band {
+  .gig-date, .gig-venue, .gig-city {
     font-size: 0.8rem !important;
+  }
+  .gig-band {
+    font-size: 1rem !important;
+    min-width: 120px;
+  }
+  .gig-details {
+    margin: 0 0.5rem;
   }
 }
