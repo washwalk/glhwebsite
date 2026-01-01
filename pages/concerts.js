@@ -120,12 +120,13 @@ export default function Concerts() {
              marginBottom: '2rem',
              fontSize: '1.2rem',
              textAlign: 'center'
-           }}>Loading Concerts...</h2>
+           }}>Loading...</h2>
            <ul style={{ listStyle: 'none', padding: 0 }}>
              {Array.from({ length: 5 }, (_, idx) => (
                <li key={`skeleton-${idx}`} className="upcoming-gig" style={{ backgroundColor: 'var(--hover-bg)', borderBottom: '1px solid var(--border-color)' }}>
                  <div className="gig-details">
-                   <div style={{ height: '1.2rem', backgroundColor: 'var(--secondary-text)', marginBottom: '2px', borderRadius: '2px' }}></div>
+                   <div style={{ height: '1.4rem', backgroundColor: 'var(--text-color)', marginBottom: '2px', borderRadius: '2px', width: '70%' }}></div>
+                   <div style={{ height: '1.2rem', backgroundColor: 'var(--secondary-text)', marginBottom: '2px', borderRadius: '2px', width: '50%' }}></div>
                    <div style={{ height: '1.2rem', backgroundColor: 'var(--secondary-text)', marginBottom: '2px', borderRadius: '2px', width: '80%' }}></div>
                    <div style={{ height: '1.2rem', backgroundColor: 'var(--secondary-text)', borderRadius: '2px', width: '60%' }}></div>
                  </div>
