@@ -155,7 +155,7 @@ export default function Concerts() {
              marginBottom: '2rem',
              fontSize: '1.2rem',
              textAlign: 'center'
-           }}>Upcoming Concerts</h2>
+           }}>Upcoming</h2>
 
             <ul style={{ listStyle: 'none', padding: 0 }}>
               {gigs.upcoming.map((gig, idx) => (
@@ -185,7 +185,7 @@ export default function Concerts() {
              marginBottom: '2rem',
              fontSize: '1.2rem',
              textAlign: 'center'
-           }}>Past Performances</h2>
+           }}>Past</h2>
 
             <ul style={{ listStyle: 'none', padding: 0 }}>
               {gigs.past.map((gig, idx) => (
