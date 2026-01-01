@@ -189,11 +189,15 @@ li {
 
 .gig-band {
   flex-shrink: 0;
-  min-width: 150px;
+  min-width: 120px;
+  max-width: 200px;
   font-size: 1.1rem !important;
   color: var(--text-color);
   margin: 0 !important;
   font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .gig-details {
@@ -232,14 +236,29 @@ li {
 /* Mobile adjustments */
 @media (max-width: 480px) {
   .upcoming-gig, .past-gig {
-    padding: 0.4rem 0.6rem !important;
+    padding: 0.4rem 0.5rem !important;
   }
   .gig-date, .gig-venue, .gig-city {
     font-size: 0.8rem !important;
   }
   .gig-band {
     font-size: 1rem !important;
-    min-width: 120px;
+    min-width: 100px;
+  }
+  .gig-details {
+    margin: 0 0.3rem;
+  }
+  .gig-link {
+    margin-left: 10px;
+    padding: 0.2rem 0.4rem;
+    font-size: 0.6rem;
+  }
+}
+
+/* Tablet adjustments */
+@media (max-width: 768px) and (min-width: 481px) {
+  .gig-band {
+    min-width: 110px;
   }
   .gig-details {
     margin: 0 0.5rem;
