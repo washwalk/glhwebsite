@@ -174,3 +174,40 @@ li {
     minWidth: '140px';
   }
 }
+
+/* Optimized Compact Layout for Android Portrait Mode */
+@media screen and (max-width: 480px) and (orientation: portrait) {
+  /* Reduce vertical spacing in the concert list container */
+  .concert-list {
+    gap: 0.5rem !important; /* Tightens space between tabs */
+  }
+
+  /* Compact individual concert tab */
+  .concert-tab {
+    padding: 0.5rem 0.75rem !important; /* Smaller internal padding */
+    display: grid !important;
+    grid-template-columns: 1fr auto; /* Pushes content to left and right */
+    align-items: center;
+    line-height: 1.2 !important; /* Reduced line height for text density */
+  }
+
+  /* Stack date and venue info closely */
+  .concert-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  /* Reduce font sizes for maximum visibility */
+  .concert-date, .concert-venue {
+    font-size: 0.85rem !important;
+  }
+
+  /* Force the ticket/link to the right */
+  .concert-link {
+    grid-column: 2;
+    text-align: right;
+    font-size: 0.8rem !important;
+    padding-left: 10px;
+  }
+}
