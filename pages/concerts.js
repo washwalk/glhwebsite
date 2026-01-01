@@ -113,90 +113,97 @@ export default function Concerts() {
         </div>
       )}
 
-      {!loading && !error && gigs.upcoming.length === 0 && gigs.past.length === 0 && (
-        <div style={{
-          textAlign: 'center',
-          padding: '2rem',
-          color: '#666666',
-          fontSize: '1rem'
-        }}>
-          No concerts found.
-        </div>
-      )}
-
-      {/* Upcoming Concerts */}
-      {!loading && gigs.upcoming.length > 0 && (
-        <div style={{ marginBottom: '3rem' }}>
-          <h2 style={{
-            color: 'var(--text-color)',
-            marginBottom: '2rem',
-            fontSize: '1.2rem',
-            textAlign: 'center'
-          }}>Upcoming Concerts</h2>
-
+       {loading && (
+         <div>
+           <h2 style={{
+             color: 'var(--text-color)',
+             marginBottom: '2rem',
+             fontSize: '1.2rem',
+             textAlign: 'center'
+           }}>Loading Concerts...</h2>
            <ul style={{ listStyle: 'none', padding: 0 }}>
+             {Array.from({ length: 5 }, (_, idx) => (
+               <li key={`skeleton-${idx}`} className="upcoming-gig" style={{ backgroundColor: 'var(--hover-bg)', borderBottom: '1px solid var(--border-color)' }}>
+                 <div className="gig-details">
+                   <div style={{ height: '1.2rem', backgroundColor: 'var(--secondary-text)', marginBottom: '2px', borderRadius: '2px' }}></div>
+                   <div style={{ height: '1.2rem', backgroundColor: 'var(--secondary-text)', marginBottom: '2px', borderRadius: '2px', width: '80%' }}></div>
+                   <div style={{ height: '1.2rem', backgroundColor: 'var(--secondary-text)', borderRadius: '2px', width: '60%' }}></div>
+                 </div>
+                 <div style={{ height: '1.5rem', width: '60px', backgroundColor: 'var(--button-bg)', borderRadius: '3px' }}></div>
+               </li>
+             ))}
+           </ul>
+         </div>
+       )}
+
+       {!loading && !error && gigs.upcoming.length === 0 && gigs.past.length === 0 && (
+         <div style={{
+           textAlign: 'center',
+           padding: '2rem',
+           color: '#666666',
+           fontSize: '1rem'
+         }}>
+           No concerts found.
+         </div>
+       )}
+
+       {/* Upcoming Concerts */}
+       {!loading && gigs.upcoming.length > 0 && (
+         <div style={{ marginBottom: '3rem' }}>
+           <h2 style={{
+             color: 'var(--text-color)',
+             marginBottom: '2rem',
+             fontSize: '1.2rem',
+             textAlign: 'center'
+           }}>Upcoming Concerts</h2>
+
+            <ul style={{ listStyle: 'none', padding: 0 }}>
               {gigs.upcoming.map((gig, idx) => (
                 <li key={gig.id || idx} className="upcoming-gig">
-                  <div className="gig-band">
-                    <strong>{gig.band}</strong>
-                  </div>
                   <div className="gig-details">
-                    <div className="gig-date">{gig.date}</div>
-                    <div className="gig-venue">{gig.venue}</div>
-                    <div className="gig-city">{gig.city}</div>
+                    <span className="gig-date">{gig.date}</span>
+                    <span className="gig-venue">{gig.venue}</span>
+                    <span className="gig-city">{gig.city}</span>
                   </div>
                   {gig.link && (
-                    <a
-                      href={gig.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="gig-link"
-                    >
+                    <a href={gig.link} className="gig-link" target="_blank">
                       TICKETS
                     </a>
                   )}
                 </li>
-             ))}
-          </ul>
-        </div>
-      )}
+              ))}
+           </ul>
+         </div>
+       )}
 
-      {/* Past Performances */}
-      {!loading && gigs.past.length > 0 && (
-        <div>
-          <h2 style={{
-            color: 'var(--text-color)',
-            marginBottom: '2rem',
-            fontSize: '1.2rem',
-            textAlign: 'center'
-          }}>Past Performances</h2>
+       {/* Past Performances */}
+       {!loading && gigs.past.length > 0 && (
+         <div>
+           <h2 style={{
+             color: 'var(--text-color)',
+             marginBottom: '2rem',
+             fontSize: '1.2rem',
+             textAlign: 'center'
+           }}>Past Performances</h2>
 
-           <ul style={{ listStyle: 'none', padding: 0 }}>
+            <ul style={{ listStyle: 'none', padding: 0 }}>
               {gigs.past.map((gig, idx) => (
                 <li key={gig.id || `past-${idx}`} className="past-gig">
-                  <div className="gig-band">
-                    <strong>{gig.band}</strong>
-                  </div>
                   <div className="gig-details">
-                    <div className="gig-date">{gig.date}</div>
-                    <div className="gig-venue">{gig.venue}</div>
-                    <div className="gig-city">{gig.city}</div>
+                    <span className="gig-date">{gig.date}</span>
+                    <span className="gig-venue">{gig.venue}</span>
+                    <span className="gig-city">{gig.city}</span>
                   </div>
                   {gig.link && (
-                    <a
-                      href={gig.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="gig-link"
-                    >
+                    <a href={gig.link} className="gig-link" target="_blank">
                       TICKETS
                     </a>
                   )}
                 </li>
-             ))}
-          </ul>
-        </div>
-      )}
+              ))}
+           </ul>
+         </div>
+       )}
 
 
       </div>

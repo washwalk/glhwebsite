@@ -175,92 +175,53 @@ li {
   }
 }
 
-/* Optimized Concert Entry */
+/* 1. Define the Fade-In Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 2. Fix the min-width errors and clean up layout */
 .upcoming-gig, .past-gig {
   display: flex !important;
-  justify-content: space-between; /* Band left, tickets right, details in middle */
+  justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 1rem !important; /* Reduced vertical padding */
-  margin-bottom: 4px !important; /* Tightens space between tabs */
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  background-color: var(--card-bg);
+  padding: 8px 12px !important; /* Compact vertical padding */
+  margin-bottom: 6px;
+  border-bottom: 1px solid var(--border-color);
+  animation: fadeIn 0.4s ease forwards; /* The animation */
 }
 
-.gig-band {
-  flex-shrink: 0;
-  min-width: 120px;
-  max-width: 200px;
-  font-size: 1.1rem !important;
-  color: var(--text-color);
-  margin: 0 !important;
-  font-weight: bold;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
+/* 3. Group Date/Venue/City tightly on the left */
 .gig-details {
   display: flex;
   flex-direction: column;
-  gap: 2px !important; /* Minimal vertical space between lines */
+  gap: 2px; /* Tight vertical spacing */
   flex: 1;
-  margin: 0 1rem;
 }
 
 .gig-date, .gig-venue, .gig-city {
-  font-size: 0.9rem !important;
-  line-height: 1.2 !important; /* Less vertical space per line */
-  margin: 0 !important;
-  color: var(--secondary-text);
+  font-size: 0.9rem;
+  line-height: 1.2;
+  margin: 0;
 }
 
-/* Ticket Link Styling */
-.gig-link {
-  flex-shrink: 0;
-  white-space: nowrap; /* Prevents wrapping */
-  font-weight: bold;
-  background-color: var(--button-bg);
-  color: var(--button-text);
-  padding: 0.25rem 0.5rem;
-  border-radius: 3px;
-  text-decoration: none;
-  font-size: 0.7rem;
-  border: 1px solid var(--button-bg);
-}
+/* 4. Fix the JavaScript-style errors you saw */
+.gig-band { min-width: 150px; }
+.gig-date { min-width: 100px; }
+.gig-venue { min-width: 200px; }
 
-.gig-link:hover {
-  background-color: var(--button-hover);
-}
-
-/* Mobile adjustments */
-@media (max-width: 480px) {
+/* 5. Mobile Optimization (Portrait Only) */
+@media screen and (max-width: 480px) and (orientation: portrait) {
   .upcoming-gig, .past-gig {
-    padding: 0.4rem 0.5rem !important;
+    padding: 6px 10px !important;
   }
-  .gig-date, .gig-venue, .gig-city {
-    font-size: 0.8rem !important;
-  }
-  .gig-band {
-    font-size: 1rem !important;
-    min-width: 100px;
-  }
-  .gig-details {
-    margin: 0 0.3rem;
-  }
-  .gig-link {
-    margin-left: 10px;
-    padding: 0.2rem 0.4rem;
-    font-size: 0.6rem;
-  }
-}
 
-/* Tablet adjustments */
-@media (max-width: 768px) and (min-width: 481px) {
-  .gig-band {
-    min-width: 110px;
-  }
-  .gig-details {
-    margin: 0 0.5rem;
+  .gig-link {
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-decoration: underline;
+    margin-left: 10px;
+    white-space: nowrap;
   }
 }
