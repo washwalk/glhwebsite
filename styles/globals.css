@@ -206,6 +206,10 @@ li {
   margin: 0;
 }
 
+.gig-date {
+  font-style: italic;
+}
+
 /* 4. Fix the JavaScript-style errors you saw */
 .gig-band { font-weight: bold; }
 .gig-date { min-width: 100px; }
