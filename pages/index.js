@@ -64,17 +64,64 @@ export default function Home() {
           alignItems: 'center'
         }}>
 
-          <h1 style={{ color: 'var(--heading-color)', marginTop: 0, marginBottom: '1rem', fontSize: '1.1rem' }}>George Hadow | Drummer & Percussionist</h1>
+
 
           <p style={{
             color: 'var(--secondary-text)',
             fontSize: '1.1rem',
             lineHeight: '1.6'
           }}>
-            Amsterdam-based drummer exploring experimental rhythms and avant-garde percussion since 2012.
+
           </p>
 
-       </div>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: '1.5rem',
+            marginTop: '2rem',
+            width: '100%'
+          }}>
+            <div style={{ textAlign: 'center' }}>
+              <iframe
+                width="100%"
+                height="157"
+                src="https://www.youtube.com/embed/JwwqNoUAQ6M"
+                title="roodkapje"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+              <p style={{ color: 'var(--secondary-text)', fontSize: '0.9rem', marginTop: '0.5rem' }}>roodkapje</p>
+            </div>
+
+            <div style={{ textAlign: 'center' }}>
+              <iframe
+                width="100%"
+                height="157"
+                src="https://www.youtube.com/embed/jOOCX8HFRKo"
+                title="dogs mercury"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+              <p style={{ color: 'var(--secondary-text)', fontSize: '0.9rem', marginTop: '0.5rem' }}>dogs mercury</p>
+            </div>
+
+            <div style={{ textAlign: 'center' }}>
+              <iframe
+                width="100%"
+                height="157"
+                src="https://www.youtube.com/embed/xkW4NARYq5M"
+                title="kf"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+              <p style={{ color: 'var(--secondary-text)', fontSize: '0.9rem', marginTop: '0.5rem' }}>kf</p>
+            </div>
+          </div>
+
+        </div>
     </div>
     </>
   );
