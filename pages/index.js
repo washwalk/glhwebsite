@@ -91,7 +91,6 @@ export default function Home() {
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               />
-              <p style={{ color: 'var(--secondary-text)', fontSize: '0.9rem', marginTop: '0.5rem' }}>roodkapje</p>
             </div>
 
             <div style={{ textAlign: 'center' }}>
@@ -104,7 +103,6 @@ export default function Home() {
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               />
-              <p style={{ color: 'var(--secondary-text)', fontSize: '0.9rem', marginTop: '0.5rem' }}>dogs mercury</p>
             </div>
 
             <div style={{ textAlign: 'center' }}>
@@ -117,7 +115,6 @@ export default function Home() {
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               />
-              <p style={{ color: 'var(--secondary-text)', fontSize: '0.9rem', marginTop: '0.5rem' }}>kf</p>
             </div>
           </div>
 
