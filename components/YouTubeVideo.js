@@ -39,16 +39,19 @@ export default function YouTubeVideo({ videoId, title }) {
       paddingBottom: '56.25%', 
       height: 0, 
       overflow: 'hidden',
-      backgroundColor: '#000',
+      backgroundColor: '#1a1a1a',
       borderRadius: '4px',
       cursor: 'pointer'
     }}
     onClick={() => setIsLoaded(true)}
     >
       <img 
-        src={`https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`}
+        src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
         alt={title}
         loading="lazy"
+        onError={(e) => {
+          e.target.src = `https://img.youtube.com/vi/${videoId}/default.jpg`;
+        }}
         style={{ 
           width: '100%', 
           height: '100%', 
