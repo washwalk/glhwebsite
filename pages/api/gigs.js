@@ -31,6 +31,10 @@ function readCache() {
 
 function writeCache(data) {
   try {
+    const dataDir = path.dirname(CACHE_PATH);
+    if (!fs.existsSync(dataDir)) {
+      fs.mkdirSync(dataDir, { recursive: true });
+    }
     const cache = {
       lastScraped: Date.now(),
       data: data
@@ -111,13 +115,14 @@ export default async function handler(req, res) {
 
     // Try to get scraped data from cache or fresh scrape
     let scrapedGigs = readCache();
+    let cacheNeedsUpdate = false;
 
     if (!scrapedGigs) {
       console.log('No valid cache, scraping fresh data...');
       try {
         scrapedGigs = await scrapeConcerts();
         if (scrapedGigs && scrapedGigs.length > 0) {
-          writeCache(scrapedGigs);
+          cacheNeedsUpdate = true;
         }
       } catch (scrapeError) {
         console.error('Scraping failed:', scrapeError.message);
@@ -133,8 +138,15 @@ export default async function handler(req, res) {
             link: '',
             source: 'error'
           }];
+          // Still cache the fallback to avoid constant scraping on failure
+          cacheNeedsUpdate = true;
         }
       }
+    }
+
+    // Write cache if needed (after scraping succeeds or with fallback)
+    if (cacheNeedsUpdate && scrapedGigs) {
+      writeCache(scrapedGigs);
     }
 
     // Merge scraped and manual gigs
