@@ -1,12 +1,3 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
-
-import axios from 'axios';
-import path from 'path';
-
-const cheerio = require('cheerio');
-
-const fs = require('fs');
-
 export default async function handler(req, res) {
   // Set CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -94,6 +85,87 @@ export default async function handler(req, res) {
   }
 
   try {
+    // Load manual concerts first (always fresh)
+    const manualGigs = [];
+    try {
+      const manualPath = path.join(process.cwd(), 'data', 'concerts-manual.json');
+      const manualData = fs.readFileSync(manualPath, 'utf8');
+      const manualConcerts = JSON.parse(manualData);
+      manualConcerts.forEach(gig => {
+        manualGigs.push({
+          date: gig.date,
+          venue: gig.venue,
+          city: gig.city,
+          band: gig.band,
+          link: gig.link,
+          source: 'manual'
+        });
+      });
+      console.log(`Loaded ${manualGigs.length} manual concerts`);
+    } catch (error) {
+      console.log('Failed to load manual concerts:', error.message);
+    }
+
+    // Try to get scraped data from cache or fresh scrape
+    let scrapedGigs = readCache();
+
+    if (!scrapedGigs) {
+      console.log('No valid cache, scraping fresh data...');
+      try {
+        scrapedGigs = await scrapeConcerts();
+        if (scrapedGigs && scrapedGigs.length > 0) {
+          writeCache(scrapedGigs);
+        }
+      } catch (scrapeError) {
+        console.error('Scraping failed:', scrapeError.message);
+        await sendErrorEmail(scrapeError);
+        // Try cache as fallback
+        scrapedGigs = readCache();
+        if (!scrapedGigs) {
+          console.log('No cache available, using fallback data');
+          scrapedGigs = [{
+            date: 'Service temporarily unavailable',
+            venue: 'Unable to load concert data',
+            city: 'Please try again later',
+            link: '',
+            source: 'error'
+          }];
+        }
+      }
+    }
+
+    // Merge scraped and manual gigs
+    const allGigs = [...(scrapedGigs || []), ...manualGigs];
+
+    // Sort by date
+    allGigs.sort((a, b) => {
+      try {
+        const [dayA, monthA, yearA] = a.date.split('.');
+        const [dayB, monthB, yearB] = b.date.split('.');
+        const dateA = new Date(parseInt(yearA), parseInt(monthA) - 1, parseInt(dayA));
+        const dateB = new Date(parseInt(yearB), parseInt(monthB) - 1, parseInt(dayB));
+        return dateA - dateB;
+      } catch {
+        return 0;
+      }
+    });
+
+    console.log(`Returning ${allGigs.length} total concerts`);
+    return res.status(200).json(allGigs);
+  } catch (error) {
+    console.error('Unexpected error in gigs API:', error.message);
+    await sendErrorEmail(error);
+    return res.status(200).json([{
+      date: 'Service temporarily unavailable',
+      venue: 'Unable to load concert data',
+      city: 'Please try again later',
+      link: '',
+      source: 'error'
+    }]);
+  }
+
+  // Scraping function
+  async function scrapeConcerts() {
     console.log('Attempting to fetch concert data with enhanced headers...');
 
     const { data } = await axios.get('https://kuhnfumusic.com/tour-dates', {
@@ -118,14 +190,7 @@ export default async function handler(req, res) {
 
     // Check if we got a valid HTML response
     if (!data || data.length < 1000) {
-      console.log('Response too small, likely blocked or error page');
-      return res.status(200).json([{
-        date: 'Service temporarily unavailable',
-        venue: 'Please try again later',
-        city: '',
-        link: '',
-        source: 'error'
-      }]);
+      throw new Error('Response too small, likely blocked or error page');
     }
 
     const $ = cheerio.load(data);
@@ -135,14 +200,7 @@ export default async function handler(req, res) {
     console.log('Page title:', pageTitle);
 
     if (!pageTitle.includes('Tour Dates')) {
-      console.log('Page did not load correctly, got title:', pageTitle);
-      return res.status(200).json([{
-        date: 'Service temporarily unavailable',
-        venue: 'Website may be blocking requests',
-        city: '',
-        link: '',
-        source: 'error'
-      }]);
+      throw new Error(`Page did not load correctly, got title: ${pageTitle}`);
     }
 
     const gigs = [];
@@ -181,8 +239,8 @@ export default async function handler(req, res) {
 
           // Get link from any cell that has a link
           const link = $(cells[0]).find('a').attr('href') ||
-                      $(cells[1]).find('a').attr('href') ||
-                      $(cells[2]).find('a').attr('href') || '';
+                       $(cells[1]).find('a').attr('href') ||
+                       $(cells[2]).find('a').attr('href') || '';
 
           console.log(`Row ${rowIndex} data:`, {
             date: dateText,
@@ -253,188 +311,69 @@ export default async function handler(req, res) {
     // Debug: show what we found
     console.log(`Final result: ${gigs.length} concerts found`);
 
-console.log(`Total concerts found: ${gigs.length}`);
+    console.log(`Total concerts found: ${gigs.length}`);
 
-// Scrape from labasheeda.nl
+    // Scrape from labasheeda.nl
 
-try {
-
-  const labasheedaResponse = await axios.get('https://www.labasheeda.nl/agenda/', {
-
-    headers: {
-
-      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-
-      'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
-
-    },
-
-    timeout: 15000
-
-  });
-
-  console.log('Labasheeda response length:', labasheedaResponse.data.length);
-
-  const $lab = cheerio.load(labasheedaResponse.data);
-
-  console.log('Labasheeda page title:', $lab('title').text());
-  console.log('Labasheeda total divs:', $lab('div').length);
-  console.log('Labasheeda event_listing divs:', $lab('.event_listing').length);
-  console.log('Labasheeda wpem-event-layout-wrapper divs:', $lab('.wpem-event-layout-wrapper').length);
-  console.log('Labasheeda h3 elements:', $lab('h3').length);
-  console.log('Labasheeda wpem-heading-text elements:', $lab('.wpem-heading-text').length);
-
-  const events = $lab('.event_listing');
-
-  console.log('Labasheeda events found:', events.length);
-
-  events.each((i, elem) => {
-
-    const title = $lab(elem).find('a h3.wpem-heading-text').text().trim();
-
-    const dateTimeText = $lab(elem).find('a .wpem-event-date-time-text').text().trim();
-
-    const locationText = $lab(elem).find('a .wpem-event-location-text').text().trim();
-
-    const link = $lab(elem).find('a.wpem-event-action-url').attr('href');
-
-    console.log('Processing labasheeda event:', { title, dateTimeText, locationText, link });
-
-    // Parse date from dateTimeText, e.g., "22-11-2025 > 19:00 - 00:00" or "27-11-2025"
-
-    const dateMatch = dateTimeText.match(/(\d{2}-\d{2}-\d{4})/);
-
-    if (dateMatch && title) {
-
-      const date = dateMatch[1]; // DD-MM-YYYY
-
-      // Convert DD-MM-YYYY to DD.MM.YYYY for consistency
-
-      const [day, month, year] = date.split('-');
-
-      const formattedDate = `${day}.${month}.${year}`;
-
-      gigs.push({
-
-        date: formattedDate,
-
-        venue: title, // Use title as venue
-
-        city: locationText, // Use location as city
-
-        band: 'Labasheeda',
-
-        link: link,
-
-        source: 'labasheeda'
-
+    try {
+      const labasheedaResponse = await axios.get('https://www.labasheeda.nl/agenda/', {
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+        },
+        timeout: 15000
       });
 
-      console.log('Added labasheeda gig:', formattedDate, title);
+      console.log('Labasheeda response length:', labasheedaResponse.data.length);
 
+      const $lab = cheerio.load(labasheedaResponse.data);
+
+      console.log('Labasheeda page title:', $lab('title').text());
+      console.log('Labasheeda total divs:', $lab('div').length);
+      console.log('Labasheeda event_listing divs:', $lab('.event_listing').length);
+      console.log('Labasheeda wpem-event-layout-wrapper divs:', $lab('.wpem-event-layout-wrapper').length);
+      console.log('Labasheeda h3 elements:', $lab('h3').length);
+      console.log('Labasheeda wpem-heading-text elements:', $lab('.wpem-heading-text').length);
+
+      const events = $lab('.event_listing');
+
+      console.log('Labasheeda events found:', events.length);
+
+      events.each((i, elem) => {
+        const title = $lab(elem).find('a h3.wpem-heading-text').text().trim();
+        const dateTimeText = $lab(elem).find('a .wpem-event-date-time-text').text().trim();
+        const locationText = $lab(elem).find('a .wpem-event-location-text').text().trim();
+        const link = $lab(elem).find('a.wpem-event-action-url').attr('href');
+
+        console.log('Processing labasheeda event:', { title, dateTimeText, locationText, link });
+
+        // Parse date from dateTimeText, e.g., "22-11-2025 > 19:00 - 00:00" or "27-11-2025"
+        const dateMatch = dateTimeText.match(/(\d{2}-\d{2}-\d{4})/);
+
+        if (dateMatch && title) {
+          const date = dateMatch[1]; // DD-MM-YYYY
+          // Convert DD-MM-YYYY to DD.MM.YYYY for consistency
+          const [day, month, year] = date.split('-');
+          const formattedDate = `${day}.${month}.${year}`;
+
+          gigs.push({
+            date: formattedDate,
+            venue: title, // Use title as venue
+            city: locationText, // Use location as city
+            band: 'Labasheeda',
+            link: link,
+            source: 'labasheeda'
+          });
+
+          console.log('Added labasheeda gig:', formattedDate, title);
+        }
+      });
+
+      console.log('Scraped from Labasheeda, total added:', events.length);
+    } catch (error) {
+      console.log('Failed to scrape labasheeda:', error.message);
     }
 
-  });
-
-  console.log('Scraped from Labasheeda, total added:', events.length);
-
-} catch (error) {
-
-  console.log('Failed to scrape labasheeda:', error.message);
-
-}
-
-// Load manual concerts
-
-try {
-
-  const manualPath = path.join(process.cwd(), 'data', 'concerts-manual.json');
-
-  const manualData = fs.readFileSync(manualPath, 'utf8');
-
-  const manualGigs = JSON.parse(manualData);
-
-  manualGigs.forEach(gig => {
-
-    gigs.push({
-
-      date: gig.date,
-
-      venue: gig.venue,
-
-      city: gig.city,
-
-      band: gig.band,
-
-      link: gig.link,
-
-      source: 'manual'
-
-    });
-
-  });
-
-  console.log(`Loaded ${manualGigs.length} manual concerts`);
-
-} catch (error) {
-
-  console.log('Failed to load manual concerts:', error.message);
-
-}
-
-// Sort all gigs by date
-
-gigs.sort((a, b) => {
-
-  try {
-
-    const [dayA, monthA, yearA] = a.date.split('.');
-
-    const [dayB, monthB, yearB] = b.date.split('.');
-
-    const dateA = new Date(parseInt(yearA), parseInt(monthA) - 1, parseInt(dayA));
-
-    const dateB = new Date(parseInt(yearB), parseInt(monthB) - 1, parseInt(dayB));
-
-    return dateA - dateB;
-
-  } catch {
-
-    return 0;
-
-  }
-
-});
-
-console.log(`Total gigs after merge and sort: ${gigs.length}`);
-
-// Return the scraped data if found, otherwise show simple message
-    if (gigs.length > 0) {
-      console.log(`Successfully scraped ${gigs.length} concerts`);
-      return res.status(200).json(gigs);
-    }
-
-    // No concerts found - return simple message
-    console.log('No concerts found - website may be blocking requests');
-    res.status(200).json([{
-      date: 'Data temporarily unavailable',
-      venue: 'Please check back later or contact for updates',
-      city: 'Manual updates in progress',
-      link: '',
-      source: 'fallback'
-    }]);
-  } catch (error) {
-    console.error('Failed to fetch concerts:', error.message);
-    console.error('Error details:', error.response?.status, error.response?.statusText);
-
-
-
-    res.status(200).json([{
-      date: 'Service temporarily unavailable',
-      venue: 'Unable to load concert data',
-      city: 'Please try again later',
-      link: '',
-      source: 'error'
-    }]);
+    return gigs;
   }
 }

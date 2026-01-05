@@ -1,6 +1,8 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 export default function Navigation() {
+  const router = useRouter();
   return (
     <nav style={{
       backgroundColor: 'var(--nav-bg)',
@@ -18,12 +20,13 @@ export default function Navigation() {
         gap: '1.5rem'
       }}>
         <Link href="/" style={{
-          color: 'var(--secondary-text)',
-          textDecoration: 'none',
-          fontSize: '1rem',
-          padding: '0.125rem 0.5rem',
-          transition: 'all 0.2s ease'
-        }}
+           color: router.pathname === '/' ? 'var(--text-color)' : 'var(--secondary-text)',
+           backgroundColor: router.pathname === '/' ? 'var(--hover-bg)' : 'transparent',
+           textDecoration: 'none',
+           fontSize: '1rem',
+           padding: '0.125rem 0.5rem',
+           transition: 'all 0.2s ease'
+         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.backgroundColor = 'var(--hover-bg)';
           e.currentTarget.style.color = 'var(--text-color)';
@@ -37,12 +40,13 @@ export default function Navigation() {
         </Link>
 
         <Link href="/concerts" style={{
-          color: 'var(--secondary-text)',
-          textDecoration: 'none',
-          fontSize: '1rem',
-          padding: '0.125rem 0.5rem',
-          transition: 'all 0.2s ease'
-        }}
+           color: router.pathname === '/concerts' ? 'var(--text-color)' : 'var(--secondary-text)',
+           backgroundColor: router.pathname === '/concerts' ? 'var(--hover-bg)' : 'transparent',
+           textDecoration: 'none',
+           fontSize: '1rem',
+           padding: '0.125rem 0.5rem',
+           transition: 'all 0.2s ease'
+         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.backgroundColor = 'var(--hover-bg)';
           e.currentTarget.style.color = 'var(--text-color)';
@@ -56,12 +60,13 @@ export default function Navigation() {
         </Link>
 
         <Link href="/about" style={{
-          color: 'var(--secondary-text)',
-          textDecoration: 'none',
-          fontSize: '1rem',
-          padding: '0.125rem 0.5rem',
-          transition: 'all 0.2s ease'
-        }}
+           color: router.pathname === '/about' ? 'var(--text-color)' : 'var(--secondary-text)',
+           backgroundColor: router.pathname === '/about' ? 'var(--hover-bg)' : 'transparent',
+           textDecoration: 'none',
+           fontSize: '1rem',
+           padding: '0.125rem 0.5rem',
+           transition: 'all 0.2s ease'
+         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.backgroundColor = 'var(--hover-bg)';
           e.currentTarget.style.color = 'var(--text-color)';
@@ -75,12 +80,13 @@ export default function Navigation() {
         </Link>
 
         <Link href="/contact" style={{
-          color: 'var(--secondary-text)',
-          textDecoration: 'none',
-          fontSize: '1rem',
-          padding: '0.125rem 0.5rem',
-          transition: 'all 0.2s ease'
-        }}
+           color: router.pathname === '/contact' ? 'var(--text-color)' : 'var(--secondary-text)',
+           backgroundColor: router.pathname === '/contact' ? 'var(--hover-bg)' : 'transparent',
+           textDecoration: 'none',
+           fontSize: '1rem',
+           padding: '0.125rem 0.5rem',
+           transition: 'all 0.2s ease'
+         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.backgroundColor = 'var(--hover-bg)';
           e.currentTarget.style.color = 'var(--text-color)';

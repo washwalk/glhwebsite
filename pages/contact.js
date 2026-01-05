@@ -8,7 +8,8 @@ export default function Contact() {
     name: '',
     email: '',
     subject: '',
-    message: ''
+    message: '',
+    website: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
@@ -38,7 +39,7 @@ export default function Contact() {
 
       if (data.success) {
         setSubmitStatus('success');
-        setFormData({ name: '', email: '', subject: '', message: '' });
+        setFormData({ name: '', email: '', subject: '', message: '', website: '' });
       } else {
         setSubmitStatus('error');
         console.error('Contact form error:', data.error);
@@ -73,16 +74,10 @@ export default function Contact() {
           maxWidth: '800px',
           margin: '0 auto'
         }}>
-          <h1 style={{
-            color: 'var(--heading-color)',
-            marginBottom: '2rem',
-            fontSize: '1.5rem'
-          }}>Contact</h1>
-
-          <p style={{ color: 'var(--secondary-text)', lineHeight: '1.6', fontSize: '1rem', marginBottom: '2rem' }}>
-            Get in touch with George Hadow for booking inquiries, collaboration opportunities,
-            or any questions about his music and performances.
-          </p>
+           <p style={{ color: 'var(--secondary-text)', lineHeight: '1.6', fontSize: '1rem', marginBottom: '2rem' }}>
+             Get in touch with George Hadow for booking inquiries, collaboration opportunities,
+             or any questions about his music and performances.
+           </p>
 
           <form onSubmit={handleSubmit} style={{
             display: 'flex',
@@ -107,15 +102,15 @@ export default function Contact() {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  style={{
-                    width: '100%',
-                    padding: '0.75rem',
-                    border: '1px solid #e0e0e0',
-                    borderRadius: '4px',
-                    fontSize: '1rem',
-                    backgroundColor: '#ffffff',
-                    color: '#000000'
-                  }}
+                   style={{
+                     width: '100%',
+                     padding: '0.75rem',
+                     border: '1px solid var(--border-color)',
+                     borderRadius: '4px',
+                     fontSize: '1rem',
+                     backgroundColor: 'var(--bg-color)',
+                     color: 'var(--text-color)'
+                   }}
                 />
               </div>
               <div style={{ flex: 1 }}>
@@ -205,10 +200,27 @@ export default function Contact() {
                   resize: 'vertical',
                   fontFamily: 'inherit'
                 }}
-              />
-            </div>
+               />
+             </div>
 
-            <button
+             {/* Honeypot field for bot protection */}
+             <input
+               type="text"
+               name="website"
+               value={formData.website}
+               onChange={handleChange}
+               style={{
+                 position: 'absolute',
+                 left: '-9999px',
+                 width: '1px',
+                 height: '1px',
+                 overflow: 'hidden'
+               }}
+               tabIndex="-1"
+               autoComplete="off"
+             />
+
+             <button
               type="submit"
               disabled={isSubmitting}
               style={{

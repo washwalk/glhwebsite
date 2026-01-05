@@ -7,7 +7,16 @@ export default async function handler(req, res) {
     return res.status(405).json({ success: false, error: 'Method not allowed' });
   }
 
-  const { name, email, subject, message } = req.body;
+  const { name, email, subject, message, website } = req.body;
+
+  // Honeypot check for bot protection
+  if (website && website.trim()) {
+    // Bot detected - return fake success to avoid alerting bots
+    return res.status(200).json({
+      success: false,
+      error: 'Message sent successfully'
+    });
+  }
 
   // Validate required fields
   if (!name || !email || !subject || !message) {
