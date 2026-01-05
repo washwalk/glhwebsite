@@ -85,18 +85,12 @@ export default function ConcertsPage({ upcoming, past }) {
 
               <ul style={{ listStyle: 'none', padding: 0 }}>
                 {past.map((gig, idx) => (
-                  <li key={gig.id || `past-${idx}`} className="past-gig">
-                    <div className="gig-details">
-                      <span className="gig-band"><strong>{gig.band}</strong></span>
-                      <span className="gig-date">{gig.date}</span>
-                      <span className="gig-venue">{gig.venue}</span>
-                      <span className="gig-city">{gig.city}</span>
-                    </div>
-                    {gig.link && (
-                      <a href={gig.link} className="gig-link" target="_blank" rel="noopener noreferrer">
-                        TICKETS
-                      </a>
-                    )}
+                  <li key={gig.id || `past-${idx}`} style={{
+                    padding: '0.25rem 0',
+                    color: 'var(--secondary-text)',
+                    fontSize: '0.95rem'
+                  }}>
+                    {gig.date} | {gig.band} @ {gig.venue}, {gig.city}
                   </li>
                 ))}
               </ul>
