@@ -2,58 +2,7 @@
 import SEO from '../components/SEO';
 import Logo from '../components/Logo';
 import Navigation from '../components/Navigation';
-
-function YouTubeVideo({ videoId, title }) {
-  return (
-    <div style={{ 
-      position: 'relative', 
-      paddingBottom: '56.25%', 
-      height: 0, 
-      overflow: 'hidden',
-      backgroundColor: '#000',
-      borderRadius: '4px'
-    }}>
-      <a 
-        href={`https://www.youtube.com/watch?v=${videoId}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={`Watch ${title} on YouTube`}
-        style={{ 
-          position: 'absolute', 
-          top: 0, 
-          left: 0, 
-          width: '100%', 
-          height: '100%',
-          display: 'block'
-        }}
-      >
-        <img 
-          src={`https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`}
-          alt={title}
-          loading="lazy"
-          style={{ 
-            width: '100%', 
-            height: '100%', 
-            objectFit: 'cover',
-            display: 'block'
-          }}
-        />
-        <div style={{ 
-          position: 'absolute', 
-          top: '50%', 
-          left: '50%', 
-          transform: 'translate(-50%, -50%)',
-          width: '68px',
-          height: '48px',
-          backgroundImage: 'url(https://www.youtube.com/img/youtube_socials_red.png)',
-          backgroundSize: 'contain',
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'center'
-        }} />
-      </a>
-    </div>
-  );
-}
+import YouTubeVideo from '../components/YouTubeVideo';
 
 export default function Home() {
   return (
