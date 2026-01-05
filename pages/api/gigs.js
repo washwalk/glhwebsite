@@ -14,10 +14,16 @@ const CACHE_PATH = path.join(process.cwd(), 'data', 'concerts-cache.json');
 
 function readCache() {
   try {
+    if (!fs.existsSync(CACHE_PATH)) {
+      console.log('Cache file does not exist');
+      return null;
+    }
     const cacheData = fs.readFileSync(CACHE_PATH, 'utf8');
     const cache = JSON.parse(cacheData);
     const now = Date.now();
-    if (now - cache.lastScraped < CACHE_DURATION) {
+    const age = now - cache.lastScraped;
+    console.log(`Cache age: ${Math.round(age / 1000 / 60)} minutes (max: ${CACHE_DURATION / 1000 / 60 / 60} hours)`);
+    if (age < CACHE_DURATION) {
       console.log('Using cached concert data');
       return cache.data;
     }
@@ -81,6 +87,9 @@ Time: ${new Date().toISOString()}
 }
 
 export default async function handler(req, res) {
+  const startTime = Date.now();
+  console.log(`[${new Date().toISOString()}] API request started`);
+
   // Set CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
@@ -146,11 +155,13 @@ export default async function handler(req, res) {
 
     // Write cache if needed (after scraping succeeds or with fallback)
     if (cacheNeedsUpdate && scrapedGigs) {
+      console.log('Writing cache with scraped/fallback data');
       writeCache(scrapedGigs);
     }
 
     // Merge scraped and manual gigs
     const allGigs = [...(scrapedGigs || []), ...manualGigs];
+    console.log(`Total gigs: ${allGigs.length} (scraped: ${scrapedGigs?.length || 0}, manual: ${manualGigs.length})`);
 
     // Sort by date
     allGigs.sort((a, b) => {
@@ -166,9 +177,13 @@ export default async function handler(req, res) {
     });
 
     console.log(`Returning ${allGigs.length} total concerts`);
+    const duration = Date.now() - startTime;
+    console.log(`[${new Date().toISOString()}] API request completed in ${duration}ms`);
     return res.status(200).json(allGigs);
   } catch (error) {
     console.error('Unexpected error in gigs API:', error.message);
+    const duration = Date.now() - startTime;
+    console.log(`[${new Date().toISOString()}] API request failed in ${duration}ms`);
     await sendErrorEmail(error);
     return res.status(200).json([{
       date: 'Service temporarily unavailable',
