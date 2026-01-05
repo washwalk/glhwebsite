@@ -74,49 +74,52 @@ export default function Home() {
 
           </p>
 
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: '1.5rem',
-            marginTop: '2rem',
-            width: '100%'
-          }}>
-            <div style={{ textAlign: 'center' }}>
-              <iframe
-                width="100%"
-                height="157"
-                src="https://www.youtube.com/embed/JwwqNoUAQ6M"
-                title="roodkapje"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            </div>
+           <div style={{
+             display: 'grid',
+             gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+             gap: '1.5rem',
+             marginTop: '2rem',
+             width: '100%'
+           }}>
+             <div style={{ textAlign: 'center' }}>
+               <iframe
+                 width="100%"
+                 height="157"
+                 src="https://www.youtube.com/embed/JwwqNoUAQ6M"
+                 title="roodkapje"
+                 loading="lazy"
+                 style={{ border: 0 }}
+                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                 allowFullScreen
+               />
+             </div>
 
-            <div style={{ textAlign: 'center' }}>
-              <iframe
-                width="100%"
-                height="157"
-                src="https://www.youtube.com/embed/jOOCX8HFRKo"
-                title="dogs mercury"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            </div>
+             <div style={{ textAlign: 'center' }}>
+               <iframe
+                 width="100%"
+                 height="157"
+                 src="https://www.youtube.com/embed/jOOCX8HFRKo"
+                 title="dogs mercury"
+                 loading="lazy"
+                 style={{ border: 0 }}
+                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                 allowFullScreen
+               />
+             </div>
 
-            <div style={{ textAlign: 'center' }}>
-              <iframe
-                width="100%"
-                height="157"
-                src="https://www.youtube.com/embed/xkW4NARYq5M"
-                title="kf"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            </div>
-          </div>
+             <div style={{ textAlign: 'center' }}>
+               <iframe
+                 width="100%"
+                 height="157"
+                 src="https://www.youtube.com/embed/xkW4NARYq5M"
+                 title="kf"
+                 loading="lazy"
+                 style={{ border: 0 }}
+                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                 allowFullScreen
+               />
+             </div>
+           </div>
 
         </div>
     </div>
