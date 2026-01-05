@@ -31,3 +31,6 @@ yarn-error.log*
 
 # TypeScript
 *.tsbuildinfo
+
+# Cache files
+data/concerts-cache.json
