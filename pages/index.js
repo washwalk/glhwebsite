@@ -3,6 +3,58 @@ import SEO from '../components/SEO';
 import Logo from '../components/Logo';
 import Navigation from '../components/Navigation';
 
+function YouTubeVideo({ videoId, title }) {
+  return (
+    <div style={{ 
+      position: 'relative', 
+      paddingBottom: '56.25%', 
+      height: 0, 
+      overflow: 'hidden',
+      backgroundColor: '#000',
+      borderRadius: '4px'
+    }}>
+      <a 
+        href={`https://www.youtube.com/watch?v=${videoId}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Watch ${title} on YouTube`}
+        style={{ 
+          position: 'absolute', 
+          top: 0, 
+          left: 0, 
+          width: '100%', 
+          height: '100%',
+          display: 'block'
+        }}
+      >
+        <img 
+          src={`https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`}
+          alt={title}
+          loading="lazy"
+          style={{ 
+            width: '100%', 
+            height: '100%', 
+            objectFit: 'cover',
+            display: 'block'
+          }}
+        />
+        <div style={{ 
+          position: 'absolute', 
+          top: '50%', 
+          left: '50%', 
+          transform: 'translate(-50%, -50%)',
+          width: '68px',
+          height: '48px',
+          backgroundImage: 'url(https://www.youtube.com/img/youtube_socials_red.png)',
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center'
+        }} />
+      </a>
+    </div>
+  );
+}
+
 export default function Home() {
   return (
     <>
@@ -41,17 +93,15 @@ export default function Home() {
           })
         }}
       />
-       <div style={{
-         backgroundColor: 'var(--bg-color)',
-         color: 'var(--text-color)',
-         minHeight: '100vh',
-         display: 'flex',
-         flexDirection: 'column'
-       }}>
+      <div style={{
+        backgroundColor: 'var(--bg-color)',
+        color: 'var(--text-color)',
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column'
+      }}>
         <Logo />
         <Navigation />
-
-
 
         <div style={{
           padding: '2rem',
@@ -64,65 +114,20 @@ export default function Home() {
           alignItems: 'center'
         }}>
 
-
-
-          <p style={{
-            color: 'var(--secondary-text)',
-            fontSize: '1.1rem',
-            lineHeight: '1.6'
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: '1.5rem',
+            marginTop: '2rem',
+            width: '100%'
           }}>
-
-          </p>
-
-           <div style={{
-             display: 'grid',
-             gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-             gap: '1.5rem',
-             marginTop: '2rem',
-             width: '100%'
-           }}>
-             <div style={{ textAlign: 'center' }}>
-               <iframe
-                 width="100%"
-                 height="157"
-                 src="https://www.youtube.com/embed/JwwqNoUAQ6M"
-                 title="roodkapje"
-                 loading="lazy"
-                 style={{ border: 0 }}
-                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                 allowFullScreen
-               />
-             </div>
-
-             <div style={{ textAlign: 'center' }}>
-               <iframe
-                 width="100%"
-                 height="157"
-                 src="https://www.youtube.com/embed/jOOCX8HFRKo"
-                 title="dogs mercury"
-                 loading="lazy"
-                 style={{ border: 0 }}
-                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                 allowFullScreen
-               />
-             </div>
-
-             <div style={{ textAlign: 'center' }}>
-               <iframe
-                 width="100%"
-                 height="157"
-                 src="https://www.youtube.com/embed/xkW4NARYq5M"
-                 title="kf"
-                 loading="lazy"
-                 style={{ border: 0 }}
-                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                 allowFullScreen
-               />
-             </div>
-           </div>
+            <YouTubeVideo videoId="JwwqNoUAQ6M" title="roodkapje" />
+            <YouTubeVideo videoId="jOOCX8HFRKo" title="dogs mercury" />
+            <YouTubeVideo videoId="xkW4NARYq5M" title="kf" />
+          </div>
 
         </div>
-    </div>
+      </div>
     </>
   );
 }
