@@ -1,3 +1,81 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
+
+import axios from 'axios';
+import path from 'path';
+import sgMail from '@sendgrid/mail';
+
+const cheerio = require('cheerio');
+
+const fs = require('fs');
+
+// Cache utilities
+const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+const CACHE_PATH = path.join(process.cwd(), 'data', 'concerts-cache.json');
+
+function readCache() {
+  try {
+    const cacheData = fs.readFileSync(CACHE_PATH, 'utf8');
+    const cache = JSON.parse(cacheData);
+    const now = Date.now();
+    if (now - cache.lastScraped < CACHE_DURATION) {
+      console.log('Using cached concert data');
+      return cache.data;
+    }
+    console.log('Cache is stale, will rescrape');
+    return null;
+  } catch (error) {
+    console.log('Cache read failed:', error.message);
+    return null;
+  }
+}
+
+function writeCache(data) {
+  try {
+    const cache = {
+      lastScraped: Date.now(),
+      data: data
+    };
+    fs.writeFileSync(CACHE_PATH, JSON.stringify(cache, null, 2));
+    console.log('Cache updated');
+  } catch (error) {
+    console.error('Cache write failed:', error.message);
+  }
+}
+
+async function sendErrorEmail(error) {
+  if (!process.env.SENDGRID_API_KEY) {
+    console.log('SENDGRID_API_KEY not set, skipping error email');
+    return;
+  }
+  try {
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    const msg = {
+      to: 'georgehadow@gmail.com',
+      from: {
+        email: 'noreply@georgehadow.com',
+        name: 'George Hadow Website'
+      },
+      subject: 'Concert Scraping Error',
+      html: `
+        <p>Failed to scrape concert data from external sources.</p>
+        <p>Error: ${error.message}</p>
+        <p>Using cached data if available.</p>
+        <p>Time: ${new Date().toISOString()}</p>
+      `,
+      text: `
+Failed to scrape concert data from external sources.
+Error: ${error.message}
+Using cached data if available.
+Time: ${new Date().toISOString()}
+      `.trim()
+    };
+    await sgMail.send(msg);
+    console.log('Error email sent');
+  } catch (emailError) {
+    console.error('Failed to send error email:', emailError.message);
+  }
+}
+
 export default async function handler(req, res) {
   // Set CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -7,81 +85,6 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') {
     res.status(200).end();
     return;
-  }
-
-  // Debug endpoints
-  if (req.query.debug === 'html') {
-    try {
-      console.log('Fetching HTML for debugging...');
-      const { data } = await axios.get('https://kuhnfumusic.com/tour-dates', {
-        headers: {
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
-        },
-        timeout: 15000
-      });
-
-      const $ = cheerio.load(data);
-
-      // Extract table information
-      const tables = $('table');
-      const tableData = tables.map((i, table) => {
-        const rows = $(table).find('tr');
-        return {
-          tableIndex: i,
-          rowCount: rows.length,
-          rows: rows.map((j, row) => {
-            const cells = $(row).find('td');
-            return {
-              rowIndex: j,
-              cellCount: cells.length,
-              cells: cells.map((k, cell) => ({
-                cellIndex: k,
-                text: $(cell).text().trim(),
-                hasLink: $(cell).find('a').length > 0,
-                link: $(cell).find('a').attr('href') || null
-              })).get()
-            };
-          }).get()
-        };
-      }).get();
-
-      return res.status(200).json({
-        success: true,
-        htmlLength: data.length,
-        title: $('title').text().trim(),
-        hasContentTable: $('.content-table').length > 0,
-        tableCount: tables.length,
-        tableData: tableData,
-        rawTableHTML: $('.content-table table').html()?.substring(0, 2000) || 'No table HTML found'
-      });
-    } catch (error) {
-      console.log('Debug HTML fetch failed:', error.message);
-      return res.status(500).json({
-        success: false,
-        error: error.message,
-        status: error.response?.status,
-        statusText: error.response?.statusText
-      });
-    }
-  }
-
-  if (req.query.debug === 'test') {
-    // Simple test to check if we can reach the website at all
-    try {
-      const response = await axios.head('https://kuhnfumusic.com/tour-dates', { timeout: 5000 });
-      return res.status(200).json({
-        reachable: true,
-        status: response.status,
-        headers: response.headers
-      });
-    } catch (error) {
-      return res.status(200).json({
-        reachable: false,
-        error: error.message,
-        status: error.response?.status
-      });
-    }
   }
 
   try {
