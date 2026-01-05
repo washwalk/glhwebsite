@@ -2,7 +2,26 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  // Configure headers for API routes
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        destination: 'https://www.georgehadow.com/:path*',
+        permanent: true,
+        has: [
+          {
+            type: 'host',
+            value: 'georgehadow.com',
+          },
+        ],
+      },
+      {
+        source: '/(.+)/',
+        destination: '/$1',
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {
