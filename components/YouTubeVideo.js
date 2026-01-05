@@ -66,11 +66,17 @@ export default function YouTubeVideo({ videoId, title }) {
         transform: 'translate(-50%, -50%)',
         width: '68px',
         height: '48px',
-        backgroundImage: 'url(https://www.youtube.com/img/youtube_socials_red.png)',
-        backgroundSize: 'contain',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center'
-      }} />
+        backgroundColor: '#ff0000',
+        borderRadius: '8px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        boxShadow: '0 2px 8px rgba(0,0,0,0.3)'
+      }}>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+      </div>
     </div>
   );
 }
