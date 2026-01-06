@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState } from 'react';
@@ -13,7 +12,8 @@ export default function YouTubeVideo({ videoId, title }) {
         paddingBottom: '56.25%', 
         height: 0, 
         overflow: 'hidden',
-        borderRadius: '4px'
+        borderRadius: '4px',
+        backgroundColor: '#000'
       }}>
         <iframe
           src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
@@ -34,26 +34,32 @@ export default function YouTubeVideo({ videoId, title }) {
   }
 
   return (
-    <div style={{ 
-      position: 'relative', 
-      paddingBottom: '56.25%', 
-      height: 0, 
-      overflow: 'hidden',
-      backgroundColor: '#1a1a1a',
-      borderRadius: '4px',
-      cursor: 'pointer'
-    }}
-    onClick={() => setIsLoaded(true)}
+    <div 
+      style={{ 
+        position: 'relative', 
+        paddingBottom: '56.25%', 
+        height: 0, 
+        overflow: 'hidden',
+        backgroundColor: '#222',
+        borderRadius: '4px',
+        cursor: 'pointer'
+      }}
+      onClick={() => setIsLoaded(true)}
     >
       <img 
-        src={`https://i.ytimg.com/vi/${videoId}/mqdefault.jpg`}
+        src={`https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`}
         alt={title}
-        loading="lazy"
+        onError={(e) => {
+          e.target.src = `https://i.ytimg.com/vi/${videoId}/mqdefault.jpg`;
+        }}
         style={{ 
           width: '100%', 
           height: '100%', 
           objectFit: 'cover',
-          display: 'block'
+          display: 'block',
+          position: 'absolute',
+          top: 0,
+          left: 0
         }}
       />
       <div style={{ 
