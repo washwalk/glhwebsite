@@ -46,12 +46,9 @@ export default function YouTubeVideo({ videoId, title }) {
     onClick={() => setIsLoaded(true)}
     >
       <img 
-        src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
+        src={`https://i.ytimg.com/vi/${videoId}/mqdefault.jpg`}
         alt={title}
         loading="lazy"
-        onError={(e) => {
-          e.target.src = `https://img.youtube.com/vi/${videoId}/default.jpg`;
-        }}
         style={{ 
           width: '100%', 
           height: '100%', 
